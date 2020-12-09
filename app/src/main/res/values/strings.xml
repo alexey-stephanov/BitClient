@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BitClient</string>
+    <string name="enter_greeting">Welcome to BitClient</string>
+    <string name="login_enter">Enter</string>
+</resources>
