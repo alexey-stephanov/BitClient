@@ -6,9 +6,9 @@
     app:startDestination="@id/signInFragment">
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.bitclient.ui.view.fragments.SignInFragment"
+        android:name="com.example.bitclient.ui.view.fragments.AuthorizationFragment"
         android:label="SignInFragment"
-        tools:layout="@layout/fragment_sign_in">
+        tools:layout="@layout/fragment_authorization">
         <action
             android:id="@+id/action_signInFragment_to_repositoriesFragment"
             app:destination="@id/repositoriesFragment" />

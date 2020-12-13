@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/text_view_sign_in_greeting"
+        android:id="@+id/text_view_authorization_greeting"
         style="@style/TextAppearance.MaterialComponents.Caption.Greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,12 +17,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_sign_in_enter"
+        android:id="@+id/button_authorization_enter"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_128"
-        android:text="@string/sign_in_enter"
+        android:text="@string/authorization_enter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

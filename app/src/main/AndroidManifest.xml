@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bitclient">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.bitclient"
+    tools:ignore="GoogleAppIndexingWarning">
 
     <uses-permission android:name="android.permission.ACCOUNT_MANAGER"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".BitClientApp"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@drawable/ic_bucket_black_48"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ic_bucket_black_48"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitClient.Launcher">
         <activity android:name=".ui.view.activities.MainActivity">

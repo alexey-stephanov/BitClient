@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">BitClient</string>
-    <string name="sign_in_greeting">Welcome to BitClient</string>
-    <string name="sign_in_enter">Enter to your account</string>
+    <string name="authorization_greeting">Welcome to BitClient</string>
+    <string name="authorization_enter">Enter to your account</string>
 </resources>
