@@ -5,7 +5,7 @@ import com.example.bitclient.ui.view.fragments.RepositoriesFragment
 import com.example.bitclient.ui.view.fragments.SettingsFragment
 import dagger.Subcomponent
 
-@AuthorizedUserScope
+@UserScope
 @Subcomponent
 interface UserComponent {
 
