@@ -1,6 +1,7 @@
 package com.example.bitclient.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
+import javax.inject.Inject
 
-class RepositoriesViewModel : ViewModel() {
+class RepositoriesViewModel @Inject constructor(): ViewModel() {
 }

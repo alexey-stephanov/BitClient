@@ -17,10 +17,18 @@
         android:roundIcon="@drawable/ic_bucket_black_48"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitClient.Launcher">
-        <activity android:name=".ui.view.activities.MainActivity">
+        <activity android:name=".ui.view.activities.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="com.example.bitclient"
+                    android:host="redirection"/>
             </intent-filter>
         </activity>
     </application>

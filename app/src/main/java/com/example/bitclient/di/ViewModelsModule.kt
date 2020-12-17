@@ -11,6 +11,11 @@ abstract class ViewModelsModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(viewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(AuthorizationViewModel::class)
     abstract fun bindAuthorizationViewModel(viewModel: AuthorizationViewModel): ViewModel
 
