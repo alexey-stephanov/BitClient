@@ -47,14 +47,10 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonAuthorizationEnter.setOnClickListener {
-
             val url = authorizationViewModel.url
             val builder = CustomTabsIntent.Builder()
             val customTabsIntent = builder.build()
             customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
-
-            //view.findNavController().navigate(AuthorizationFragmentDirections.actionSignInFragmentToRepositoriesFragment())
-            //Toast.makeText(requireContext(), "FFFFFFFFFF", Toast.LENGTH_LONG).show()
         }
     }
 }

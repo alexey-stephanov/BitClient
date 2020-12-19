@@ -13,8 +13,7 @@ class MainViewModel @Inject constructor(private val networkDataRepository: Netwo
 
     fun handleAuthorizationCode(code: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = networkDataRepository.retrieveAccessToken(code)
-            Log.e("TOKENS", "${result.accessToken} +++ ${result.refreshToken}")
+            networkDataRepository.retrieveAccessToken(code)
         }
     }
 }

@@ -1,8 +1,8 @@
-package com.example.bitclient.data.model
+package com.example.bitclient.data.models
 
 import com.google.gson.annotations.SerializedName
 
-class TokenModel(
+data class TokenModel(
     @SerializedName("access_token")
     val accessToken: String,
     @SerializedName("refresh_token")

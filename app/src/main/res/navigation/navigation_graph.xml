@@ -17,5 +17,14 @@
         android:id="@+id/repositoriesFragment"
         android:name="com.example.bitclient.ui.view.fragments.RepositoriesFragment"
         android:label="RepositoriesFragment"
-        tools:layout="@layout/fragment_repositories"/>
+        tools:layout="@layout/fragment_repositories">
+        <action
+            android:id="@+id/action_repositoriesFragment_to_branchesFragment"
+            app:destination="@id/branchesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/branchesFragment"
+        android:name="com.example.bitclient.ui.view.fragments.BranchesFragment"
+        android:label="BranchesFragment"
+        tools:layout="@layout/fragment_branches"/>
 </navigation>
