@@ -5,7 +5,7 @@ import com.example.bitclient.di.UserScope
 import javax.inject.Inject
 
 @UserScope
-class UserDataRepository @Inject constructor(private val userManager: UserManager){
+class UserDataRepository @Inject constructor(private val userManager: UserManager) {
 
     val userName: String = ""
 }

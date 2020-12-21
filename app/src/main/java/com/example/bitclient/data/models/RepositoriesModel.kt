@@ -1,4 +1,5 @@
 package com.example.bitclient.data.models
 
-class RepositoriesModel {
-}
+data class RepositoriesModel(
+        val name: String
+)

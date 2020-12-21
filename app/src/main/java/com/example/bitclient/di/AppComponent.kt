@@ -3,13 +3,19 @@ package com.example.bitclient.di
 import android.content.Context
 import com.example.bitclient.data.user.UserManager
 import com.example.bitclient.ui.view.activities.MainActivity
-import com.example.bitclient.ui.view.fragments.RepositoriesFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppSubcomponents::class, ViewModelFactoryModule::class, ViewModelsModule::class, NetworkModule::class])
+@Component(modules = [
+    AppSubcomponents::class,
+    ViewModelFactoryModule::class,
+    ViewModelsModule::class,
+    NetworkModule::class,
+    RetrofitModule::class,
+    StorageModule::class]
+)
 interface AppComponent {
 
     @Component.Factory

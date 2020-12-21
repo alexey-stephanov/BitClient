@@ -4,7 +4,6 @@ import android.view.View
 import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
@@ -36,5 +35,5 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
     }
 }
 
-fun <T: ViewBinding> viewBinding(viewBindingFactory: (View) -> T) =
+fun <T : ViewBinding> viewBinding(viewBindingFactory: (View) -> T) =
         FragmentViewBindingDelegate(viewBindingFactory)

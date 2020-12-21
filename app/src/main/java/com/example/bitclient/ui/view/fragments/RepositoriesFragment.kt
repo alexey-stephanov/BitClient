@@ -1,11 +1,9 @@
 package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.user.UserManager
 import com.example.bitclient.databinding.FragmentRepositoriesBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
