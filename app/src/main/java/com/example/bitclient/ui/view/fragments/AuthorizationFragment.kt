@@ -7,6 +7,7 @@ import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.databinding.FragmentAuthorizationBinding

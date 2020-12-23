@@ -1,8 +1,8 @@
 package com.example.bitclient.di
 
-import com.example.bitclient.BuildConfig
-import com.example.bitclient.data.oauth.BasicAuthInterceptor
-import com.example.bitclient.data.oauth.BearerAuthInterceptor
+import com.example.bitclient.data.oauth.AuthorizationInterceptor
+import com.example.bitclient.data.oauth.RequestsInterceptor
+import com.example.bitclient.data.repositories.NetworkDataRepository
 import com.example.bitclient.data.storage.Storage
 import dagger.Module
 import dagger.Provides
@@ -17,9 +17,9 @@ import javax.inject.Singleton
 class RetrofitModule {
 
     @Singleton
-    @BasicAuth
+    @Authorization
     @Provides
-    fun provideBasicRetrofit(@BasicAuth okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
+    fun provideAuthorizationRetrofit(@Authorization okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
     ): Retrofit = Retrofit.Builder()
             .baseUrl("https://bitbucket.org/")
             .client(okHttpClient)
@@ -27,9 +27,9 @@ class RetrofitModule {
             .build()
 
     @Singleton
-    @BearerAuth
+    @Requests
     @Provides
-    fun provideBearerRetrofit(@BearerAuth okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
+    fun provideRequestsRetrofit(@Requests okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
     ): Retrofit = Retrofit.Builder()
             .baseUrl("https://api.bitbucket.org/")
             .client(okHttpClient)
@@ -37,10 +37,10 @@ class RetrofitModule {
             .build()
 
     @Singleton
-    @BasicAuth
+    @Authorization
     @Provides
-    fun provideBasicAuthClient(
-            @BasicAuth interceptor: Interceptor,
+    fun provideAuthorizationClient(
+            @Authorization interceptor: Interceptor,
             httpLoggingInterceptor: HttpLoggingInterceptor,
     ): OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)
@@ -48,10 +48,10 @@ class RetrofitModule {
             .build()
 
     @Singleton
-    @BearerAuth
+    @Requests
     @Provides
-    fun provideBearerAuthClient(
-            @BearerAuth interceptor: Interceptor,
+    fun provideRequestsClient(
+            @Requests interceptor: Interceptor,
             httpLoggingInterceptor: HttpLoggingInterceptor,
     ): OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)
@@ -59,14 +59,14 @@ class RetrofitModule {
             .build()
 
     @Singleton
-    @BasicAuth
+    @Authorization
     @Provides
-    fun provideBasicAuthInterceptor(): Interceptor = BasicAuthInterceptor(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET)
+    fun provideAuthorizationInterceptor(): Interceptor = AuthorizationInterceptor()
 
     @Singleton
-    @BearerAuth
+    @Requests
     @Provides
-    fun provideBearerAuthInterceptor(storage: Storage): Interceptor = BearerAuthInterceptor(storage)
+    fun provideRequestsInterceptor(storage: Storage, networkDataRepository: NetworkDataRepository): Interceptor = RequestsInterceptor(storage, networkDataRepository)
 
     @Singleton
     @Provides

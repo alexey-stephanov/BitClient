@@ -10,7 +10,5 @@ interface RequestApi {
     suspend fun getRepositories(): List<RepositoriesModel>
 
     @GET("2.0/user")
-    suspend fun getUserInfo(
-            //@Path("access_token") accessToken: String
-    ): UserModel
+    suspend fun getUserInfo(): UserModel
 }

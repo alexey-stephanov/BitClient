@@ -22,15 +22,15 @@ abstract class ViewModelsModule {
     @Binds
     @IntoMap
     @ViewModelKey(RepositoriesViewModel::class)
-    abstract fun bindRepositoriesViewModel(viewModel: AuthorizationViewModel): ViewModel
+    abstract fun bindRepositoriesViewModel(viewModel: RepositoriesViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(BranchesViewModel::class)
-    abstract fun bindBranchesViewModel(viewModel: AuthorizationViewModel): ViewModel
+    abstract fun bindBranchesViewModel(viewModel: BranchesViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(SettingsViewModel::class)
-    abstract fun bindSettingsViewModel(viewModel: AuthorizationViewModel): ViewModel
+    abstract fun bindSettingsViewModel(viewModel: SettingsViewModel): ViewModel
 }

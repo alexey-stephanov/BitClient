@@ -15,12 +15,10 @@ class NetworkModule {
 //    fun provideServerUrl(): String = "https://bitbucket.org/site/oauth2/"
 
     @Singleton
-    @BasicAuth
     @Provides
-    fun provideBasicApi(@BasicAuth retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
+    fun provideAuthorizationApi(@Authorization retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
     @Singleton
-    @BearerAuth
     @Provides
-    fun provideBearerApi(@BearerAuth retrofit: Retrofit): RequestApi = retrofit.create(RequestApi::class.java)
+    fun provideApi(@Requests retrofit: Retrofit): RequestApi = retrofit.create(RequestApi::class.java)
 }

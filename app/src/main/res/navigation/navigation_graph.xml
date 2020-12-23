@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/authorizationFragment">
     <fragment
-        android:id="@+id/signInFragment"
+        android:id="@+id/authorizationFragment"
         android:name="com.example.bitclient.ui.view.fragments.AuthorizationFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_authorization">
         <action
-            android:id="@+id/action_signInFragment_to_repositoriesFragment"
-            app:destination="@id/repositoriesFragment" />
+            android:id="@+id/action_authorizationFragment_to_repositoriesFragment"
+            app:destination="@id/repositoriesFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/navigation_graph"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/repositoriesFragment"
@@ -21,10 +24,18 @@
         <action
             android:id="@+id/action_repositoriesFragment_to_branchesFragment"
             app:destination="@id/branchesFragment" />
+        <action
+            android:id="@+id/action_repositoriesFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/branchesFragment"
         android:name="com.example.bitclient.ui.view.fragments.BranchesFragment"
         android:label="BranchesFragment"
         tools:layout="@layout/fragment_branches"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.bitclient.ui.view.fragments.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
 </navigation>

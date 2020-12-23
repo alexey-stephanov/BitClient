@@ -3,7 +3,7 @@ package com.example.bitclient.data.storage
 import android.content.Context
 import javax.inject.Inject
 
-class SharedPreferencesStorage @Inject constructor(name: String, context: Context) : Storage {
+class SharedPreferencesStorage(name: String, context: Context) : Storage {
     private val sharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
 
     override fun getString(key: String): String =

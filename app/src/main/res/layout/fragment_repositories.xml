@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_repositories_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_repositories_actionbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/design_default_color_on_primary">
+
+            <ImageButton
+                android:id="@+id/image_button_repositories_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:contentDescription="@string/repositories_menu"
+                android:src="@drawable/ic_menu" />
+
+            <TextView
+                android:id="@+id/text_view_repositories_title"
+                style="@style/TextAppearance.MaterialComponents.Caption.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/spacing_16"
+                android:paddingEnd="@dimen/spacing_16"
+                android:text="@string/repositories_title" />
+        </com.google.android.material.appbar.MaterialToolbar>
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_repositories_navigation"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/side_nav_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </com.google.android.material.navigation.NavigationView>
-
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/side_nav_header"
+        app:menu="@menu/drawer"/>
 </androidx.drawerlayout.widget.DrawerLayout>

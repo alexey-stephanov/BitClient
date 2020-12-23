@@ -2,15 +2,19 @@ package com.example.bitclient.ui.view.activities
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 import com.example.bitclient.BitClientApp
+import com.example.bitclient.R
 import com.example.bitclient.databinding.ActivityMainBinding
+import com.example.bitclient.ui.view.fragments.AuthorizationFragmentDirections
 import com.example.bitclient.ui.viewmodels.MainViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
 import javax.inject.Inject
 
-class MainActivity : FragmentActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -34,7 +38,13 @@ class MainActivity : FragmentActivity() {
 
         val code = intent?.data?.getQueryParameter("code")
         if (code != null) {
-            mainViewModel.handleAuthorizationCode(code)
+            mainViewModel.apply {
+                handleAuthorizationCode(code)
+                saveUserInfo()
+            }
+            Navigation
+                    .findNavController(this, R.id.nav_host_fragment)
+                    .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToRepositoriesFragment())
         } else {
             throw KotlinNullPointerException()
         }

@@ -8,7 +8,6 @@ import dagger.Provides
 
 @Module
 class StorageModule {
-
     @Provides
     fun provideTokensStorage(context: Context): Storage =
             SharedPreferencesStorage("tokens", context)
