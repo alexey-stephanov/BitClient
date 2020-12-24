@@ -5,9 +5,10 @@ import com.example.bitclient.di.Authorization
 import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
 @Authorization
-class AuthorizationInterceptor : Interceptor {
+class AuthorizationInterceptor @Inject constructor(): Interceptor {
     private var credentials: String = Credentials.basic(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET)
 
     override fun intercept(chain: Interceptor.Chain): Response {

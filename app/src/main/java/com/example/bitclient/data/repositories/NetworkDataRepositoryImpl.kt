@@ -10,7 +10,6 @@ import javax.inject.Singleton
 private const val ACCESS_TOKEN_KEY = "access_token"
 private const val REFRESH_TOKEN_KEY = "refresh_token"
 
-@Singleton
 class NetworkDataRepositoryImpl @Inject constructor(
         private val storage: Storage,
         private val authService: AuthApi,

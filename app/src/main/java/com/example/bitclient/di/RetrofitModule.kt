@@ -1,11 +1,13 @@
 package com.example.bitclient.di
 
+import com.example.bitclient.data.oauth.AccessTokenAuthenticator
 import com.example.bitclient.data.oauth.AuthorizationInterceptor
 import com.example.bitclient.data.oauth.RequestsInterceptor
-import com.example.bitclient.data.repositories.NetworkDataRepository
 import com.example.bitclient.data.storage.Storage
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,66 +16,68 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class RetrofitModule {
+abstract class RetrofitModule {
 
-    @Singleton
     @Authorization
-    @Provides
-    fun provideAuthorizationRetrofit(@Authorization okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
-    ): Retrofit = Retrofit.Builder()
-            .baseUrl("https://bitbucket.org/")
-            .client(okHttpClient)
-            .addConverterFactory(gsonConverterFactory)
-            .build()
+    @Binds
+    abstract fun bindAuthorizationInterceptor(authorizationInterceptor: AuthorizationInterceptor): Interceptor
 
-    @Singleton
     @Requests
-    @Provides
-    fun provideRequestsRetrofit(@Requests okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
-    ): Retrofit = Retrofit.Builder()
-            .baseUrl("https://api.bitbucket.org/")
-            .client(okHttpClient)
-            .addConverterFactory(gsonConverterFactory)
-            .build()
+    @Binds
+    abstract fun bindRequestsInterceptor(requestsInterceptor: RequestsInterceptor): Interceptor
 
-    @Singleton
-    @Authorization
-    @Provides
-    fun provideAuthorizationClient(
-            @Authorization interceptor: Interceptor,
-            httpLoggingInterceptor: HttpLoggingInterceptor,
-    ): OkHttpClient = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
-
-    @Singleton
     @Requests
-    @Provides
-    fun provideRequestsClient(
-            @Requests interceptor: Interceptor,
-            httpLoggingInterceptor: HttpLoggingInterceptor,
-    ): OkHttpClient = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .addInterceptor(httpLoggingInterceptor)
-            .build()
+    @Binds
+    abstract fun bindAccessTokenAuthenticator(accessTokenAuthenticator: AccessTokenAuthenticator): Authenticator
 
-    @Singleton
-    @Authorization
-    @Provides
-    fun provideAuthorizationInterceptor(): Interceptor = AuthorizationInterceptor()
+    companion object {
+        @Singleton
+        @Authorization
+        @Provides
+        fun provideAuthorizationRetrofit(@Authorization okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
+        ): Retrofit = Retrofit.Builder()
+                .baseUrl("https://bitbucket.org/")
+                .client(okHttpClient)
+                .addConverterFactory(gsonConverterFactory)
+                .build()
 
-    @Singleton
-    @Requests
-    @Provides
-    fun provideRequestsInterceptor(storage: Storage, networkDataRepository: NetworkDataRepository): Interceptor = RequestsInterceptor(storage, networkDataRepository)
+        @Singleton
+        @Requests
+        @Provides
+        fun provideRequestsRetrofit(@Requests okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
+        ): Retrofit = Retrofit.Builder()
+                .baseUrl("https://api.bitbucket.org/")
+                .client(okHttpClient)
+                .addConverterFactory(gsonConverterFactory)
+                .build()
 
-    @Singleton
-    @Provides
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+        @Authorization
+        @Provides
+        fun provideAuthorizationClient(
+                @Authorization interceptor: Interceptor,
+                httpLoggingInterceptor: HttpLoggingInterceptor
+        ): OkHttpClient = OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .addInterceptor(httpLoggingInterceptor)
+                .build()
 
-    @Singleton
-    @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
+        @Requests
+        @Provides
+        fun provideRequestsClient(
+                @Requests interceptor: Interceptor,
+                httpLoggingInterceptor: HttpLoggingInterceptor,
+                storage: Storage
+        ): OkHttpClient = OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .addInterceptor(httpLoggingInterceptor)
+                .authenticator(AccessTokenAuthenticator(storage))
+                .build()
+
+        @Provides
+        fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        @Provides
+        fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
+    }
 }

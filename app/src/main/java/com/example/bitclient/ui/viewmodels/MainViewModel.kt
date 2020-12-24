@@ -3,6 +3,7 @@ package com.example.bitclient.ui.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bitclient.data.repositories.NetworkDataRepository
+import com.example.bitclient.data.repositories.NetworkDataRepositoryImpl
 import com.example.bitclient.data.user.UserManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
