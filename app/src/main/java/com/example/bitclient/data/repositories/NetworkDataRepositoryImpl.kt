@@ -2,10 +2,9 @@ package com.example.bitclient.data.repositories
 
 import com.example.bitclient.data.api.AuthApi
 import com.example.bitclient.data.api.RequestApi
-import com.example.bitclient.data.models.UserModel
+import com.example.bitclient.data.models.usermodel.UserModel
 import com.example.bitclient.data.storage.Storage
 import javax.inject.Inject
-import javax.inject.Singleton
 
 private const val ACCESS_TOKEN_KEY = "access_token"
 private const val REFRESH_TOKEN_KEY = "refresh_token"

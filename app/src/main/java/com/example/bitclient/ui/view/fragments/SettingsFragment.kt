@@ -8,6 +8,7 @@ import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.user.UserManager
 import com.example.bitclient.databinding.FragmentSettingsBinding
+import com.example.bitclient.di.UserComponentManager
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
 import com.example.bitclient.ui.viewmodels.SettingsViewModel
@@ -22,13 +23,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var settingsViewModel: SettingsViewModel
 
-    private lateinit var userManager: UserManager
+    @Inject
+    lateinit var userManager: UserManager
+
+    private lateinit var userComponentManager: UserComponentManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        userManager = (requireActivity().application as BitClientApp).appComponent.userManager()
-        userManager.userComponent!!.inject(this)
+        userComponentManager = (requireActivity().application as BitClientApp).appComponent.userComponentManager()
+        userComponentManager.userComponent!!.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

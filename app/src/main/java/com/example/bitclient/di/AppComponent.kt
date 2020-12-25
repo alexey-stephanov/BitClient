@@ -12,6 +12,7 @@ import javax.inject.Singleton
     AppSubcomponents::class,
     ViewModelFactoryModule::class,
     ViewModelsModule::class,
+    UserModule::class,
     NetworkModule::class,
     RetrofitModule::class,
     StorageModule::class]
@@ -27,5 +28,5 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
 
-    fun userManager(): UserManager
+    fun userComponentManager(): UserComponentManager
 }

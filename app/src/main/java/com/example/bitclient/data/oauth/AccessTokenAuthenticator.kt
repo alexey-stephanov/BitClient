@@ -13,14 +13,14 @@ import javax.inject.Inject
 
 @Requests
 class AccessTokenAuthenticator @Inject constructor(private val storage: Storage) : Authenticator {
-    override fun authenticate(route: Route?, response: Response): Request? {
+    override fun authenticate(route: Route?, response: Response): Request {
         val refreshToken = storage.getString("refresh_token")
         val newAccessToken = refreshTokens(refreshToken)
         return response.request.newBuilder().header("Authorization", "Bearer $newAccessToken").build()
     }
 
     private fun refreshTokens(refreshToken: String): String? {
-        var newAccessToken: String?
+        val newAccessToken: String?
         val client = OkHttpClient.Builder()
                 .addInterceptor(AuthorizationInterceptor())
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))

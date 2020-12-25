@@ -1,5 +1,6 @@
 package com.example.bitclient.di
 
+import com.example.bitclient.ui.view.fragments.AccountFragment
 import com.example.bitclient.ui.view.fragments.BranchesFragment
 import com.example.bitclient.ui.view.fragments.RepositoriesFragment
 import com.example.bitclient.ui.view.fragments.SettingsFragment
@@ -17,4 +18,5 @@ interface UserComponent {
     fun inject(repositoriesFragment: RepositoriesFragment)
     fun inject(branchesFragment: BranchesFragment)
     fun inject(settingsFragment: SettingsFragment)
+    fun inject(accountFragment: AccountFragment)
 }

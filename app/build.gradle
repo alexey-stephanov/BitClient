@@ -31,6 +31,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "api"
+    productFlavors {
+        beta {
+            dimension "api"
+            buildConfigField "String", "AUTH_URL", '"https://bitbucket.org/"'
+            buildConfigField "String", "REQUESTS_URL", '"https://api.bitbucket.org/"'
+        }
+    }
     buildFeatures {
         viewBinding true
     }

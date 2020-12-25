@@ -1,7 +1,7 @@
 package com.example.bitclient.data.api
 
 import com.example.bitclient.data.models.RepositoriesModel
-import com.example.bitclient.data.models.UserModel
+import com.example.bitclient.data.models.usermodel.UserModel
 import retrofit2.http.GET
 
 interface RequestApi {

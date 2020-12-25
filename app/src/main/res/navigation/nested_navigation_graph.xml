@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nested_navigation_graph"
+    app:startDestination="@id/repositoriesFragment">
+
+    <fragment
+        android:id="@+id/repositoriesFragment"
+        android:name="com.example.bitclient.ui.view.fragments.RepositoriesFragment"
+        android:label="RepositoriesFragment"
+        tools:layout="@layout/fragment_repositories">
+        <action
+            android:id="@+id/action_repositoriesFragment_to_branchesFragment"
+            app:destination="@id/branchesFragment" />
+        <action
+            android:id="@+id/action_repositoriesFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_repositoriesFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/branchesFragment"
+        android:name="com.example.bitclient.ui.view.fragments.BranchesFragment"
+        android:label="BranchesFragment"
+        tools:layout="@layout/fragment_branches" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.bitclient.ui.view.fragments.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.bitclient.ui.view.fragments.AccountFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/fragment_account" />
+</navigation>

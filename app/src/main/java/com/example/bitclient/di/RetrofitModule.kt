@@ -1,5 +1,6 @@
 package com.example.bitclient.di
 
+import com.example.bitclient.BuildConfig
 import com.example.bitclient.data.oauth.AccessTokenAuthenticator
 import com.example.bitclient.data.oauth.AuthorizationInterceptor
 import com.example.bitclient.data.oauth.RequestsInterceptor
@@ -36,7 +37,7 @@ abstract class RetrofitModule {
         @Provides
         fun provideAuthorizationRetrofit(@Authorization okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
         ): Retrofit = Retrofit.Builder()
-                .baseUrl("https://bitbucket.org/")
+                .baseUrl(BuildConfig.AUTH_URL)
                 .client(okHttpClient)
                 .addConverterFactory(gsonConverterFactory)
                 .build()
@@ -46,7 +47,7 @@ abstract class RetrofitModule {
         @Provides
         fun provideRequestsRetrofit(@Requests okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
         ): Retrofit = Retrofit.Builder()
-                .baseUrl("https://api.bitbucket.org/")
+                .baseUrl(BuildConfig.REQUESTS_URL)
                 .client(okHttpClient)
                 .addConverterFactory(gsonConverterFactory)
                 .build()

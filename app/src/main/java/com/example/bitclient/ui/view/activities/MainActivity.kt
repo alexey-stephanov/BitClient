@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.databinding.ActivityMainBinding
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         (application as BitClientApp).appComponent.inject(this)
 
+        setTheme(R.style.Theme_BitClient)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -38,13 +39,8 @@ class MainActivity : AppCompatActivity() {
 
         val code = intent?.data?.getQueryParameter("code")
         if (code != null) {
-            mainViewModel.apply {
-                handleAuthorizationCode(code)
-                saveUserInfo()
-            }
-            Navigation
-                    .findNavController(this, R.id.nav_host_fragment)
-                    .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToRepositoriesFragment())
+            mainViewModel.handleAuthorizationCode(code)
+            Navigation.findNavController(this, R.id.main_host_fragment).navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
         } else {
             throw KotlinNullPointerException()
         }
