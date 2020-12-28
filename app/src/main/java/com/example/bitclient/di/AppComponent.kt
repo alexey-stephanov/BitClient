@@ -24,9 +24,8 @@ interface AppComponent {
         fun create(@BindsInstance context: Context): AppComponent
     }
 
-    fun authorizationComponent(): AuthorizationComponent.Factory
-
     fun inject(mainActivity: MainActivity)
 
+    fun authorizationComponent(): AuthorizationComponent.Factory
     fun userComponentManager(): UserComponentManager
 }

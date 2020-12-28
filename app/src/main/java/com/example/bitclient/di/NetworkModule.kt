@@ -1,11 +1,9 @@
 package com.example.bitclient.di
 
 import com.example.bitclient.data.api.AuthApi
-import com.example.bitclient.data.api.RequestApi
+import com.example.bitclient.data.api.RequestsApi
 import com.example.bitclient.data.repositories.NetworkDataRepository
 import com.example.bitclient.data.repositories.NetworkDataRepositoryImpl
-import com.example.bitclient.data.storage.SharedPreferencesStorage
-import com.example.bitclient.data.storage.Storage
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -14,10 +12,6 @@ import javax.inject.Singleton
 
 @Module
 abstract class NetworkModule {
-
-//    @Provides
-//    @Named("serverUrl")
-//    fun provideServerUrl(): String = "https://bitbucket.org/site/oauth2/"
 
     @Singleton
     @Binds
@@ -30,6 +24,6 @@ abstract class NetworkModule {
 
         @Singleton
         @Provides
-        fun provideApi(@Requests retrofit: Retrofit): RequestApi = retrofit.create(RequestApi::class.java)
+        fun provideApi(@Requests retrofit: Retrofit): RequestsApi = retrofit.create(RequestsApi::class.java)
     }
 }

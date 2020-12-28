@@ -20,9 +20,6 @@ class BranchesFragment : Fragment(R.layout.fragment_branches) {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var branchesViewModel: BranchesViewModel
 
-    @Inject
-    lateinit var userManager: UserManager
-
     private lateinit var userComponentManager: UserComponentManager
 
     override fun onAttach(context: Context) {

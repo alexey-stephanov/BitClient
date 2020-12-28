@@ -12,9 +12,9 @@
         android:name=".BitClientApp"
         android:allowBackup="false"
         android:fullBackupContent="false"
-        android:icon="@drawable/ic_bucket_black_48"
+        android:icon="@drawable/ic_app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_bucket_black_48"
+        android:roundIcon="@drawable/ic_app_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitClient.Launcher">
         <activity android:name=".ui.view.activities.MainActivity"

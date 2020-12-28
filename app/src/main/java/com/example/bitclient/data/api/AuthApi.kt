@@ -20,11 +20,4 @@ interface AuthApi {
             @Field("grant_type") grantType: String,
             @Field("refresh_token") refreshToken: String
     ): TokenModel
-
-    @FormUrlEncoded
-    @POST("site/oauth2/access_token")
-    fun refreshAccessToken2(
-            @Field("grant_type") grantType: String,
-            @Field("refresh_token") refreshToken: String
-    ): TokenModel
 }

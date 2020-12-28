@@ -6,10 +6,10 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_repositories_actionbar"
+        android:id="@+id/toolbar_account_actionbar"
+        style="@style/ToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/design_default_color_on_primary"
         app:title="@string/branches_title" />
 
 </LinearLayout>

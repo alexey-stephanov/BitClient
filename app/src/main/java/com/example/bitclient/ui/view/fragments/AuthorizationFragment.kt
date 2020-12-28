@@ -7,8 +7,8 @@ import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import com.example.bitclient.BitClientApp
+import com.example.bitclient.BuildConfig
 import com.example.bitclient.R
 import com.example.bitclient.databinding.FragmentAuthorizationBinding
 import com.example.bitclient.di.AuthorizationComponent
@@ -25,29 +25,34 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var authorizationViewModel: AuthorizationViewModel
 
-    lateinit var authorizationComponent: AuthorizationComponent
+    private var authorizationComponent: AuthorizationComponent? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         authorizationComponent = (requireActivity().application as BitClientApp).appComponent.authorizationComponent().create()
-        authorizationComponent.inject(this)
+        authorizationComponent!!.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        authorizationViewModel = ViewModelProvider(this, viewModelFactory).get(AuthorizationViewModel::class.java)
+        authorizationViewModel =
+            ViewModelProvider(this, viewModelFactory).get(AuthorizationViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonAuthorizationEnter.setOnClickListener {
-            val url = authorizationViewModel.authorizationUrl
-            val builder = CustomTabsIntent.Builder()
-            val customTabsIntent = builder.build()
+            val url = "${BuildConfig.AUTH_URL}site/oauth2/authorize?client_id=${BuildConfig.CLIENT_ID}&response_type=code"
+            val customTabsIntent = CustomTabsIntent.Builder().build()
             customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        authorizationComponent = null
     }
 }

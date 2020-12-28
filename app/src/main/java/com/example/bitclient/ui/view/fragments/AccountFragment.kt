@@ -2,10 +2,13 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
+import com.example.bitclient.data.models.usermodel.UserModel
 import com.example.bitclient.data.user.UserManager
 import com.example.bitclient.databinding.FragmentAccountBinding
 import com.example.bitclient.di.UserComponentManager
@@ -22,24 +25,29 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var accountViewModel: AccountViewModel
 
-    @Inject
-    lateinit var userManager: UserManager
-
     private lateinit var userComponentManager: UserComponentManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        userComponentManager =
-            (requireActivity().application as BitClientApp).appComponent.userComponentManager()
-        userComponentManager.createComponent()
+        userComponentManager = (requireActivity().application as BitClientApp).appComponent.userComponentManager()
         userComponentManager.userComponent!!.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        accountViewModel =
-            ViewModelProvider(this, viewModelFactory).get(AccountViewModel::class.java)
+        accountViewModel = ViewModelProvider(this, viewModelFactory).get(AccountViewModel::class.java)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        val userModelObserver = Observer<UserModel> {
+            binding.imageViewAccountAvatar.setImageURI(it.links.avatar.href)
+            binding.textViewAccountDisplayName.text = it.displayName
+            binding.textViewAccountUsername.text = it.username
+        }
+        accountViewModel.liveUserModel.observe(viewLifecycleOwner, userModelObserver)
     }
 }

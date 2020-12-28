@@ -7,11 +7,21 @@
 
     <TextView
         android:id="@+id/text_view_authorization_greeting"
-        style="@style/TextAppearance.MaterialComponents.Caption.Greeting"
+        style="@style/TextAppearance.MaterialComponents.Headline3.Greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_128"
         android:text="@string/authorization_greeting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        style="@style/AuthorizationLogoStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/authorization_logo_content_description"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

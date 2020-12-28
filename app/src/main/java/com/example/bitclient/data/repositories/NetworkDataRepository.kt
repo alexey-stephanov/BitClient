@@ -4,6 +4,5 @@ import com.example.bitclient.data.models.usermodel.UserModel
 
 interface NetworkDataRepository {
     suspend fun retrieveTokens(code: String)
-    suspend fun refreshAccessToken()
     suspend fun retrieveUserInfo(): UserModel
 }

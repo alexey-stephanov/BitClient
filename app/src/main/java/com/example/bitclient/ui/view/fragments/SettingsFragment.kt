@@ -23,9 +23,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var settingsViewModel: SettingsViewModel
 
-    @Inject
-    lateinit var userManager: UserManager
-
     private lateinit var userComponentManager: UserComponentManager
 
     override fun onAttach(context: Context) {
@@ -46,6 +43,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
         binding.buttonSettingsLogout.setOnClickListener {
             settingsViewModel.logout()
+            userComponentManager.removeComponent()
         }
     }
 }

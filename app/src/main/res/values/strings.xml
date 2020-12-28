@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">BitClient</string>
     <string name="authorization_greeting">Welcome to BitClient</string>
+    <string name="authorization_logo_content_description">Logo</string>
     <string name="authorization_enter">Enter to your account</string>
     <string name="settings_title">Settings</string>
     <string name="repositories_title">Repositories</string>

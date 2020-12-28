@@ -1,11 +1,13 @@
 package com.example.bitclient.di
 
 import com.example.bitclient.BuildConfig
+import com.example.bitclient.data.api.AuthApi
 import com.example.bitclient.data.oauth.AccessTokenAuthenticator
 import com.example.bitclient.data.oauth.AuthorizationInterceptor
 import com.example.bitclient.data.oauth.RequestsInterceptor
 import com.example.bitclient.data.storage.Storage
 import dagger.Binds
+import dagger.Lazy
 import dagger.Module
 import dagger.Provides
 import okhttp3.Authenticator
@@ -67,11 +69,12 @@ abstract class RetrofitModule {
         fun provideRequestsClient(
                 @Requests interceptor: Interceptor,
                 httpLoggingInterceptor: HttpLoggingInterceptor,
-                storage: Storage
+                storage: Storage,
+                authApi: Lazy<AuthApi>
         ): OkHttpClient = OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .addInterceptor(httpLoggingInterceptor)
-                .authenticator(AccessTokenAuthenticator(storage))
+                .authenticator(AccessTokenAuthenticator(storage, authApi))
                 .build()
 
         @Provides

@@ -30,9 +30,6 @@ class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var repositoriesViewModel: RepositoriesViewModel
 
-    @Inject
-    lateinit var userManager: UserManager
-
     private lateinit var userComponentManager: UserComponentManager
 
     override fun onAttach(context: Context) {
