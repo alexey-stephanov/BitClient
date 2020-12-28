@@ -8,10 +8,10 @@ class UserComponentManager @Inject constructor(private val userComponentFactory:
 
     var userComponent: UserComponent? = null
         private set
-
-    fun createComponent() {
-        userComponent = userComponentFactory.create()
-    }
+        get() = field ?: run {
+            userComponent = userComponentFactory.create()
+            userComponent
+        }
 
     fun removeComponent() {
         userComponent = null

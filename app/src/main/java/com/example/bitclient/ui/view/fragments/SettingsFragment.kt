@@ -6,6 +6,9 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.Slide
+import androidx.transition.Transition
+import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.network.NetworkLiveData
@@ -30,7 +33,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onAttach(context)
 
         userComponentManager = (requireActivity().application as BitClientApp).appComponent.userComponentManager()
-        userComponentManager.userComponent!!.inject(this)
+        userComponentManager.userComponent?.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,20 +51,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         startConnectionChecking()
     }
 
     private fun startConnectionChecking() {
-        NetworkLiveData.observe(this, {
-            if (it) {
-                if (binding.textViewSettingsNoInternet.isVisible)
-                    binding.textViewSettingsNoInternet.visibility = View.GONE
-            } else {
-                binding.textViewSettingsNoInternet.visibility = View.VISIBLE
-            }
+        NetworkLiveData.observe(viewLifecycleOwner, { isAvailable ->
+            TransitionManager.beginDelayedTransition(binding.root, Slide())
+            binding.textViewSettingsNoInternet.isVisible = !isAvailable
         })
     }
 }

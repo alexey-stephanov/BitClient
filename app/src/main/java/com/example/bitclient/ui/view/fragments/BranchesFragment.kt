@@ -6,6 +6,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.network.NetworkLiveData
@@ -35,20 +37,16 @@ class BranchesFragment : Fragment(R.layout.fragment_branches) {
         branchesViewModel = ViewModelProvider(this, viewModelFactory).get(BranchesViewModel::class.java)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         startConnectionChecking()
     }
 
     private fun startConnectionChecking() {
-        NetworkLiveData.observe(this, {
-            if (it) {
-                if (binding.textViewBranchesNoInternet.isVisible)
-                    binding.textViewBranchesNoInternet.visibility = View.GONE
-            } else {
-                binding.textViewBranchesNoInternet.visibility = View.VISIBLE
-            }
+        NetworkLiveData.observe(viewLifecycleOwner, { isAvailable ->
+            TransitionManager.beginDelayedTransition(binding.root, Slide())
+            binding.textViewBranchesNoInternet.isVisible = !isAvailable
         })
     }
 }

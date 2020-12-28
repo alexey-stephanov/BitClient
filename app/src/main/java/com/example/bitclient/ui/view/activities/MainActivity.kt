@@ -41,8 +41,6 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.handleAuthorizationCode(code)
             Navigation.findNavController(this, R.id.main_host_fragment)
                 .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
-        } else {
-            throw KotlinNullPointerException()
         }
     }
 }

@@ -8,6 +8,8 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.BuildConfig
 import com.example.bitclient.R
@@ -41,6 +43,8 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        startConnectionChecking()
+
         binding.buttonAuthorizationEnter.setOnClickListener {
             val url = "${BuildConfig.AUTH_URL}site/oauth2/authorize?client_id=${BuildConfig.CLIENT_ID}&response_type=code"
             val customTabsIntent = CustomTabsIntent.Builder().build()
@@ -48,21 +52,10 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        startConnectionChecking()
-    }
-
     private fun startConnectionChecking() {
-        NetworkLiveData.observe(this, {
-            if(it) {
-                if(binding.textViewAuthorizationNoInternet.isVisible) {
-                    binding.textViewAuthorizationNoInternet.visibility = View.GONE
-                }
-            } else {
-                binding.textViewAuthorizationNoInternet.visibility = View.VISIBLE
-            }
+        NetworkLiveData.observe(viewLifecycleOwner, { isAvailable ->
+            TransitionManager.beginDelayedTransition(binding.root, Slide())
+            binding.textViewAuthorizationNoInternet.isVisible = !isAvailable
         })
     }
 }

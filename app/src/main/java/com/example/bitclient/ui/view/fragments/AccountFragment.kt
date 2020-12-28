@@ -7,6 +7,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.models.usermodel.UserModel
@@ -37,26 +39,22 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         accountViewModel = ViewModelProvider(this, viewModelFactory).get(AccountViewModel::class.java)
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val userModelObserver = Observer<UserModel> {
-            binding.imageViewAccountAvatar.setImageURI(it.links.avatar.href)
-            binding.textViewAccountDisplayName.text = it.displayName
-            binding.textViewAccountUsername.text = it.username
+        val userModelObserver = Observer<UserModel> { userModel ->
+            binding.imageViewAccountAvatar.setImageURI(userModel.links.avatar.href)
+            binding.textViewAccountDisplayName.text = userModel.displayName
+            binding.textViewAccountUsername.text = userModel.username
         }
         accountViewModel.liveUserModel.observe(viewLifecycleOwner, userModelObserver)
         startConnectionChecking()
     }
 
     private fun startConnectionChecking() {
-        NetworkLiveData.observe(this, {
-            if (it) {
-                if (binding.textViewAccountNoInternet.isVisible)
-                    binding.textViewAccountNoInternet.visibility = View.GONE
-            } else {
-                binding.textViewAccountNoInternet.visibility = View.VISIBLE
-            }
+        NetworkLiveData.observe(viewLifecycleOwner, { isAvailable ->
+            TransitionManager.beginDelayedTransition(binding.root, Slide())
+            binding.textViewAccountNoInternet.isVisible = !isAvailable
         })
     }
 }

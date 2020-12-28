@@ -13,5 +13,4 @@ class RepositoriesViewModel @Inject constructor(private val networkDataRepositor
         MutableLiveData<UserModel>()
     }
 
-    //fun getUserInfo(): String = userManager.getUserInfo()
 }

@@ -1,9 +1,6 @@
 package com.example.bitclient.ui.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.bitclient.data.models.usermodel.UserModel
 import com.example.bitclient.data.user.UserManager
 import com.example.bitclient.data.user.UserManagerDelegate
 import javax.inject.Inject
