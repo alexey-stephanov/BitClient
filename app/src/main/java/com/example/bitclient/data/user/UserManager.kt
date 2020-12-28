@@ -1,6 +1,5 @@
 package com.example.bitclient.data.user
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.bitclient.data.models.usermodel.UserModel
 

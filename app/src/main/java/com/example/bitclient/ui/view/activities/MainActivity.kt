@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.databinding.ActivityMainBinding
@@ -40,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         val code = intent?.data?.getQueryParameter("code")
         if (code != null) {
             mainViewModel.handleAuthorizationCode(code)
-            Navigation.findNavController(this, R.id.main_host_fragment).navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
+            Navigation.findNavController(this, R.id.main_host_fragment)
+                .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
         } else {
             throw KotlinNullPointerException()
         }

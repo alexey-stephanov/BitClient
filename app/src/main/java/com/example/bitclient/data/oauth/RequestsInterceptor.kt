@@ -1,16 +1,9 @@
 package com.example.bitclient.data.oauth
 
-import android.util.Log
-import com.example.bitclient.data.repositories.NetworkDataRepository
-import com.example.bitclient.data.repositories.NetworkDataRepositoryImpl
 import com.example.bitclient.data.storage.Storage
 import com.example.bitclient.di.Requests
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.net.HttpURLConnection
 import javax.inject.Inject
 
 @Requests

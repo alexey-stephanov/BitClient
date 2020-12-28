@@ -56,4 +56,19 @@
         app:layout_constraintStart_toEndOf="@+id/barrier_account"
         app:layout_constraintTop_toBottomOf="@+id/text_view_account_display_name" />
 
+    <TextView
+        android:id="@+id/text_view_account_no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:text="@string/no_internet_connection"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@color/red"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,7 @@
 package com.example.bitclient.ui.view.fragments
 
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.bitclient.R

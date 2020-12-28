@@ -3,6 +3,7 @@
     <string name="authorization_greeting">Welcome to BitClient</string>
     <string name="authorization_logo_content_description">Logo</string>
     <string name="authorization_enter">Enter to your account</string>
+    <string name="no_internet_connection">No internet connection</string>
     <string name="settings_title">Settings</string>
     <string name="repositories_title">Repositories</string>
     <string name="account_title">Account</string>

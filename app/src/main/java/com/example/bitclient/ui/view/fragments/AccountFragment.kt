@@ -2,16 +2,16 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.models.usermodel.UserModel
-import com.example.bitclient.data.user.UserManager
+import com.example.bitclient.data.network.NetworkLiveData
 import com.example.bitclient.databinding.FragmentAccountBinding
-import com.example.bitclient.di.UserComponentManager
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.AccountViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
@@ -25,13 +25,10 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var accountViewModel: AccountViewModel
 
-    private lateinit var userComponentManager: UserComponentManager
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        userComponentManager = (requireActivity().application as BitClientApp).appComponent.userComponentManager()
-        userComponentManager.userComponent!!.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.userComponentManager().userComponent!!.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +37,8 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         accountViewModel = ViewModelProvider(this, viewModelFactory).get(AccountViewModel::class.java)
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
 
         val userModelObserver = Observer<UserModel> {
             binding.imageViewAccountAvatar.setImageURI(it.links.avatar.href)
@@ -49,5 +46,17 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             binding.textViewAccountUsername.text = it.username
         }
         accountViewModel.liveUserModel.observe(viewLifecycleOwner, userModelObserver)
+        startConnectionChecking()
+    }
+
+    private fun startConnectionChecking() {
+        NetworkLiveData.observe(this, {
+            if (it) {
+                if (binding.textViewAccountNoInternet.isVisible)
+                    binding.textViewAccountNoInternet.visibility = View.GONE
+            } else {
+                binding.textViewAccountNoInternet.visibility = View.VISIBLE
+            }
+        })
     }
 }

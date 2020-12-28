@@ -5,13 +5,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.BuildConfig
 import com.example.bitclient.R
+import com.example.bitclient.data.network.NetworkLiveData
 import com.example.bitclient.databinding.FragmentAuthorizationBinding
-import com.example.bitclient.di.AuthorizationComponent
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.AuthorizationViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
@@ -25,20 +26,16 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     lateinit var viewModelFactory: ViewModelFactory
     private lateinit var authorizationViewModel: AuthorizationViewModel
 
-    private var authorizationComponent: AuthorizationComponent? = null
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        authorizationComponent = (requireActivity().application as BitClientApp).appComponent.authorizationComponent().create()
-        authorizationComponent!!.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.authorizationComponent().create().inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        authorizationViewModel =
-            ViewModelProvider(this, viewModelFactory).get(AuthorizationViewModel::class.java)
+        authorizationViewModel = ViewModelProvider(this, viewModelFactory).get(AuthorizationViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,8 +48,21 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        authorizationComponent = null
+    override fun onResume() {
+        super.onResume()
+
+        startConnectionChecking()
+    }
+
+    private fun startConnectionChecking() {
+        NetworkLiveData.observe(this, {
+            if(it) {
+                if(binding.textViewAuthorizationNoInternet.isVisible) {
+                    binding.textViewAuthorizationNoInternet.visibility = View.GONE
+                }
+            } else {
+                binding.textViewAuthorizationNoInternet.visibility = View.VISIBLE
+            }
+        })
     }
 }
