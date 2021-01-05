@@ -53,6 +53,15 @@
         app:layout_constraintStart_toEndOf="@+id/barrier_account"
         app:layout_constraintTop_toBottomOf="@+id/text_view_account_display_name" />
 
+    <ProgressBar
+        android:id="@+id/progressBar_account_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_account_actionbar" />
+
     <TextView
         android:id="@+id/text_view_account_no_internet"
         android:layout_width="match_parent"

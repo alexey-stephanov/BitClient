@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_account_actionbar"
+        android:id="@+id/toolbar_repositories_actionbar"
         style="@style/ToolbarStyle"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -16,12 +16,21 @@
         app:title="@string/repositories_title" />
 
     <ProgressBar
+        android:id="@+id/progressBar_repositories_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_account_actionbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_repositories_actionbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_repositories_repos_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_repositories_actionbar" />
 
     <TextView
         android:id="@+id/text_view_repositories_no_internet"

@@ -10,7 +10,7 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.NetworkLiveData
+import com.example.bitclient.data.network.networkavailability.NetworkLiveData
 import com.example.bitclient.databinding.FragmentBranchesBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.BranchesViewModel

@@ -3,6 +3,7 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
@@ -13,7 +14,7 @@ import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.BuildConfig
 import com.example.bitclient.R
-import com.example.bitclient.data.network.NetworkLiveData
+import com.example.bitclient.data.network.networkavailability.NetworkLiveData
 import com.example.bitclient.databinding.FragmentAuthorizationBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.AuthorizationViewModel
@@ -54,7 +55,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
     private fun startConnectionChecking() {
         NetworkLiveData.observe(viewLifecycleOwner, { isAvailable ->
-            TransitionManager.beginDelayedTransition(binding.root, Slide())
+            TransitionManager.beginDelayedTransition(binding.root, Slide(Gravity.TOP))
             binding.textViewAuthorizationNoInternet.isVisible = !isAvailable
         })
     }

@@ -1,13 +1,8 @@
 package com.example.bitclient.data.user
 
-import androidx.lifecycle.MutableLiveData
-import com.example.bitclient.data.models.usermodel.UserModel
+import com.example.bitclient.data.network.networkmodels.usermodel.UserModel
 
-interface UserManager : UserManagerDelegate {
+interface UserManager : UserLiveDataDelegate {
     fun loginUser(userModel: UserModel)
     fun logout()
-}
-
-interface UserManagerDelegate {
-    val liveUserModel: MutableLiveData<UserModel>
 }

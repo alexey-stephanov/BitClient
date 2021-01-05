@@ -3,6 +3,7 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -11,8 +12,8 @@ import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.models.usermodel.UserModel
-import com.example.bitclient.data.network.NetworkLiveData
+import com.example.bitclient.data.network.networkmodels.usermodel.UserModel
+import com.example.bitclient.data.network.networkavailability.NetworkLiveData
 import com.example.bitclient.databinding.FragmentAccountBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.AccountViewModel
@@ -43,6 +44,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         super.onViewCreated(view, savedInstanceState)
 
         val userModelObserver = Observer<UserModel> { userModel ->
+            binding.progressBarAccountLoading.isGone = true
             binding.imageViewAccountAvatar.setImageURI(userModel.links.avatar.href)
             binding.textViewAccountDisplayName.text = userModel.displayName
             binding.textViewAccountUsername.text = userModel.username

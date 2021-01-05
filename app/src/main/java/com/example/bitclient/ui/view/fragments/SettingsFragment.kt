@@ -7,13 +7,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.transition.Slide
-import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.NetworkLiveData
+import com.example.bitclient.data.network.networkavailability.NetworkLiveData
 import com.example.bitclient.databinding.FragmentSettingsBinding
-import com.example.bitclient.di.UserComponentManager
+import com.example.bitclient.data.user.UserComponentManager
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.SettingsViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
