@@ -1,8 +1,7 @@
 package com.example.bitclient.data.storage
 
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
-import com.example.bitclient.data.network.networkmodels.TokenModel
+import com.example.bitclient.data.network.networkmodels.TokensModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,10 +20,10 @@ class SharedPreferencesStorage @Inject constructor(context: Context) : Storage {
         }
     }
 
-    override fun saveTokens(tokenModel: TokenModel) {
+    override fun saveTokens(tokensModel: TokensModel) {
         with(sharedPreferences.edit()) {
-            putString("access_token", tokenModel.accessToken)
-            putString("refresh_token", tokenModel.refreshToken)
+            putString("access_token", tokensModel.accessToken)
+            putString("refresh_token", tokensModel.refreshToken)
             apply()
         }
     }

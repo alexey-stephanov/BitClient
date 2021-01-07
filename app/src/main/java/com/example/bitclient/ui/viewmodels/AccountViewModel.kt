@@ -1,18 +1,23 @@
 package com.example.bitclient.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.example.bitclient.data.network.networkmodels.usermodel.UserModel
+import androidx.lifecycle.viewModelScope
 import com.example.bitclient.data.network.requests.RequestsDataRepository
-import com.example.bitclient.data.user.UserLiveDataDelegate
+import com.example.bitclient.data.user.UserInfoLiveDataDelegate
 import com.example.bitclient.data.user.UserManager
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AccountViewModel @Inject constructor(private val requestsDataRepository: RequestsDataRepository, private val userManager: UserManager) : ViewModel(),
-    UserLiveDataDelegate by userManager {
+class AccountViewModel @Inject constructor(
+    private val requestsDataRepository: RequestsDataRepository,
+    private val userManager: UserManager,
+) : ViewModel(),
+    UserInfoLiveDataDelegate by userManager {
 
-    private suspend fun loadUserData() {
-        val userInfo = getUserInfo()
+    fun loadUserInfo() {
+        viewModelScope.launch {
+            val userInfo = requestsDataRepository.retrieveUserInfo()
+            liveUserModel.postValue(userInfo)
+        }
     }
-
-    private suspend fun getUserInfo(): UserModel = requestsDataRepository.retrieveUserInfo()
-    }
+}

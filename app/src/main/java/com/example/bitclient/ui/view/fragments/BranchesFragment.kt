@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkavailability.NetworkLiveData
+import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.databinding.FragmentBranchesBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.BranchesViewModel
@@ -23,18 +24,12 @@ class BranchesFragment : Fragment(R.layout.fragment_branches) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var branchesViewModel: BranchesViewModel
+    private val branchesViewModel: BranchesViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userComponentManager().userComponent!!.inject(this)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        branchesViewModel = ViewModelProvider(this, viewModelFactory).get(BranchesViewModel::class.java)
+        (requireActivity().application as BitClientApp).appComponent.userComponentManager().userComponent?.repositoriesComponent()?.create()?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +39,7 @@ class BranchesFragment : Fragment(R.layout.fragment_branches) {
     }
 
     private fun startConnectionChecking() {
-        NetworkLiveData.observe(viewLifecycleOwner, { isAvailable ->
+        NetworkStatus.observe(viewLifecycleOwner, { isAvailable ->
             TransitionManager.beginDelayedTransition(binding.root, Slide())
             binding.textViewBranchesNoInternet.isVisible = !isAvailable
         })

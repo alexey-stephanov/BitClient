@@ -1,6 +1,6 @@
 package com.example.bitclient.data.network.authorization
 
-import com.example.bitclient.data.network.networkmodels.TokenModel
+import com.example.bitclient.data.network.networkmodels.TokensModel
 import com.example.bitclient.data.storage.Storage
 import com.example.bitclient.data.network.requests.RequestsQualifier
 import dagger.Lazy
@@ -20,7 +20,7 @@ class AccessTokenAuthenticator @Inject constructor(
     override fun authenticate(route: Route?, response: Response): Request {
         val authService = authorizationServiceWrapper.get()
         val refreshToken = storage.getString("refresh_token")
-        var result: TokenModel?
+        var result: TokensModel?
 
         runBlocking {
             result = authService.refreshAccessToken("refresh_token", refreshToken)

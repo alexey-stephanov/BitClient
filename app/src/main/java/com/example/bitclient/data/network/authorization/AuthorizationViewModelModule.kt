@@ -1,7 +1,8 @@
-package com.example.bitclient.ui.viewmodels
+package com.example.bitclient.data.network.authorization
 
 import androidx.lifecycle.ViewModel
-import com.example.bitclient.data.network.authorization.AuthorizationScope
+import com.example.bitclient.ui.viewmodels.AuthorizationViewModel
+import com.example.bitclient.ui.viewmodels.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

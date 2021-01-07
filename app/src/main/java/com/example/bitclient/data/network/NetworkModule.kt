@@ -25,6 +25,10 @@ abstract class NetworkModule {
     @Binds
     abstract fun bindRequestsDataRepository(requestsDataRepositoryImpl: RequestsDataRepositoryImpl): RequestsDataRepository
 
+    @Singleton
+    @Binds
+    abstract fun bindTokensManager(tokensManagerImpl: TokenManagerImpl): TokenManager
+
     companion object {
         @Singleton
         @Provides

@@ -10,7 +10,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.bitclient.BitClientApp
 
-object NetworkLiveData : LiveData<Boolean>() {
+object NetworkStatus : LiveData<Boolean>() {
 
     private lateinit var application: BitClientApp
     private lateinit var networkRequest: NetworkRequest

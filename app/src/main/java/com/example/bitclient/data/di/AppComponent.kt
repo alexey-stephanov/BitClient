@@ -21,7 +21,7 @@ import javax.inject.Singleton
         MainViewModelModule::class,
         NetworkModule::class,
         RetrofitModule::class,
-        StorageModule::class],
+        StorageModule::class]
 )
 interface AppComponent {
 

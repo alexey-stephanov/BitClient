@@ -8,5 +8,5 @@ data class RepositoriesResponse(
         @SerializedName("page")
         val page: Int,
         @SerializedName("next")
-        val nextPage: String
+        val nextPage: String?
 )

@@ -1,7 +1,6 @@
 package com.example.bitclient.data.network.authorization
 
 import com.example.bitclient.ui.view.fragments.AuthorizationFragment
-import com.example.bitclient.ui.viewmodels.AuthorizationViewModelModule
 import dagger.Subcomponent
 
 @AuthorizationScope

@@ -13,14 +13,11 @@ import dagger.Provides
 @Module
 class RecyclerViewModule {
 
-    @Provides
-    fun bindRepositoryDataSource(requestsDataRepository: RequestsDataRepository): RepositoryDataSource = RepositoryDataSource(requestsDataRepository)
+//  @Provides
+//  fun provideRepositoryDataSource(requestsDataRepository: RequestsDataRepository): RepositoryDataSource = RepositoryDataSource(requestsDataRepository)
 
     @Provides
-    fun bindRepositoriesListAdapter(): RepositoriesListAdapter = RepositoriesListAdapter()
-
-    @Provides
-    fun provideLayoutManager(context: Context): LinearLayoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    fun provideRepositoriesListAdapter(): RepositoriesListAdapter = RepositoriesListAdapter()
 
     @Provides
     fun provideDividerItemDecoration(context: Context): DividerItemDecoration = DividerItemDecoration(context, RecyclerView.VERTICAL)

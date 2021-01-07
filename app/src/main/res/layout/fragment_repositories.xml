@@ -19,18 +19,29 @@
         android:id="@+id/progressBar_repositories_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_repositories_actionbar" />
 
+    <Spinner
+        android:id="@+id/spinner_repositories_workspaces"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_repositories_actionbar"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_view_repositories_repos_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_repositories_repos_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_repositories_actionbar" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_repositories_workspaces" />
 
     <TextView
         android:id="@+id/text_view_repositories_no_internet"
