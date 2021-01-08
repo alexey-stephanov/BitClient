@@ -4,7 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -21,6 +23,7 @@ import com.example.bitclient.R
 import com.example.bitclient.data.network.TokenManager
 import com.example.bitclient.data.network.TokenStatus
 import com.example.bitclient.data.network.networkavailability.NetworkStatus
+import com.example.bitclient.data.network.networkmodels.workspacesmodel.WorkspaceModel
 import com.example.bitclient.data.network.networkmodels.workspacesmodel.WorkspacesResponse
 import com.example.bitclient.databinding.FragmentRepositoriesBinding
 import com.example.bitclient.ui.adapters.RepositoriesListAdapter
@@ -67,12 +70,8 @@ class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
                     Log.e("TOKEN_LOADING", "Pls wait.")
                 }
                 is TokenStatus.Ready -> {
-                    binding.progressBarRepositoriesLoading.isVisible = true
-                    repositoriesViewModel.loadUserWorkspaces()
-                    repositoriesViewModel.liveWorkspacesModel.observe(viewLifecycleOwner, { userWorkspaces ->
-                        setupSpinner(userWorkspaces)
-                        setupRecyclerView(userWorkspaces)
-                    })
+                    setupRecyclerView()
+                    loadUserWorkspacesIntoUI()
                 }
                 is TokenStatus.Error -> {
                     Log.e("TOKEN_ERROR", "Some problems with token.")
@@ -82,6 +81,14 @@ class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
         tokenManager.tokenStatusLiveData.observe(viewLifecycleOwner, userTokensObserver)
     }
 
+    private fun loadUserWorkspacesIntoUI() {
+        binding.progressBarRepositoriesLoading.isVisible = true
+        repositoriesViewModel.loadUserWorkspaces()
+        repositoriesViewModel.liveWorkspacesModel.observe(viewLifecycleOwner, { userWorkspaces ->
+            setupSpinner(userWorkspaces)
+        })
+    }
+
     private fun setupSpinner(userWorkspaces: WorkspacesResponse) {
         val workspacesNamesList = mutableListOf<String>()
         userWorkspaces.workspaces.forEach { workspaces ->
@@ -89,9 +96,21 @@ class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
         }
         val adapter = ArrayAdapter(requireContext(), R.layout.support_simple_spinner_dropdown_item, workspacesNamesList)
         binding.spinnerRepositoriesWorkspaces.adapter = adapter
+        binding.spinnerRepositoriesWorkspaces.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                loadUserRepositories(userWorkspaces, position)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 
-    private fun setupRecyclerView(userWorkspaces: WorkspacesResponse) {
+    private fun setupRecyclerView() {
         binding.recyclerViewRepositoriesReposList.apply {
             layoutManager = object : LinearLayoutManager(requireContext(), VERTICAL, false) {
                 override fun onLayoutCompleted(state: RecyclerView.State?) {
@@ -103,12 +122,17 @@ class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
             setHasFixedSize(true)
             adapter = repositoriesListAdapter
         }
+
+    }
+
+    private fun loadUserRepositories(userWorkspaces: WorkspacesResponse, position: Int) {
         viewLifecycleOwner.lifecycleScope.launch {
-            repositoriesViewModel.getRepositoriesFlow(userWorkspaces.workspaces[0].workspaceId).collectLatest { pagingData ->
+            repositoriesViewModel.getRepositoriesFlow(userWorkspaces.workspaces[position].workspaceId).collectLatest { pagingData ->
                 repositoriesListAdapter.submitData(pagingData)
             }
         }
     }
+
 
     private fun startConnectionChecking() {
         NetworkStatus.observe(viewLifecycleOwner, { isAvailable ->

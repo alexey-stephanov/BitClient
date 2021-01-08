@@ -54,11 +54,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                     Log.e("TOKEN_LOADING", "Pls wait.")
                 }
                 is TokenStatus.Ready -> {
-                    binding.progressBarAccountLoading.isVisible = true
-                    accountViewModel.loadUserInfo()
-                    accountViewModel.liveUserModel.observe(viewLifecycleOwner, { userModel ->
-                        setupView(userModel)
-                    })
+                    getUserInfo()
                 }
                 is TokenStatus.Error -> {
                     Log.e("TOKEN_ERROR", "Some problems with token.")
@@ -66,6 +62,14 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             }
         }
         tokenManager.tokenStatusLiveData.observe(viewLifecycleOwner, userTokensObserver)
+    }
+
+    private fun getUserInfo() {
+        binding.progressBarAccountLoading.isVisible = true
+        accountViewModel.loadUserInfo()
+        accountViewModel.liveUserModel.observe(viewLifecycleOwner, { userModel ->
+            setupView(userModel)
+        })
     }
 
     private fun setupView(userModel: UserModel) {

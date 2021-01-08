@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoryModel
 import com.example.bitclient.data.network.requests.RequestsDataRepository
-import com.example.bitclient.data.pagination.RepositoryDataSource
+import com.example.bitclient.data.pagination.PagingDataSource
 import com.example.bitclient.data.user.UserManager
 import com.example.bitclient.data.user.UserWorkspacesLiveDataDelegate
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +22,7 @@ class RepositoriesViewModel @Inject constructor(
 
     fun getRepositoriesFlow(workspaceId: String): Flow<PagingData<RepositoryModel>> {
         return Pager(PagingConfig(pageSize = 10)) {
-            RepositoryDataSource(requestsDataRepository, workspaceId)
+            PagingDataSource(requestsDataRepository, workspaceId)
         }.flow.cachedIn(viewModelScope)
     }
 
