@@ -37,7 +37,7 @@ class RepositoriesListAdapter : PagingDataAdapter<RepositoryModel, RepositoriesL
                 imageViewRepositoryItemIcon.setImageURI(repository.links.avatar.href)
                 textViewRepositoryItemRepoName.text = repository.name
                 textViewRepositoryItemFullName.text = repository.fullName
-                if (repository.isPrivate == "true") {
+                if (repository.isPrivate) {
                     imageViewRepositoryItemLockImage.isVisible = true
                     imageViewRepositoryItemLockImage.setOnClickListener {
                         Toast.makeText(
@@ -47,7 +47,6 @@ class RepositoriesListAdapter : PagingDataAdapter<RepositoryModel, RepositoriesL
                         ).show()
                     }
                 }
-
             }
         }
     }

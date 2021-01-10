@@ -2,19 +2,15 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.TokenManager
-import com.example.bitclient.data.network.TokenStatus
 import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.data.network.networkmodels.usermodel.UserModel
 import com.example.bitclient.databinding.FragmentAccountBinding
@@ -31,42 +27,38 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     lateinit var viewModelFactory: ViewModelFactory
     private val accountViewModel: AccountViewModel by viewModels { viewModelFactory }
 
-    @Inject
-    lateinit var tokenManager: TokenManager
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userComponentManager().userComponent?.accountComponent()?.create()?.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.accountComponent()?.create()?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         startConnectionChecking()
-        observeTokenStatus()
+        //observeTokenStatus()
     }
 
-    private fun observeTokenStatus() {
-        val userTokensObserver = Observer<TokenStatus> { tokenStatus ->
-            when(tokenStatus) {
-                is TokenStatus.Loading -> {
-                    Log.e("TOKEN_LOADING", "Pls wait.")
-                }
-                is TokenStatus.Ready -> {
-                    getUserInfo()
-                }
-                is TokenStatus.Error -> {
-                    Log.e("TOKEN_ERROR", "Some problems with token.")
-                }
-            }
-        }
-        tokenManager.tokenStatusLiveData.observe(viewLifecycleOwner, userTokensObserver)
-    }
+//    private fun observeTokenStatus() {
+//        val userTokensObserver = Observer<TokenStatus> { tokenStatus ->
+//            when(tokenStatus) {
+//                is TokenStatus.Loading -> {
+//                    Log.e("TOKEN_LOADING", "Pls wait.")
+//                }
+//                is TokenStatus.Ready -> {
+//                    getUserInfo()
+//                }
+//                is TokenStatus.Error -> {
+//                    Log.e("TOKEN_ERROR", "Some problems with token.")
+//                }
+//            }
+//        }
+//        tokenManager.tokenStatusLiveData.observe(viewLifecycleOwner, userTokensObserver)
+//    }
 
     private fun getUserInfo() {
         binding.progressBarAccountLoading.isVisible = true
-        accountViewModel.loadUserInfo()
         accountViewModel.liveUserModel.observe(viewLifecycleOwner, { userModel ->
             setupView(userModel)
         })

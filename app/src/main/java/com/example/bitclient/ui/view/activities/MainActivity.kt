@@ -2,6 +2,7 @@ package com.example.bitclient.ui.view.activities
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var mainViewModel: MainViewModel
+    private val mainViewModel: MainViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,18 +30,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        mainViewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
     }
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 
         val code = intent?.data?.getQueryParameter("code")
-        if (code != null) {
-            mainViewModel.handleAuthorizationCode(code)
-            Navigation.findNavController(this, R.id.main_host_fragment)
-                .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
-        }
+//        if (code != null) {
+//            mainViewModel.handleAuthorizationCode(code)
+//            Navigation.findNavController(this, R.id.main_host_fragment)
+//                .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
+//        }
     }
 }

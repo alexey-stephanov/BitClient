@@ -1,8 +1,8 @@
 package com.example.bitclient.data.di
 
-import com.example.bitclient.data.network.authorization.AuthorizationComponent
-import com.example.bitclient.data.user.UserComponent
+import com.example.bitclient.data.di.authorization.AuthorizationSubcomponent
+import com.example.bitclient.data.di.user.UserSubcomponent
 import dagger.Module
 
-@Module(subcomponents = [AuthorizationComponent::class, UserComponent::class])
+@Module(subcomponents = [AuthorizationSubcomponent::class, UserSubcomponent::class])
 class AppSubcomponents

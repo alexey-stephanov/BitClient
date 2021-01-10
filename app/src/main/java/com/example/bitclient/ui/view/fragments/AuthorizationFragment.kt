@@ -32,7 +32,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.authorizationComponent().create().inject(this)
+        (requireActivity().application as BitClientApp).appComponent.authorizationSubcomponent().create().inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

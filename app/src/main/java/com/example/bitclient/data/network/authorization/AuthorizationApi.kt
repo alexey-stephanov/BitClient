@@ -13,11 +13,4 @@ interface AuthorizationApi {
         @Field("grant_type") grantType: String,
         @Field("code") code: String
     ): TokensModel
-
-    @FormUrlEncoded
-    @POST("site/oauth2/access_token")
-    suspend fun refreshAccessToken(
-        @Field("grant_type") grantType: String,
-        @Field("refresh_token") refreshToken: String
-    ): TokensModel
 }

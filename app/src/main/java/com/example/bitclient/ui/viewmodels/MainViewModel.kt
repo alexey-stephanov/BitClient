@@ -10,15 +10,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val authorizationDataRepository: AuthorizationDataRepository,
-    private val tokenManager: TokenManager
+    /*private val authorizationDataRepository: AuthorizationDataRepository,*/
 ) : ViewModel() {
 
-    fun handleAuthorizationCode(code: String) {
-        tokenManager.tokenStatusLiveData.value = TokenStatus.Loading
-        viewModelScope.launch(Dispatchers.IO) {
-            authorizationDataRepository.retrieveTokens(code)
-            tokenManager.tokenStatusLiveData.postValue(TokenStatus.Ready)
-        }
-    }
+//    fun handleAuthorizationCode(code: String) {
+//        tokenManager.tokenStatusLiveData.value = TokenStatus.Loading
+//        viewModelScope.launch(Dispatchers.IO) {
+//            authorizationDataRepository.retrieveTokens(code)
+//            tokenManager.tokenStatusLiveData.postValue(TokenStatus.Ready)
+//        }
+//    }
 }

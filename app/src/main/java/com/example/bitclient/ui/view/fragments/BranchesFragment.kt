@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
@@ -29,7 +28,7 @@ class BranchesFragment : Fragment(R.layout.fragment_branches) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userComponentManager().userComponent?.repositoriesComponent()?.create()?.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.repositoriesComponent()?.create()?.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

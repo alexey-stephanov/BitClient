@@ -4,32 +4,31 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoryModel
-import com.example.bitclient.data.network.requests.RequestsDataRepository
+import com.example.bitclient.data.network.requests.UserDataRepository
 import com.example.bitclient.data.pagination.PagingDataSource
 import com.example.bitclient.data.user.UserManager
 import com.example.bitclient.data.user.UserWorkspacesLiveDataDelegate
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RepositoriesViewModel @Inject constructor(
-    private val requestsDataRepository: RequestsDataRepository,
+    private val userDataRepository: UserDataRepository,
     private val userManager: UserManager
 ) : ViewModel(), UserWorkspacesLiveDataDelegate by userManager {
 
-    fun getRepositoriesFlow(workspaceId: String): Flow<PagingData<RepositoryModel>> {
-        return Pager(PagingConfig(pageSize = 10)) {
-            PagingDataSource(requestsDataRepository, workspaceId)
-        }.flow.cachedIn(viewModelScope)
-    }
+    private val workspaceId: Flow<String> = MutableStateFlow("")
 
-    fun loadUserWorkspaces() {
+    init {
         viewModelScope.launch {
-            val userWorkspaces = requestsDataRepository.retrieveUserWorkspaces()
+            val userWorkspaces = userDataRepository.retrieveUserWorkspaces()
             liveWorkspacesModel.postValue(userWorkspaces)
         }
     }
+
+    val repositoriesFlow = Pager(PagingConfig(pageSize = 10)) {
+            PagingDataSource(userDataRepository, workspaceId)
+        }.flow.cachedIn(viewModelScope)
 }

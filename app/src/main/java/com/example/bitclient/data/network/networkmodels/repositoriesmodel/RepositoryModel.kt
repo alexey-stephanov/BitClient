@@ -12,5 +12,5 @@ data class RepositoryModel(
     @SerializedName("links")
     val links: RepositoryLinksModel,
     @SerializedName("is_private")
-    val isPrivate: String
+    val isPrivate: Boolean
 )
