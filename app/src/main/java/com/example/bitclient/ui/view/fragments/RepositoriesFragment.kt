@@ -52,7 +52,7 @@ class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
 
         startConnectionChecking()
         //observeTokenStatus()
-        loadUserRepositories()
+        subscribeOnUserRepositories()
     }
 
 //    private fun observeTokenStatus() {
@@ -115,7 +115,7 @@ class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
 
     }
 
-    private fun loadUserRepositories() {
+    private fun subscribeOnUserRepositories() {
         viewLifecycleOwner.lifecycleScope.launch {
             repositoriesViewModel.repositoriesFlow.collectLatest { pagingData ->
                 repositoriesListAdapter.submitData(pagingData)

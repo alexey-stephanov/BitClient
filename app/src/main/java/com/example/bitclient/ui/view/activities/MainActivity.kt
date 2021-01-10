@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
         super.onNewIntent(intent)
 
         val code = intent?.data?.getQueryParameter("code")
-//        if (code != null) {
-//            mainViewModel.handleAuthorizationCode(code)
-//            Navigation.findNavController(this, R.id.main_host_fragment)
-//                .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
-//        }
+        if (code != null) {
+            mainViewModel.handleAuthorizationCode(code)
+            Navigation.findNavController(this, R.id.main_host_fragment)
+                .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
+        }
     }
 }
