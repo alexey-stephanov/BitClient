@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -19,20 +20,64 @@
         android:id="@+id/progressBar_repositories_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_repositories_actionbar" />
 
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/constraint_layout_repositories_workspaces"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="visible"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/toolbar_repositories_actionbar"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/recycler_view_repositories_repos_list"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_view_repositories_current_workspace"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="@dimen/spacing_4"-->
+<!--            android:layout_marginStart="@dimen/spacing_16"-->
+<!--            android:text="@string/repositories_current_workspace"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/text_view_repositories_workspaces_name"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/text_view_repositories_workspaces_name"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/repositories_all_workspaces"-->
+<!--            android:layout_marginStart="@dimen/spacing_16"-->
+<!--            android:layout_marginBottom="@dimen/spacing_8"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/text_view_repositories_current_workspace"-->
+<!--            style="@style/TextAppearance.MaterialComponents.Headline6.WorkspaceName" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/button_repositories_change_workspaces"-->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="@dimen/spacing_8"-->
+<!--            android:text="@string/repositories_change_workspaces"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            tools:ignore="RelativeOverlap" />-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
     <Spinner
         android:id="@+id/spinner_repositories_workspaces"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_repositories_actionbar"
         app:layout_constraintBottom_toTopOf="@+id/recycler_view_repositories_repos_list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_repositories_actionbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_repositories_repos_list"

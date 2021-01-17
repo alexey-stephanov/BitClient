@@ -1,5 +1,6 @@
 package com.example.bitclient.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bitclient.data.network.requests.UserDataRepository

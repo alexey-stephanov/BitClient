@@ -1,4 +1,4 @@
-package com.example.bitclient.ui.adapters
+package com.example.bitclient.ui.recyclerview
 
 import android.view.View
 import android.view.ViewGroup

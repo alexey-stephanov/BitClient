@@ -1,20 +1,14 @@
-package com.example.bitclient.ui.adapters
+package com.example.bitclient.ui.recyclerview
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bitclient.R
 import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoryModel
 import com.example.bitclient.databinding.RepositoryItemBinding
-import com.facebook.drawee.view.SimpleDraweeView
-import javax.inject.Inject
 
 class RepositoriesListAdapter : PagingDataAdapter<RepositoryModel, RepositoriesListAdapter.RepositoriesViewHolder>(REPOSITORY_COMPARATOR) {
 

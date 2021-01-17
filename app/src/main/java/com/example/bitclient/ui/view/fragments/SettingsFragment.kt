@@ -1,7 +1,9 @@
 package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -13,6 +15,7 @@ import com.example.bitclient.R
 import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.databinding.FragmentSettingsBinding
 import com.example.bitclient.data.di.user.UserSubcomponentManager
+import com.example.bitclient.ui.view.activities.MainActivity
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.SettingsViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
@@ -39,9 +42,17 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onActivityCreated(savedInstanceState)
 
         binding.buttonSettingsLogout.setOnClickListener {
-            settingsViewModel.logout()
-            userSubcomponentManager.removeComponent()
+            logout()
         }
+    }
+
+    private fun logout() {
+        settingsViewModel.logout()
+        userSubcomponentManager.removeComponent()
+        val intent = Intent(activity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        Log.e("AAA", "Logout")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

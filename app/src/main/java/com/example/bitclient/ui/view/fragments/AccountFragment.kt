@@ -2,6 +2,7 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -33,32 +34,14 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.accountComponent()?.create()?.inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
         startConnectionChecking()
-        //observeTokenStatus()
+        getUserInfo()
     }
 
-//    private fun observeTokenStatus() {
-//        val userTokensObserver = Observer<TokenStatus> { tokenStatus ->
-//            when(tokenStatus) {
-//                is TokenStatus.Loading -> {
-//                    Log.e("TOKEN_LOADING", "Pls wait.")
-//                }
-//                is TokenStatus.Ready -> {
-//                    getUserInfo()
-//                }
-//                is TokenStatus.Error -> {
-//                    Log.e("TOKEN_ERROR", "Some problems with token.")
-//                }
-//            }
-//        }
-//        tokenManager.tokenStatusLiveData.observe(viewLifecycleOwner, userTokensObserver)
-//    }
-
     private fun getUserInfo() {
-        binding.progressBarAccountLoading.isVisible = true
         accountViewModel.liveUserModel.observe(viewLifecycleOwner, { userModel ->
             setupView(userModel)
         })

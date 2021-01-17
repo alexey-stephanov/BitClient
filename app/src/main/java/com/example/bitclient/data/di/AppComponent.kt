@@ -15,6 +15,7 @@ import javax.inject.Singleton
         MainViewModelModule::class,
         BaseRetrofitModule::class,
         StorageModule::class,
+        EventsModel::class,
         AppSubcomponents::class]
 )
 interface AppComponent {

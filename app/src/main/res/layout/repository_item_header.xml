@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_gray">
+
+    <TextView
+        android:id="@+id/text_view_repository_item_header"
+        android:text="@string/repositories_all_workspaces"
+        android:layout_margin="@dimen/spacing_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TextAppearance.MaterialComponents.Headline6.WorkspaceName"/>
+
+</FrameLayout>

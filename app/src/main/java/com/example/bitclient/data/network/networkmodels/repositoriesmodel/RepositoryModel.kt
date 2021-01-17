@@ -1,5 +1,6 @@
 package com.example.bitclient.data.network.networkmodels.repositoriesmodel
 
+import com.example.bitclient.data.network.networkmodels.ValuesModel
 import com.google.gson.annotations.SerializedName
 
 data class RepositoryModel(
@@ -13,4 +14,4 @@ data class RepositoryModel(
     val links: RepositoryLinksModel,
     @SerializedName("is_private")
     val isPrivate: Boolean
-)
+): ValuesModel()

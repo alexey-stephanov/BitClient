@@ -2,6 +2,7 @@ package com.example.bitclient.ui.view.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -38,8 +39,6 @@ class MainActivity : AppCompatActivity() {
         val code = intent?.data?.getQueryParameter("code")
         if (code != null) {
             mainViewModel.handleAuthorizationCode(code)
-            Navigation.findNavController(this, R.id.main_host_fragment)
-                .navigate(AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment())
         }
     }
 }
