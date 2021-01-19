@@ -23,13 +23,6 @@ object ViewHolderFactory {
                 textViewRepositoryItemFullName.text = data.fullName
                 if (data.isPrivate) {
                     imageViewRepositoryItemLockImage.isVisible = true
-                    imageViewRepositoryItemLockImage.setOnClickListener {
-                        android.widget.Toast.makeText(
-                            binding.root.context,
-                            "Repository is private",
-                            android.widget.Toast.LENGTH_SHORT
-                        ).show()
-                    }
                 }
             }
         }

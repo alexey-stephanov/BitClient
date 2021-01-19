@@ -1,13 +1,12 @@
 package com.example.bitclient.data.pagination
 
-import android.util.Log
 import androidx.paging.PagingSource
 import com.example.bitclient.data.network.networkmodels.PaginatedResponse
 
-class PagingDataSource<T : Any>(
-    private val retrieveData: suspend (page: Int) -> PaginatedResponse<T>
-) : PagingSource<Int, T>() {
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, T> {
+class PagingDataSource<DataModel : Any>(
+    private val retrieveData: suspend (page: Int) -> PaginatedResponse<DataModel>
+) : PagingSource<Int, DataModel>() {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, DataModel> {
         return try {
             val page = params.key ?: 1
 
@@ -20,7 +19,6 @@ class PagingDataSource<T : Any>(
             )
 
         } catch (e: Exception) {
-            Log.e("ASD",e.toString())
             LoadResult.Error(e)
         }
     }

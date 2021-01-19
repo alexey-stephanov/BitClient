@@ -4,19 +4,23 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.bitclient.data.network.networkmodels.PaginatedResponse
 import com.example.bitclient.data.pagination.PagingDataSource
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
 
-abstract class PaginatedViewModel<T : Any>(private val retrieveData: suspend (page: Int) -> PaginatedResponse<T>) : ViewModel() {
+abstract class PaginatedViewModel<DataModel : Any> : ViewModel() {
 
-    @ExperimentalCoroutinesApi
-    val paginatedFlow = Pager(
-        config = PagingConfig(pageSize = 10),
-        pagingSourceFactory = {
-            PagingDataSource { page ->
-                retrieveData(page)
-            }
-        }).flow.cachedIn(viewModelScope)
+    abstract suspend fun retrieveData(page: Int) : PaginatedResponse<DataModel>
+
+    fun getPagingFlow(): Flow<PagingData<DataModel>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = {
+                PagingDataSource { page ->
+                    retrieveData(page)
+                }
+            }).flow.cachedIn(viewModelScope)
+    }
 }

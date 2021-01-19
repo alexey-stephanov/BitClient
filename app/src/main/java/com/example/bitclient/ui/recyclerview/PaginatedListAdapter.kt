@@ -3,17 +3,14 @@ package com.example.bitclient.ui.recyclerview
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoryModel
 import com.example.bitclient.databinding.RepositoryItemBinding
 
-abstract class PaginatedListAdapter<T : Any> :
-    PagingDataAdapter<T, RecyclerView.ViewHolder>(PagingComparator<T>()) {
+abstract class PaginatedListAdapter<DataModel : Any> :
+    PagingDataAdapter<DataModel, RecyclerView.ViewHolder>(PagingComparator<DataModel>()) {
 
     private lateinit var binding: ViewBinding
 
@@ -24,28 +21,28 @@ abstract class PaginatedListAdapter<T : Any> :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as Binder<T>).bind(getItem(position)!!)
+        (holder as Binder<DataModel>).bind(getItem(position)!!)
     }
 
     override fun getItemViewType(position: Int): Int =
         getLayoutId(position, getItem(position)!!)
 
-    protected abstract fun getLayoutId(position: Int, obj: T): Int
+    protected abstract fun getLayoutId(position: Int, obj: DataModel): Int
 
     protected open fun getViewHolder(binding: ViewBinding, viewType: Int): RecyclerView.ViewHolder {
         return ViewHolderFactory.create(binding, viewType)
     }
 
-    interface Binder<T> {
-        fun bind(data: T)
+    interface Binder<DataModel> {
+        fun bind(data: DataModel)
     }
 
-    class PagingComparator<T : Any> : DiffUtil.ItemCallback<T>() {
-        override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
+    class PagingComparator<DataModel : Any> : DiffUtil.ItemCallback<DataModel>() {
+        override fun areItemsTheSame(oldItem: DataModel, newItem: DataModel): Boolean =
             oldItem.toString() == newItem.toString()
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
+        override fun areContentsTheSame(oldItem: DataModel, newItem: DataModel): Boolean =
             oldItem == newItem
     }
 }

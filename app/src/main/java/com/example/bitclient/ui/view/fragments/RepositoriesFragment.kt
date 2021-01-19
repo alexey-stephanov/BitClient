@@ -3,11 +3,10 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.os.Bundle
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
@@ -19,26 +18,28 @@ import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
+class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoriesViewModel>() {
 
     private val binding by viewBinding(FragmentRepositoriesBinding::bind)
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    private val repositoriesViewModel: RepositoriesViewModel by viewModels { viewModelFactory }
 
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
 
-    private val repositoriesListAdapter = object : PaginatedListAdapter<RepositoryModel>() {
-        override fun getLayoutId(position: Int, obj: RepositoryModel): Int =
-            R.layout.repository_item
-    }
+    override val paginatedListAdapter: PaginatedListAdapter<RepositoryModel> =
+        object : PaginatedListAdapter<RepositoryModel>() {
+            override fun getLayoutId(position: Int, obj: RepositoryModel): Int =
+                R.layout.repository_item
+        }
+
+    override val viewModel: RepositoriesViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,30 +48,18 @@ class RepositoriesFragment : Fragment(R.layout.fragment_repositories) {
             ?.create()?.inject(this)
     }
 
-    @ExperimentalCoroutinesApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         startConnectionChecking()
-        setupRecyclerView()
-        subscribeOnUserRepositories()
     }
 
-    private fun setupRecyclerView() {
-        binding.recyclerViewRepositoriesReposList.apply {
-            addItemDecoration(itemDecoration)
-            setHasFixedSize(true)
-            adapter = repositoriesListAdapter
-        }
-    }
+    override fun getLayoutResId(): Int = R.layout.fragment_repositories
 
-    @ExperimentalCoroutinesApi
-    private fun subscribeOnUserRepositories() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            repositoriesViewModel.paginatedFlow.collectLatest { pagingData ->
-                repositoriesListAdapter.submitData(pagingData)
-            }
-        }
+    override fun getRecyclerView(): RecyclerView {
+        val recyclerView = binding.recyclerViewRepositoriesReposList
+        recyclerView.addItemDecoration(itemDecoration)
+        return recyclerView
     }
 
     private fun startConnectionChecking() {
