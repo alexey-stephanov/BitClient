@@ -1,11 +1,6 @@
 package com.example.bitclient.data.di.user
 
-import com.example.bitclient.data.network.networkmodels.PaginatedResponse
-import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoriesResponse
-import com.example.bitclient.data.network.requests.UserDataRepository
-import com.example.bitclient.data.pagination.PagingDataSource
 import dagger.Module
-import dagger.Provides
 
 @Module
 class PaginationModule {

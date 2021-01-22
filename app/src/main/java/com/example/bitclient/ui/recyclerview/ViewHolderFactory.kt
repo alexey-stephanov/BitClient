@@ -4,7 +4,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoryModel
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryModel
 import com.example.bitclient.databinding.RepositoryItemBinding
 
 object ViewHolderFactory {

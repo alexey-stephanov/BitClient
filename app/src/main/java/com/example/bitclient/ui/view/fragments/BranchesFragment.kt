@@ -2,15 +2,11 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkavailability.NetworkStatus
+import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentBranchesBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.BranchesViewModel
@@ -25,22 +21,23 @@ class BranchesFragment : Fragment(R.layout.fragment_branches) {
     lateinit var viewModelFactory: ViewModelFactory
     private val branchesViewModel: BranchesViewModel by viewModels { viewModelFactory }
 
+    @Inject
+    lateinit var networkConnectivityManager: NetworkConnectivityManager
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.repositoriesComponent()?.create()?.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.repositoriesComponent()
+            ?.create()?.inject(this)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-        startConnectionChecking()
-    }
-
-    private fun startConnectionChecking() {
-        NetworkStatus.observe(viewLifecycleOwner, { isAvailable ->
-            TransitionManager.beginDelayedTransition(binding.root, Slide())
-            binding.textViewBranchesNoInternet.isVisible = !isAvailable
-        })
+        networkConnectivityManager.startConnectionChecking(
+            viewLifecycleOwner,
+            binding.root,
+            binding.textViewBranchesNoInternet
+        )
     }
 }

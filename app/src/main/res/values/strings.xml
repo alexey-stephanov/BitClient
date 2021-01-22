@@ -7,10 +7,6 @@
     <string name="settings_title">Settings</string>
     <string name="repositories_title">Repositories</string>
     <string name="account_title">Account</string>
-    <string name="workspaces_title">Workspaces</string>
-    <string name="repositories_current_workspace">Current workspace</string>
-    <string name="repositories_change_workspaces">Change</string>
-    <string name="repositories_all_workspaces">All</string>
     <string name="branches_title">Branches</string>
     <string name="repositories_menu">Menu</string>
     <string name="settings_logout">Log out</string>

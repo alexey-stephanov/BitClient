@@ -7,7 +7,7 @@ import dagger.Module
 import javax.inject.Singleton
 
 @Module
-abstract class EventsModel {
+abstract class EventsModule {
 
     @Singleton
     @Binds

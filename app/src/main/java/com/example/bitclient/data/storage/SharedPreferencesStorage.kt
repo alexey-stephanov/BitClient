@@ -1,7 +1,7 @@
 package com.example.bitclient.data.storage
 
 import android.content.Context
-import com.example.bitclient.data.network.networkmodels.TokensModel
+import com.example.bitclient.data.network.datamodels.TokensModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,6 +28,14 @@ class SharedPreferencesStorage @Inject constructor(context: Context) : Storage {
         with(sharedPreferences.edit()) {
             putString(ACCESS_TOKEN_KEY, tokensModel.accessToken)
             putString(REFRESH_TOKEN_KEY, tokensModel.refreshToken)
+            apply()
+        }
+    }
+
+    override fun clearStorage() {
+        with(sharedPreferences.edit()) {
+            putString(ACCESS_TOKEN_KEY, "")
+            putString(REFRESH_TOKEN_KEY, "")
             apply()
         }
     }

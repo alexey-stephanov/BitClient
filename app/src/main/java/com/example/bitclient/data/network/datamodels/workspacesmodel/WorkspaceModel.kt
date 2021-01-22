@@ -1,4 +1,4 @@
-package com.example.bitclient.data.network.networkmodels.workspacesmodel
+package com.example.bitclient.data.network.datamodels.workspacesmodel
 
 import com.google.gson.annotations.SerializedName
 

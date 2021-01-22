@@ -1,8 +1,8 @@
 package com.example.bitclient.data.network.events
 
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.Flow
 
 interface EventProducer {
-    val codeState: SharedFlow<String>
+    val codeState: Flow<String>
     suspend fun pushCode(code: String)
 }

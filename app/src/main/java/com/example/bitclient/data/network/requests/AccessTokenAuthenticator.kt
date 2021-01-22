@@ -1,6 +1,6 @@
 package com.example.bitclient.data.network.requests
 
-import com.example.bitclient.data.network.networkmodels.TokensModel
+import com.example.bitclient.data.network.datamodels.TokensModel
 import com.example.bitclient.data.storage.Storage
 import dagger.Lazy
 import kotlinx.coroutines.runBlocking

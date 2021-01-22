@@ -1,6 +1,6 @@
 package com.example.bitclient.data.network.authorization
 
-import com.example.bitclient.data.network.networkmodels.TokensModel
+import com.example.bitclient.data.network.datamodels.TokensModel
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST

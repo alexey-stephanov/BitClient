@@ -2,18 +2,13 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkavailability.NetworkStatus
-import com.example.bitclient.data.network.networkmodels.usermodel.UserModel
+import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
+import com.example.bitclient.data.network.datamodels.usermodel.UserModel
 import com.example.bitclient.databinding.FragmentAccountBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.AccountViewModel
@@ -28,16 +23,24 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     lateinit var viewModelFactory: ViewModelFactory
     private val accountViewModel: AccountViewModel by viewModels { viewModelFactory }
 
+    @Inject
+    lateinit var networkConnectivityManager: NetworkConnectivityManager
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.accountComponent()?.create()?.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.accountComponent()
+            ?.create()?.inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        startConnectionChecking()
+        networkConnectivityManager.startConnectionChecking(
+            viewLifecycleOwner,
+            binding.root,
+            binding.textViewAccountNoInternet
+        )
         getUserInfo()
     }
 
@@ -54,10 +57,4 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         binding.textViewAccountUsername.text = userModel.username
     }
 
-    private fun startConnectionChecking() {
-        NetworkStatus.observe(viewLifecycleOwner, { isAvailable ->
-            TransitionManager.beginDelayedTransition(binding.root, Slide())
-            binding.textViewAccountNoInternet.isVisible = !isAvailable
-        })
-    }
 }

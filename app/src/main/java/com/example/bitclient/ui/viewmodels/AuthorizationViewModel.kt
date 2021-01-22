@@ -7,7 +7,7 @@ import com.example.bitclient.data.network.ResponseStatus
 import com.example.bitclient.data.network.authorization.AuthorizationDataRepository
 import com.example.bitclient.data.network.events.EventProducer
 import com.example.bitclient.data.storage.Storage
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,13 +21,13 @@ class AuthorizationViewModel @Inject constructor(
     val responseStatusLiveData: MutableLiveData<ResponseStatus> = MutableLiveData()
 
     init {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             eventProducer.codeState.collect { code ->
                 try {
                     val tokens = authorizationDataRepository.retrieveTokens(code)
                     storage.saveTokens(tokens)
                     responseStatusLiveData.postValue(ResponseStatus.Success)
-                } catch (e: Exception) {
+                } catch (e: CancellationException) {
                     responseStatusLiveData.postValue(ResponseStatus.Error)
                 }
             }

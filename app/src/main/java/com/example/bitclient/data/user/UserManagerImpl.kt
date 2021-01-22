@@ -1,10 +1,11 @@
 package com.example.bitclient.data.user
 
 import androidx.lifecycle.MutableLiveData
-import com.example.bitclient.data.network.networkmodels.usermodel.UserModel
+import com.example.bitclient.data.network.datamodels.usermodel.UserModel
+import com.example.bitclient.data.storage.Storage
 import javax.inject.Inject
 
-class UserManagerImpl @Inject constructor() : UserManager {
+class UserManagerImpl @Inject constructor(private val storage: Storage) : UserManager {
 
     override val liveUserModel: MutableLiveData<UserModel> = MutableLiveData()
 
@@ -13,6 +14,7 @@ class UserManagerImpl @Inject constructor() : UserManager {
     }
 
     override fun logout() {
+        storage.clearStorage()
         liveUserModel.value = null
     }
 }

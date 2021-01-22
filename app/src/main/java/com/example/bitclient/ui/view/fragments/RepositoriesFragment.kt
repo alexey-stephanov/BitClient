@@ -2,33 +2,29 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkavailability.NetworkStatus
-import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoryModel
+import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryModel
 import com.example.bitclient.databinding.FragmentRepositoriesBinding
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoriesViewModel>() {
+class RepositoriesFragment : PaginatedFragment<RepositoryModel>() {
 
     private val binding by viewBinding(FragmentRepositoriesBinding::bind)
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
+
+    @Inject
+    lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
@@ -51,21 +47,17 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoriesView
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        startConnectionChecking()
+        networkConnectivityManager.startConnectionChecking(
+            viewLifecycleOwner,
+            binding.root,
+            binding.textViewRepositoriesNoInternet
+        )
     }
 
     override fun getLayoutResId(): Int = R.layout.fragment_repositories
 
     override fun getRecyclerView(): RecyclerView {
-        val recyclerView = binding.recyclerViewRepositoriesReposList
-        recyclerView.addItemDecoration(itemDecoration)
-        return recyclerView
-    }
-
-    private fun startConnectionChecking() {
-        NetworkStatus.observe(viewLifecycleOwner, { isAvailable ->
-            TransitionManager.beginDelayedTransition(binding.root, Slide())
-            binding.textViewRepositoriesNoInternet.isVisible = !isAvailable
-        })
+        binding.recyclerViewRepositoriesReposList.addItemDecoration(itemDecoration)
+        return binding.recyclerViewRepositoriesReposList
     }
 }

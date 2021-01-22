@@ -1,7 +1,7 @@
 package com.example.bitclient.data.pagination
 
 import androidx.paging.PagingSource
-import com.example.bitclient.data.network.networkmodels.PaginatedResponse
+import com.example.bitclient.data.network.datamodels.PaginatedResponse
 
 class PagingDataSource<DataModel : Any>(
     private val retrieveData: suspend (page: Int) -> PaginatedResponse<DataModel>

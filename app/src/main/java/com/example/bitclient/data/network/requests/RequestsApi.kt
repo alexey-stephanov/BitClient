@@ -1,9 +1,9 @@
 package com.example.bitclient.data.network.requests
 
-import com.example.bitclient.data.network.networkmodels.TokensModel
-import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoriesResponse
-import com.example.bitclient.data.network.networkmodels.usermodel.UserModel
-import com.example.bitclient.data.network.networkmodels.workspacesmodel.WorkspacesResponse
+import com.example.bitclient.data.network.datamodels.TokensModel
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoriesResponse
+import com.example.bitclient.data.network.datamodels.usermodel.UserModel
+import com.example.bitclient.data.network.datamodels.workspacesmodel.WorkspacesResponse
 import retrofit2.http.*
 
 interface RequestsApi {

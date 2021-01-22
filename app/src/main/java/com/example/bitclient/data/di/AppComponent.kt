@@ -4,6 +4,7 @@ import android.content.Context
 import com.example.bitclient.data.di.authorization.AuthorizationSubcomponent
 import com.example.bitclient.data.di.user.UserSubcomponentManager
 import com.example.bitclient.ui.view.activities.MainActivity
+import com.example.bitclient.ui.view.fragments.BottomNavigationFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -15,7 +16,8 @@ import javax.inject.Singleton
         MainViewModelModule::class,
         BaseRetrofitModule::class,
         StorageModule::class,
-        EventsModel::class,
+        EventsModule::class,
+        NetworkConnectivityModule::class,
         AppSubcomponents::class]
 )
 interface AppComponent {

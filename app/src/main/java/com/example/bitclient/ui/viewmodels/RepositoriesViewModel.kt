@@ -1,7 +1,7 @@
 package com.example.bitclient.ui.viewmodels
 
-import com.example.bitclient.data.network.networkmodels.PaginatedResponse
-import com.example.bitclient.data.network.networkmodels.repositoriesmodel.RepositoryModel
+import com.example.bitclient.data.network.datamodels.PaginatedResponse
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryModel
 import com.example.bitclient.data.network.requests.UserDataRepository
 import com.example.bitclient.data.user.UserWorkspacesLiveDataDelegate
 import kotlinx.coroutines.flow.Flow

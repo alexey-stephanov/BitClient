@@ -1,6 +1,6 @@
 package com.example.bitclient.data.network.authorization
 
-import com.example.bitclient.data.network.networkmodels.TokensModel
+import com.example.bitclient.data.network.datamodels.TokensModel
 import javax.inject.Inject
 
 private const val GRANT_TYPE = "authorization_code"

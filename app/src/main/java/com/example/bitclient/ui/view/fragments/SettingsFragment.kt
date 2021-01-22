@@ -3,18 +3,13 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkavailability.NetworkStatus
-import com.example.bitclient.databinding.FragmentSettingsBinding
 import com.example.bitclient.data.di.user.UserSubcomponentManager
+import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
+import com.example.bitclient.databinding.FragmentSettingsBinding
 import com.example.bitclient.ui.view.activities.MainActivity
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.SettingsViewModel
@@ -29,18 +24,27 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     lateinit var viewModelFactory: ViewModelFactory
     private val settingsViewModel: SettingsViewModel by viewModels { viewModelFactory }
 
+    @Inject
+    lateinit var networkConnectivityManager: NetworkConnectivityManager
+
     private lateinit var userSubcomponentManager: UserSubcomponentManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        userSubcomponentManager = (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager()
+        userSubcomponentManager =
+            (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager()
         userSubcomponentManager.userSubcomponent?.settingsComponent()?.create()?.inject(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        networkConnectivityManager.startConnectionChecking(
+            viewLifecycleOwner,
+            binding.root,
+            binding.textViewSettingsNoInternet
+        )
         binding.buttonSettingsLogout.setOnClickListener {
             logout()
         }
@@ -49,22 +53,11 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private fun logout() {
         settingsViewModel.logout()
         userSubcomponentManager.removeComponent()
-        val intent = Intent(activity, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        requireActivity().finish()
+        requireActivity().overridePendingTransition(0, 0)
+        val intent = Intent(requireContext(), MainActivity::class.java)
+            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
-        Log.e("AAA", "Logout")
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        startConnectionChecking()
-    }
-
-    private fun startConnectionChecking() {
-        NetworkStatus.observe(viewLifecycleOwner, { isAvailable ->
-            TransitionManager.beginDelayedTransition(binding.root, Slide())
-            binding.textViewSettingsNoInternet.isVisible = !isAvailable
-        })
+        requireActivity().overridePendingTransition(0, 0)
     }
 }

@@ -10,12 +10,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.viewmodels.PaginatedViewModel
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-abstract class PaginatedFragment<DataModel : Any, ViewModel : PaginatedViewModel<DataModel>> : Fragment() {
+abstract class PaginatedFragment<DataModel : Any> : Fragment() {
 
-    protected abstract val viewModel: ViewModel
+    protected abstract val viewModel: PaginatedViewModel<DataModel>
 
     protected abstract val paginatedListAdapter: PaginatedListAdapter<DataModel>
 
@@ -37,7 +37,7 @@ abstract class PaginatedFragment<DataModel : Any, ViewModel : PaginatedViewModel
 
     private fun subscribeOnPaginatedData() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getPagingFlow().collectLatest { pagingData ->
+            viewModel.dataFlow.collect { pagingData ->
                 paginatedListAdapter.submitData(pagingData)
             }
         }
