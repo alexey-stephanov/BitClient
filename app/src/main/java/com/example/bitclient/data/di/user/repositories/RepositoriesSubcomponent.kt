@@ -5,7 +5,7 @@ import com.example.bitclient.ui.view.fragments.RepositoriesFragment
 import dagger.Subcomponent
 
 @RepositoriesScope
-@Subcomponent(modules = [RepositoriesViewModelsModule::class, RecyclerViewModule::class])
+@Subcomponent(modules = [RepositoriesViewModelsModule::class, RepositoriesDaoModule::class, RecyclerViewModule::class])
 interface RepositoriesSubcomponent {
 
     @Subcomponent.Factory

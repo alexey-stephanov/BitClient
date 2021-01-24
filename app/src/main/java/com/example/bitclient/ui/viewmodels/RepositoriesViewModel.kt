@@ -1,5 +1,6 @@
 package com.example.bitclient.ui.viewmodels
 
+import com.example.bitclient.data.database.UserRepositoriesDao
 import com.example.bitclient.data.network.datamodels.PaginatedResponse
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryModel
 import com.example.bitclient.data.network.requests.UserDataRepository
@@ -11,7 +12,8 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RepositoriesViewModel @Inject constructor(
-    private val userDataRepository: UserDataRepository
+    private val userDataRepository: UserDataRepository,
+    private val userRepositoriesDao: UserRepositoriesDao
 ) : PaginatedViewModel<RepositoryModel>(), UserWorkspacesLiveDataDelegate {
 
     override val workspaceIdFlow: Flow<String> = flow {
@@ -23,5 +25,9 @@ class RepositoriesViewModel @Inject constructor(
         return workspaceIdFlow.map { workspaceId ->
             userDataRepository.retrieveUserRepositories(workspaceId, page)
         }.first()
+    }
+
+    fun saveRepositoriesInDatabase(repositories: List<RepositoryModel>) {
+        userRepositoriesDao.insertAllRepositories(repositories)
     }
 }

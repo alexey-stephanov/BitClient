@@ -1,7 +1,9 @@
 package com.example.bitclient.data.network.datamodels.usermodel
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "users")
 data class UserModel(
         @SerializedName("display_name")
         val displayName: String,

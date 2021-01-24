@@ -4,7 +4,7 @@ import com.example.bitclient.ui.view.fragments.AccountFragment
 import dagger.Subcomponent
 
 @AccountScope
-@Subcomponent(modules = [AccountViewModelModule::class])
+@Subcomponent(modules = [AccountViewModelModule::class, AccountDaoModule::class])
 interface AccountSubcomponent {
 
     @Subcomponent.Factory
