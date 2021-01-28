@@ -7,6 +7,7 @@ import com.example.bitclient.data.network.datamodels.usermodel.UserModel
 import com.example.bitclient.data.network.requests.UserDataRepository
 import com.example.bitclient.data.user.UserInfoLiveDataDelegate
 import com.example.bitclient.data.user.UserManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,10 +19,9 @@ class AccountViewModel @Inject constructor(
     UserInfoLiveDataDelegate by userManager {
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val userInfo = userDataRepository.retrieveUserInfo()
             liveUserModel.postValue(userInfo)
-            setUserInfoInDatabase(userInfo)
         }
     }
 

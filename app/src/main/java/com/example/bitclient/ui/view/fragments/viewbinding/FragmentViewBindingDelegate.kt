@@ -9,15 +9,15 @@ import androidx.viewbinding.ViewBinding
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-class FragmentViewBindingDelegate<T : ViewBinding>(
-        val viewBindingFactory: (View) -> T
-) : ReadOnlyProperty<Fragment, T> {
+class FragmentViewBindingDelegate<Binding : ViewBinding>(
+        val viewBindingFactory: (View) -> Binding
+) : ReadOnlyProperty<Fragment, Binding> {
 
-    private var binding: T? = null
+    private var binding: Binding? = null
     private val lifecycleObserver = BindingLifecycleObserver()
 
     @MainThread
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): Binding {
 
         this.binding?.let { return it }
 

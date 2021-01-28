@@ -12,7 +12,7 @@ interface UserRepositoriesDao {
     fun getAllRepositories(): List<RepositoryModel>
 
     @Query("SELECT * FROM repositories WHERE repositoryId = :repositoryId")
-    fun getRepositoryById(repositoryId: String)
+    fun getRepositoryById(repositoryId: String): RepositoryModel
 
     @Insert
     fun insertAllRepositories(repositories: List<RepositoryModel>)

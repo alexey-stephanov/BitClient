@@ -1,19 +1,17 @@
 package com.example.bitclient.data.network.requests
 
-import com.example.bitclient.data.network.datamodels.TokensModel
+import com.example.bitclient.data.network.datamodels.branchesmodel.BranchesResponse
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoriesResponse
 import com.example.bitclient.data.network.datamodels.usermodel.UserModel
 import com.example.bitclient.data.network.datamodels.workspacesmodel.WorkspacesResponse
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface RequestsApi {
 
-    @FormUrlEncoded
-    @POST("site/oauth2/access_token")
-    suspend fun refreshAccessToken(
-        @Field("grant_type") grantType: String,
-        @Field("refresh_token") refreshToken: String
-    ): TokensModel
+    @GET("2.0/workspaces")
+    suspend fun getWorkspaces(): WorkspacesResponse
 
     @GET("2.0/repositories/{workspace}")
     suspend fun getRepositories(
@@ -21,8 +19,12 @@ interface RequestsApi {
         @Query("page") page: Int
     ): RepositoriesResponse
 
-    @GET("2.0/workspaces")
-    suspend fun getWorkspaces(): WorkspacesResponse
+    @GET("2.0/repositories/{workspace}/{repo_slug}/refs/branches")
+    suspend fun getBranches(
+        @Path("workspace") workspaceId: String,
+        @Path("repo_slug") repositoryId: String,
+        @Query("page") page: Int
+    ): BranchesResponse
 
     @GET("2.0/user")
     suspend fun getUserInfo(): UserModel

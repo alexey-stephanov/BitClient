@@ -16,9 +16,9 @@ abstract class RepositoriesViewModelsModule {
     @ViewModelKey(RepositoriesViewModel::class)
     abstract fun bindRepositoriesViewModel(viewModel: RepositoriesViewModel): ViewModel
 
-    @RepositoriesScope
-    @Binds
-    @IntoMap
-    @ViewModelKey(BranchesViewModel::class)
-    abstract fun bindBranchesViewModel(viewModel: BranchesViewModel): ViewModel
+//    @RepositoriesScope
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(BranchesViewModel::class)
+//    abstract fun bindBranchesViewModel(viewModel: BranchesViewModel): ViewModel
 }

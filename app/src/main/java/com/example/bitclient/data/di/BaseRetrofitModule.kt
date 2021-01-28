@@ -1,17 +1,28 @@
 package com.example.bitclient.data.di
 
+import com.example.bitclient.data.network.authorization.AuthorizationInterceptor
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import okhttp3.Interceptor
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
-class BaseRetrofitModule {
+abstract class BaseRetrofitModule {
 
-    @Provides
-    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
-        .setLevel(HttpLoggingInterceptor.Level.BODY)
+    @Singleton
+    @AuthorizationQualifier
+    @Binds
+    abstract fun bindAuthorizationInterceptor(authorizationInterceptor: AuthorizationInterceptor): Interceptor
 
-    @Provides
-    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
+    companion object {
+        @Provides
+        fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor()
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        @Provides
+        fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
+    }
 }

@@ -6,7 +6,7 @@ import com.example.bitclient.data.di.user.settings.SettingsSubcomponent
 import dagger.Subcomponent
 
 @UserScope
-@Subcomponent(modules = [UserModule::class, RequestsModule::class, DatabaseModule::class, UserSubcomponents::class])
+@Subcomponent(modules = [UserModule::class, RequestsModule::class, RefreshTokenModule::class, DatabaseModule::class, UserSubcomponents::class])
 interface UserSubcomponent {
 
     @Subcomponent.Factory

@@ -3,13 +3,16 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryModel
+import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentRepositoriesBinding
+import com.example.bitclient.databinding.RepositoryItemBinding
+import com.example.bitclient.ui.recyclerview.OnItemClickListener
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
@@ -30,7 +33,16 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel>() {
     lateinit var itemDecoration: DividerItemDecoration
 
     override val paginatedListAdapter: PaginatedListAdapter<RepositoryModel> =
-        object : PaginatedListAdapter<RepositoryModel>() {
+        object : PaginatedListAdapter<RepositoryModel>(OnItemClickListener { data ->
+            val action =
+                RepositoriesFragmentDirections.actionRepositoriesFragmentToBranchesFragment(
+                    data.workspace.workspaceId,
+                    data.repositoryId
+                )
+            view?.findNavController()?.navigate(action)
+        }, { inflater, viewGroup ->
+            RepositoryItemBinding.inflate(inflater, viewGroup, false)
+        }) {
             override fun getLayoutId(position: Int, obj: RepositoryModel): Int =
                 R.layout.repository_item
         }

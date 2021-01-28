@@ -1,6 +1,7 @@
 package com.example.bitclient.data.di.user
 
 import com.example.bitclient.BuildConfig
+import com.example.bitclient.data.di.RequestQualifier
 import com.example.bitclient.data.network.requests.*
 import dagger.Binds
 import dagger.Module
@@ -20,6 +21,7 @@ abstract class RequestsModule {
     abstract fun bindUserDataRepository(userDataRepositoryImpl: UserDataRepositoryImpl): UserDataRepository
 
     @UserScope
+    @RequestQualifier
     @Binds
     abstract fun bindRequestsInterceptor(requestsInterceptor: RequestsInterceptor): Interceptor
 
@@ -29,14 +31,16 @@ abstract class RequestsModule {
 
     companion object {
         @UserScope
+        @RequestQualifier
         @Provides
-        fun provideRequestsApi(retrofit: Retrofit): RequestsApi =
+        fun provideRequestsApi(@RequestQualifier retrofit: Retrofit): RequestsApi =
             retrofit.create(RequestsApi::class.java)
 
         @UserScope
+        @RequestQualifier
         @Provides
         fun provideRequestsRetrofit(
-            okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
+            @RequestQualifier okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
         ): Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.REQUESTS_URL)
             .client(okHttpClient)
@@ -44,9 +48,10 @@ abstract class RequestsModule {
             .build()
 
         @UserScope
+        @RequestQualifier
         @Provides
         fun provideRequestsClient(
-            interceptor: Interceptor,
+            @RequestQualifier interceptor: Interceptor,
             httpLoggingInterceptor: HttpLoggingInterceptor,
             authenticator: Authenticator
         ): OkHttpClient = OkHttpClient.Builder()

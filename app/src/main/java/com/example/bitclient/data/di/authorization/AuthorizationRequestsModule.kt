@@ -1,6 +1,7 @@
 package com.example.bitclient.data.di.authorization
 
 import com.example.bitclient.BuildConfig
+import com.example.bitclient.data.di.AuthorizationQualifier
 import com.example.bitclient.data.network.authorization.*
 import dagger.Binds
 import dagger.Module
@@ -17,10 +18,6 @@ abstract class AuthorizationRequestsModule {
     @AuthorizationScope
     @Binds
     abstract fun bindAuthorizationDataRepository(authorizationDataRepositoryImpl: AuthorizationDataRepositoryImpl): AuthorizationDataRepository
-
-    @AuthorizationScope
-    @Binds
-    abstract fun bindAuthorizationInterceptor(authorizationInterceptor: AuthorizationInterceptor): Interceptor
 
     companion object {
         @AuthorizationScope
@@ -40,7 +37,7 @@ abstract class AuthorizationRequestsModule {
         @AuthorizationScope
         @Provides
         fun provideAuthorizationClient(
-            interceptor: Interceptor,
+            @AuthorizationQualifier interceptor: Interceptor,
             httpLoggingInterceptor: HttpLoggingInterceptor
         ): OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(interceptor)

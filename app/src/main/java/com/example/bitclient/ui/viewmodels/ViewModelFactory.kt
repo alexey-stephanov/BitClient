@@ -2,12 +2,15 @@ package com.example.bitclient.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavArgs
 import javax.inject.Inject
 import javax.inject.Provider
 
 class ViewModelFactory @Inject constructor(
-    private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>,
+    private val viewModels: MutableMap<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
+
+    lateinit var args: NavArgs
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         val viewModelProvider = viewModels[modelClass]

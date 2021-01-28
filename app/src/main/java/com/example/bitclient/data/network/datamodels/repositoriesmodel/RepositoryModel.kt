@@ -1,6 +1,7 @@
 package com.example.bitclient.data.network.datamodels.repositoriesmodel
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
@@ -8,13 +9,17 @@ import com.google.gson.annotations.SerializedName
 data class RepositoryModel(
     @PrimaryKey
     @SerializedName("uuid")
-    val repositoryId: String,
+    var repositoryId: String = "",
     @SerializedName("name")
-    val name: String,
+    var name: String = "",
     @SerializedName("full_name")
-    val fullName: String,
+    var fullName: String = "",
     @SerializedName("links")
-    val links: RepositoryLinksModel,
+    @Ignore
+    var links: RepositoryLinksModel = RepositoryLinksModel(RepositoryAvatarModel("")),
+    @SerializedName("workspace")
+    @Ignore
+    var workspace: RepositoryWorkspaceModel = RepositoryWorkspaceModel(""),
     @SerializedName("is_private")
-    val isPrivate: Boolean
+    var isPrivate: Boolean = false
 )

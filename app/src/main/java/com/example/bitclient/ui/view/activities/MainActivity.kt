@@ -33,10 +33,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        openAuthorizationFragment()
+        openFragment()
     }
 
-    private fun openAuthorizationFragment() {
+    private fun openFragment() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.main_host_fragment) as NavHostFragment
         val inflater = navHostFragment.navController.navInflater
