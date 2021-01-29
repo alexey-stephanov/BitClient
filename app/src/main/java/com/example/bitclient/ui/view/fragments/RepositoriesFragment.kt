@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.BitClientApp
@@ -39,7 +40,7 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel>() {
                     data.workspace.workspaceId,
                     data.repositoryId
                 )
-            view?.findNavController()?.navigate(action)
+            findNavController().navigate(action)
         }, { inflater, viewGroup ->
             RepositoryItemBinding.inflate(inflater, viewGroup, false)
         }) {

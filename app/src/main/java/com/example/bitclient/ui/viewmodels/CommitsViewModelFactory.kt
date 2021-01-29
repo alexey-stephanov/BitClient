@@ -4,18 +4,24 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.bitclient.data.repositories.userrepositories.UserRepositoriesRepository
 
-class BranchesViewModelFactory(
+class CommitsViewModelFactory(
     private val userRepositoriesRepository: UserRepositoriesRepository,
     private val workspaceId: String,
-    private val repositoryId: String
+    private val repositoryId: String,
+    private val branchName: String
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(BranchesViewModel::class.java)) {
-            return BranchesViewModel(userRepositoriesRepository, workspaceId, repositoryId) as T
+        if (modelClass.isAssignableFrom(CommitsViewModel::class.java)) {
+            return CommitsViewModel(
+                userRepositoriesRepository,
+                workspaceId,
+                repositoryId,
+                branchName
+            ) as T
         } else {
-            throw IllegalArgumentException("Required BranchesViewModel class.")
+            throw IllegalArgumentException("Required CommitsViewModel class.")
         }
     }
 }

@@ -34,6 +34,28 @@
             android:name="repositoryId"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_branchesFragment_to_commitsFragment"
+            app:destination="@id/commitsFragment"
+            app:popUpTo="@id/commitsFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/commitsFragment"
+        android:name="com.example.bitclient.ui.view.fragments.CommitsFragment"
+        android:label="CommitsFragment"
+        tools:layout="@layout/fragment_commits">
+        <argument
+            android:name="workspaceId"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="repositoryId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="branchName"
+            app:argType="string"
+            app:nullable="true"/>
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

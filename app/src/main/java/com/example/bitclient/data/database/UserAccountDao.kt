@@ -7,7 +7,7 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.Repositor
 import com.example.bitclient.data.network.datamodels.usermodel.UserModel
 
 @Dao
-interface UserInfoDao {
+interface UserAccountDao {
 
     @Query("SELECT * FROM users")
     fun getAllUsers(): List<UserModel>

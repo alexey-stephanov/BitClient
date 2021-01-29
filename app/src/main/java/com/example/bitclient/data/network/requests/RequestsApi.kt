@@ -1,6 +1,7 @@
 package com.example.bitclient.data.network.requests
 
 import com.example.bitclient.data.network.datamodels.branchesmodel.BranchesResponse
+import com.example.bitclient.data.network.datamodels.commitsmodel.CommitsResponse
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoriesResponse
 import com.example.bitclient.data.network.datamodels.usermodel.UserModel
 import com.example.bitclient.data.network.datamodels.workspacesmodel.WorkspacesResponse
@@ -25,6 +26,14 @@ interface RequestsApi {
         @Path("repo_slug") repositoryId: String,
         @Query("page") page: Int
     ): BranchesResponse
+
+    @GET("2.0/repositories/{workspace}/{repo_slug}/commits/{branch_name}")
+    suspend fun getCommits(
+        @Path("workspace") workspaceId: String,
+        @Path("repo_slug") repositoryId: String,
+        @Path("branch_name") branchName: String,
+        @Query("page") page: Int
+    ): CommitsResponse
 
     @GET("2.0/user")
     suspend fun getUserInfo(): UserModel

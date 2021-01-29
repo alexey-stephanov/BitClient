@@ -3,31 +3,28 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.datamodels.branchesmodel.BranchModel
+import com.example.bitclient.data.network.datamodels.commitsmodel.CommitModel
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
-import com.example.bitclient.data.network.requests.NetworkRepository
 import com.example.bitclient.data.repositories.userrepositories.UserRepositoriesRepository
-import com.example.bitclient.databinding.BranchItemBinding
-import com.example.bitclient.databinding.FragmentBranchesBinding
+import com.example.bitclient.databinding.CommitItemBinding
+import com.example.bitclient.databinding.FragmentCommitsBinding
 import com.example.bitclient.ui.recyclerview.OnItemClickListener
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
-import com.example.bitclient.ui.viewmodels.BranchesViewModel
-import com.example.bitclient.ui.viewmodels.BranchesViewModelFactory
+import com.example.bitclient.ui.viewmodels.CommitsViewModel
+import com.example.bitclient.ui.viewmodels.CommitsViewModelFactory
 import javax.inject.Inject
 
-class BranchesFragment : PaginatedFragment<BranchModel>() {
+class CommitsFragment : PaginatedFragment<CommitModel>() {
 
-    private val binding by viewBinding(FragmentBranchesBinding::bind)
+    private val binding by viewBinding(FragmentCommitsBinding::bind)
 
-    private val args: BranchesFragmentArgs by navArgs()
+    private val args: CommitsFragmentArgs by navArgs()
 
     @Inject
     lateinit var networkConnectivityManager: NetworkConnectivityManager
@@ -38,26 +35,23 @@ class BranchesFragment : PaginatedFragment<BranchModel>() {
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
 
-    override val viewModel: BranchesViewModel by viewModels {
-        BranchesViewModelFactory(userRepositoriesRepository, args.workspaceId!!, args.repositoryId!!)
+    override val viewModel: CommitsViewModel by viewModels {
+        CommitsViewModelFactory(
+            userRepositoriesRepository,
+            args.workspaceId!!,
+            args.repositoryId!!,
+            args.branchName!!
+        )
     }
-
-    override val paginatedListAdapter: PaginatedListAdapter<BranchModel> =
-        object : PaginatedListAdapter<BranchModel>(OnItemClickListener { data ->
-            val action =
-                BranchesFragmentDirections.actionBranchesFragmentToCommitsFragment(
-                    args.workspaceId,
-                    args.repositoryId,
-                    data.branchName
-                )
-            findNavController().navigate(action)
-        },
+    override val paginatedListAdapter: PaginatedListAdapter<CommitModel> =
+        object : PaginatedListAdapter<CommitModel>(
+            OnItemClickListener { },
             { inflater, parent ->
-                BranchItemBinding.inflate(inflater, parent, false)
+                CommitItemBinding.inflate(inflater, parent, false)
             }
         ) {
-            override fun getLayoutId(position: Int, obj: BranchModel): Int =
-                R.layout.branch_item
+            override fun getLayoutId(position: Int, obj: CommitModel): Int =
+                R.layout.commit_item
         }
 
     override fun onAttach(context: Context) {
@@ -70,18 +64,20 @@ class BranchesFragment : PaginatedFragment<BranchModel>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        binding.toolbarCommitsActionbar.title = args.branchName
+
         networkConnectivityManager.startConnectionChecking(
             viewLifecycleOwner,
             binding.root,
-            binding.textViewBranchesNoInternet
+            binding.textViewCommitsNoInternet
         )
     }
 
     override fun getLayoutResId(): Int =
-        R.layout.fragment_branches
+        R.layout.fragment_commits
 
     override fun getRecyclerView(): RecyclerView {
-        binding.recyclerViewBranchesBranchesList.addItemDecoration(itemDecoration)
-        return binding.recyclerViewBranchesBranchesList
+        binding.recyclerViewCommitsCommitsList.addItemDecoration(itemDecoration)
+        return binding.recyclerViewCommitsCommitsList
     }
 }

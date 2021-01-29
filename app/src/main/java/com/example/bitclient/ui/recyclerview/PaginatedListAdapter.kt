@@ -19,7 +19,6 @@ abstract class PaginatedListAdapter<DataModel : Any>(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        //binding = ViewBinding { inflater.inflate(viewType, parent, false) }
         binding = bindingInflater(inflater,parent)
         return getViewHolder(binding, viewType)
     }

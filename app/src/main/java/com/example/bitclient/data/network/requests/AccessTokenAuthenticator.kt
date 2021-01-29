@@ -12,14 +12,14 @@ import javax.inject.Inject
 private const val REQUEST_TYPE = "Authorization"
 
 class AccessTokenAuthenticator @Inject constructor(
-    private val userDataRepositoryWrapper: Lazy<UserDataRepository>
+    private val networkRepositoryWrapper: Lazy<NetworkRepository>
 ) : Authenticator {
 
     override fun authenticate(route: Route?, response: Response): Request {
 
-        var result: TokensModel? = null
+        var result: TokensModel?
         runBlocking {
-            result = userDataRepositoryWrapper.get().refreshAccessToken()
+            result = networkRepositoryWrapper.get().refreshAccessToken()
         }
 
         return response.request.newBuilder()

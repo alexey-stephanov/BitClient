@@ -17,10 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 abstract class RequestsModule {
 
     @UserScope
-    @Binds
-    abstract fun bindUserDataRepository(userDataRepositoryImpl: UserDataRepositoryImpl): UserDataRepository
-
-    @UserScope
     @RequestQualifier
     @Binds
     abstract fun bindRequestsInterceptor(requestsInterceptor: RequestsInterceptor): Interceptor
