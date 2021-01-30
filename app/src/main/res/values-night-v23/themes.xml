@@ -46,6 +46,7 @@
 
     <style name="TextAppearance.MaterialComponents.Body1.RepositoryName" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">18sp</item>
     </style>
 
@@ -55,6 +56,23 @@
     </style>
 
     <style name="TextAppearance.MaterialComponents.Headline6.BranchName" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Headline6.CommitName" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Body1.CommitMessage" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Body2.CommitDate" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.MaterialComponents.Body2.CommitAuthor" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textColor">@color/white</item>
     </style>
 </resources>

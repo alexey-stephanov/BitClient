@@ -1,6 +1,7 @@
 package com.example.bitclient.data.network.datamodels.commitsmodel
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class CommitModel(
     @SerializedName("author")
@@ -8,5 +9,5 @@ data class CommitModel(
     @SerializedName("message")
     val massage: String,
     @SerializedName("date")
-    val date: String
+    val date: Date
 )

@@ -1,5 +1,6 @@
 package com.example.bitclient.ui.recyclerview
 
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -10,6 +11,8 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.Repositor
 import com.example.bitclient.databinding.BranchItemBinding
 import com.example.bitclient.databinding.CommitItemBinding
 import com.example.bitclient.databinding.RepositoryItemBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 object ViewHolderFactory {
     fun create(binding: ViewBinding, viewType: Int): RecyclerView.ViewHolder {
@@ -46,10 +49,11 @@ object ViewHolderFactory {
 
     class CommitViewHolder(private val binding: CommitItemBinding) : RecyclerView.ViewHolder(binding.root), PaginatedListAdapter.Binder<CommitModel> {
         override fun bind(data: CommitModel, listener: OnItemClickListener<CommitModel>?) {
+            val str = data.massage.split("\n").filter { s -> s.isNotEmpty() }
             with(binding) {
-                textViewCommitItemCommitName.text = "name"
-                textViewCommitItemCommitMessage.text = data.massage
-                textViewCommitItemCommitDate.text = data.date
+                textViewCommitItemCommitName.text = str[0]
+                if(str.size == 2) textViewCommitItemCommitMessage.text = str[1]
+                textViewCommitItemCommitDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(data.date)
                 textViewCommitItemCommitAuthor.text = data.authorModel.author
             }
         }

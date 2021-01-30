@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraint_layout_repository_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/image_view_repository_item_icon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_margin="@dimen/spacing_16"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/barrier_repository"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:placeholderImage="@drawable/logo_light" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_repository"
@@ -25,34 +27,41 @@
     <TextView
         android:id="@+id/text_view_repository_item_repo_name"
         style="@style/TextAppearance.MaterialComponents.Body1.RepositoryName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_16"
         android:layout_marginTop="@dimen/spacing_8"
+        android:layout_marginStart="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_8"
         app:layout_constraintBottom_toTopOf="@id/text_view_repository_item_full_name"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/barrier_repository"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Repository name" />
 
     <TextView
         android:id="@+id/text_view_repository_item_full_name"
         style="@style/TextAppearance.MaterialComponents.Body2.RepositoryFullName"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginStart="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_8"
         android:layout_marginBottom="@dimen/spacing_8"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/barrier_repository"
-        app:layout_constraintTop_toBottomOf="@id/text_view_repository_item_repo_name" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_repository_item_repo_name"
+        tools:text="Repository full name" />
 
     <ImageView
         android:id="@+id/image_view_repository_item_lock_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/repository_icon_private_repo_content_description"
-        android:padding="@dimen/spacing_8"
+        android:layout_margin="@dimen/spacing_4"
         android:src="@drawable/ic_lock"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_repository_item_full_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
