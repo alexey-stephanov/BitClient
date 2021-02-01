@@ -16,15 +16,17 @@ class AccountViewModel @Inject constructor(
     UserInfoLiveDataDelegate by userManager {
 
     init {
+        getUserInfo()
+    }
+
+    fun refreshData() {
+        getUserInfo()
+    }
+
+    private fun getUserInfo() {
         viewModelScope.launch(Dispatchers.IO) {
             val userInfo = accountRepository.retrieveUserInfo()
             liveUserModel.postValue(userInfo)
         }
     }
-
-//    private fun setUserInfoInDatabase(userInfo: UserModel) {
-//        userInfoDao.insertUser(userInfo)
-//    }
-//
-//    fun getUserInfoFromDatabase(): List<UserModel> = userInfoDao.getAllUsers()
 }

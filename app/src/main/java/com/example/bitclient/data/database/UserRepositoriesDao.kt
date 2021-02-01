@@ -15,8 +15,11 @@ interface UserRepositoriesDao {
     fun getRepositoryById(repositoryId: String): RepositoryModel
 
     @Insert
-    fun insertAllRepositories(repositories: List<RepositoryModel>)
+    suspend fun insertAllRepositories(repositories: List<RepositoryModel>)
 
     @Insert
-    fun insertRepository(repository: RepositoryModel)
+    suspend fun insertRepository(repository: RepositoryModel)
+
+    @Query("DELETE FROM repositories")
+    suspend fun clearAll()
 }

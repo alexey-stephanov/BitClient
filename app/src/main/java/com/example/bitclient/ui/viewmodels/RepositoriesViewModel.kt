@@ -26,8 +26,4 @@ class RepositoriesViewModel @Inject constructor(
             userRepositoriesRepository.retrieveUserRepositories(workspaceId, page)
         }.first()
     }
-
-//    fun saveRepositoriesInDatabase(repositories: List<RepositoryModel>) {
-//        userRepositoriesRepository.insertAllRepositories(repositories)
-//    }
 }

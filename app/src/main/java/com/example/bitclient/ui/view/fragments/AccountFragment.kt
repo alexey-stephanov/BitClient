@@ -3,12 +3,16 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.os.Bundle
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.data.network.datamodels.usermodel.UserModel
+import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
+import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.databinding.FragmentAccountBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.AccountViewModel
@@ -42,6 +46,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             binding.textViewAccountNoInternet
         )
         getUserInfo()
+        setupRefreshLayout()
     }
 
     private fun getUserInfo() {
@@ -57,4 +62,17 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         binding.textViewAccountUsername.text = userModel.username
     }
 
+    private fun setupRefreshLayout() {
+        binding.swipeLayoutAccountRefresh.setOnRefreshListener {
+            accountViewModel.refreshData()
+            binding.swipeLayoutAccountRefresh.isRefreshing = false
+        }
+    }
+
+    private fun startConnectionChecking() {
+        NetworkStatus.observe(viewLifecycleOwner, { isAvailable ->
+            TransitionManager.beginDelayedTransition(binding.root, Slide())
+            binding.textViewAccountNoInternet.isVisible = !isAvailable
+        })
+    }
 }

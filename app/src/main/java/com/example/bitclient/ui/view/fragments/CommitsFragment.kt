@@ -43,6 +43,7 @@ class CommitsFragment : PaginatedFragment<CommitModel>() {
             args.branchName!!
         )
     }
+
     override val paginatedListAdapter: PaginatedListAdapter<CommitModel> =
         object : PaginatedListAdapter<CommitModel>(
             OnItemClickListener { },
@@ -64,7 +65,11 @@ class CommitsFragment : PaginatedFragment<CommitModel>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.toolbarCommitsActionbar.title = args.branchName
+        with(binding.toolbarCommitsActionbar) {
+            title = args.branchName
+            setNavigationIcon(R.drawable.ic_left_arrow)
+            setNavigationOnClickListener { activity?.onBackPressed() }
+        }
 
         networkConnectivityManager.startConnectionChecking(
             viewLifecycleOwner,

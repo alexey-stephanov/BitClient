@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "users")
 data class UserModel(
-        @PrimaryKey
+        @PrimaryKey(autoGenerate = true)
+        var id: Int = 0,
         @SerializedName("account_id")
         var accountId: String = "",
         @SerializedName("display_name")

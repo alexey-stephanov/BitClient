@@ -70,6 +70,11 @@ class BranchesFragment : PaginatedFragment<BranchModel>() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        with(binding.toolbarBranchesActionbar) {
+            setNavigationIcon(R.drawable.ic_left_arrow)
+            setNavigationOnClickListener { activity?.onBackPressed() }
+        }
+
         networkConnectivityManager.startConnectionChecking(
             viewLifecycleOwner,
             binding.root,

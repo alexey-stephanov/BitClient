@@ -46,7 +46,7 @@ object NetworkStatus : LiveData<Boolean>() {
         })
     }
 
-    private fun isNetworkAvailable(): Boolean {
+    fun isNetworkAvailable(): Boolean {
         val connectivityManager = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)

@@ -1,6 +1,7 @@
 package com.example.bitclient.data.pagination
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.example.bitclient.data.network.datamodels.PaginatedResponse
 
 class PagingDataSource<DataModel : Any>(
@@ -21,5 +22,9 @@ class PagingDataSource<DataModel : Any>(
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, DataModel>): Int? {
+        return state.anchorPosition
     }
 }
