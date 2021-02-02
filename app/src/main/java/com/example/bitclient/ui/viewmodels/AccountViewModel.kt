@@ -1,7 +1,9 @@
 package com.example.bitclient.ui.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.data.repositories.account.AccountRepository
 import com.example.bitclient.data.user.UserInfoLiveDataDelegate
 import com.example.bitclient.data.user.UserManager
@@ -19,13 +21,25 @@ class AccountViewModel @Inject constructor(
         getUserInfo()
     }
 
+    val refreshingStatus: MutableLiveData<Boolean> = MutableLiveData()
+
     fun refreshData() {
-        getUserInfo()
+        viewModelScope.launch(Dispatchers.IO) {
+            if (NetworkStatus.isNetworkAvailable()) {
+                accountRepository.retrieveUserInfoFromNetwork()
+            } else {
+                refreshingStatus.postValue(false)
+            }
+        }
     }
 
     private fun getUserInfo() {
         viewModelScope.launch(Dispatchers.IO) {
-            val userInfo = accountRepository.retrieveUserInfo()
+            val userInfo = if (NetworkStatus.isNetworkAvailable()) {
+                accountRepository.retrieveUserInfoFromNetwork()
+            } else {
+                accountRepository.retrieveUserInfoFromDatabase()
+            }
             liveUserModel.postValue(userInfo)
         }
     }

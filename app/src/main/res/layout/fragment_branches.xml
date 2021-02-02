@@ -15,6 +15,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/branches_title" />
 
+    <TextView
+        android:id="@+id/text_view_branches_no_internet"
+        style="@style/NoInternetMessageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_internet_connection"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_branches_actionbar" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_branches_branches_list"
         android:layout_width="match_parent"
@@ -23,22 +34,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_branches_actionbar" />
-
-    <TextView
-        android:id="@+id/text_view_branches_no_internet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/red"
-        android:gravity="center"
-        android:padding="1dp"
-        android:text="@string/no_internet_connection"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_branches_no_internet" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,28 +14,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/settings_title" />
 
+    <TextView
+        android:id="@+id/text_view_settings_no_internet"
+        style="@style/NoInternetMessageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_internet_connection"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_settings_actionbar" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_settings_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_128"
         android:text="@string/settings_logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/text_view_settings_no_internet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/red"
-        android:gravity="center"
-        android:padding="1dp"
-        android:text="@string/no_internet_connection"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bitclient.ui.recyclerview.OnItemClickListener
+import com.example.bitclient.data.pagination.LoaderStateAdapter
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.viewmodels.PaginatedViewModel
 import kotlinx.coroutines.flow.collect
@@ -50,7 +49,7 @@ abstract class PaginatedFragment<DataModel : Any> : Fragment() {
     private fun setupRecyclerView() {
         getRecyclerView().apply {
             setHasFixedSize(true)
-            adapter = paginatedListAdapter
+            adapter = paginatedListAdapter.withLoadStateFooter(LoaderStateAdapter { paginatedListAdapter.retry() })
         }
     }
 }

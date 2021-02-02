@@ -6,13 +6,24 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/text_view_authorization_no_internet"
+        style="@style/NoInternetMessageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_internet_connection"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/text_view_authorization_greeting"
         style="@style/TextAppearance.MaterialComponents.Headline3.Greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_8"
-       android:gravity="center"
         android:layout_marginTop="@dimen/spacing_128"
+        android:gravity="center"
+        android:padding="@dimen/spacing_8"
         android:text="@string/authorization_greeting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,21 +49,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/text_view_authorization_no_internet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/red"
-        android:gravity="center"
-        android:padding="1dp"
-        android:text="@string/no_internet_connection"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

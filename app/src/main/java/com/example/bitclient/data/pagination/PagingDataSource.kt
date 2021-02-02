@@ -3,6 +3,8 @@ package com.example.bitclient.data.pagination
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.bitclient.data.network.datamodels.PaginatedResponse
+import retrofit2.HttpException
+import java.io.IOException
 
 class PagingDataSource<DataModel : Any>(
     private val retrieveData: suspend (page: Int) -> PaginatedResponse<DataModel>
@@ -19,7 +21,9 @@ class PagingDataSource<DataModel : Any>(
                 nextKey = if (response.nextPage != null) page + 1 else null
             )
 
-        } catch (e: Exception) {
+        } catch (e: IOException) {
+            LoadResult.Error(e)
+        } catch (e: HttpException) {
             LoadResult.Error(e)
         }
     }

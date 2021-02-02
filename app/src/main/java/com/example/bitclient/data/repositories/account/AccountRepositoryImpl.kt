@@ -11,14 +11,16 @@ class AccountRepositoryImpl @Inject constructor(
     @RequestQualifier private val service: RequestsApi,
     private val userAccountDao: UserAccountDao
 ) : AccountRepository {
-    override suspend fun retrieveUserInfo(): UserModel {
-        return if (NetworkStatus.isNetworkAvailable()) {
-            val user = service.getUserInfo()
-            userAccountDao.insertUser(user)
-            user
-        } else {
-            val user = userAccountDao.getAllUsers()[0]
-            user
-        }
+
+    override suspend fun retrieveUserInfoFromNetwork(): UserModel {
+        val user = service.getUserInfo()
+        saveUserInfoInDatabase(user)
+        return user
+    }
+
+    override fun retrieveUserInfoFromDatabase(): UserModel = userAccountDao.getAllUsers()[0]
+
+    private suspend fun saveUserInfoInDatabase(userModel: UserModel) {
+        userAccountDao.insertUser(userModel)
     }
 }

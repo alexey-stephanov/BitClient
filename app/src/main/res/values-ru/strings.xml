@@ -11,4 +11,6 @@
     <string name="repositories_menu">Меню</string>
     <string name="settings_logout">Выйти</string>
     <string name="repository_icon_private_repo_content_description">Приватный репозиторий</string>
+    <string name="load_error_message">Что-то пошло не так, попробуйте ещё раз.</string>
+    <string name="load_error_retry">Повторить</string>
 </resources>

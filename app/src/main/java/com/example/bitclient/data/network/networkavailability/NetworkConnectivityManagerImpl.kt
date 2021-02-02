@@ -1,5 +1,6 @@
 package com.example.bitclient.data.network.networkavailability
 
+import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -16,7 +17,7 @@ class NetworkConnectivityManagerImpl @Inject constructor() : NetworkConnectivity
         textView: TextView
     ) {
         NetworkStatus.observe(viewLifecycleOwner, { isAvailable ->
-            TransitionManager.beginDelayedTransition(sceneRoot, Slide())
+            TransitionManager.beginDelayedTransition(sceneRoot, Slide(Gravity.TOP))
             textView.isVisible = !isAvailable
         })
     }

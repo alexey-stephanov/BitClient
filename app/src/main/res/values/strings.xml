@@ -11,4 +11,6 @@
     <string name="repositories_menu">Menu</string>
     <string name="settings_logout">Log out</string>
     <string name="repository_icon_private_repo_content_description">Private repository</string>
+    <string name="load_error_message">Something went wrong, please try again.</string>
+    <string name="load_error_retry">Retry</string>
 </resources>
