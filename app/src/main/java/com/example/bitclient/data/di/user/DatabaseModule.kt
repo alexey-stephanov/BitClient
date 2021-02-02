@@ -2,6 +2,7 @@ package com.example.bitclient.data.di.user
 
 import android.content.Context
 import androidx.room.Room
+import com.example.bitclient.data.database.RemoteKeysDao
 import com.example.bitclient.data.database.UserDatabase
 import dagger.Module
 import dagger.Provides
@@ -14,4 +15,9 @@ class DatabaseModule {
     fun provideUserDatabase(context: Context): UserDatabase {
         return Room.databaseBuilder(context, UserDatabase::class.java, "user-db").build()
     }
+
+    @UserScope
+    @Provides
+    fun provideRemoteKeysDao(userDatabase: UserDatabase): RemoteKeysDao =
+        userDatabase.remoteKeysDao()
 }

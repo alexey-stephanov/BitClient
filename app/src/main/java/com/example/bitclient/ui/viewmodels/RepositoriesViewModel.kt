@@ -17,8 +17,7 @@ class RepositoriesViewModel @Inject constructor(
 
     override val workspaceIdFlow: Flow<String> = flow {
         val userWorkspaces = userRepositoriesRepository.retrieveUserWorkspaces()
-        //emit(userWorkspaces.workspaces[0].workspaceId)
-        emit("")
+        emit(userWorkspaces.workspaces[0].workspaceId)
     }
 
     override suspend fun retrieveData(page: Int): PaginatedResponse<RepositoryModel> {
