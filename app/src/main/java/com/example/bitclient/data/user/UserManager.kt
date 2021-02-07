@@ -1,8 +1,8 @@
 package com.example.bitclient.data.user
 
-import com.example.bitclient.data.network.datamodels.usermodel.UserModel
+import com.example.bitclient.data.network.datamodels.usermodel.dbmodels.AccountDbModel
 
 interface UserManager : UserInfoLiveDataDelegate {
-    fun loginUser(userModel: UserModel)
-    fun logout()
+    fun loginUser(accountDbModel: AccountDbModel)
+    suspend fun logout()
 }

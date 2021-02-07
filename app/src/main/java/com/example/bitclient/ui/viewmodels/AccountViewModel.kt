@@ -3,6 +3,7 @@ package com.example.bitclient.ui.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bitclient.data.network.datamodels.usermodel.networkmodels.AccountModel
 import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.data.repositories.account.AccountRepository
 import com.example.bitclient.data.user.UserInfoLiveDataDelegate
@@ -40,7 +41,7 @@ class AccountViewModel @Inject constructor(
             } else {
                 accountRepository.retrieveUserInfoFromDatabase()
             }
-            liveUserModel.postValue(userInfo)
+            liveAccountModel.postValue(userInfo)
         }
     }
 }

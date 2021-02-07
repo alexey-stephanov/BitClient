@@ -1,27 +1,24 @@
 package com.example.bitclient.ui.viewmodels
 
-import androidx.lifecycle.*
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import com.example.bitclient.data.network.datamodels.PaginatedResponse
-import com.example.bitclient.data.pagination.PagingDataSource
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.*
+import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
+import com.example.bitclient.data.pagination.PagingRemoteMediator
 import kotlinx.coroutines.flow.Flow
 
-abstract class PaginatedViewModel<DataModel : Any> : ViewModel() {
+@ExperimentalPagingApi
+abstract class PaginatedViewModel<DataModel : Any, DbDataModel : PaginatedDbModel> : ViewModel() {
 
-    abstract suspend fun retrieveData(page: Int) : PaginatedResponse<DataModel>
+    abstract fun getPagingSource(): PagingSource<Int, DbDataModel>
 
-    val dataFlow = getPagingDataFlow()
+    abstract val remoteMediator: PagingRemoteMediator<DataModel, DbDataModel>
 
-    private fun getPagingDataFlow(): Flow<PagingData<DataModel>> {
-        return Pager(
-            config = PagingConfig(pageSize = 10),
-            pagingSourceFactory = {
-                PagingDataSource { page ->
-                    retrieveData(page)
-                }
-            }).flow.cachedIn(viewModelScope)
+    val dataFlow: Flow<PagingData<DbDataModel>> by lazy {
+        Pager(
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false),
+            remoteMediator = remoteMediator,
+            pagingSourceFactory = { getPagingSource() }
+        ).flow.cachedIn(viewModelScope)
     }
 }

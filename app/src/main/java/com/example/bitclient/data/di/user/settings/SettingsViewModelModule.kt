@@ -1,8 +1,8 @@
 package com.example.bitclient.data.di.user.settings
 
 import androidx.lifecycle.ViewModel
-import com.example.bitclient.ui.viewmodels.SettingsViewModel
 import com.example.bitclient.data.di.ViewModelKey
+import com.example.bitclient.ui.viewmodels.SettingsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

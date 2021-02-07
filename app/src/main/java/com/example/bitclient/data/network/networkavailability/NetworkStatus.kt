@@ -21,45 +21,50 @@ object NetworkStatus : LiveData<Boolean>() {
             .addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR)
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .build()
-        if(!isNetworkAvailable())
+        if (!isNetworkAvailable())
             postValue(false)
         getDetails()
     }
 
     private fun getDetails() {
-        val connectivityManager = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        connectivityManager.registerNetworkCallback(networkRequest, object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) {
-                super.onAvailable(network)
-                postValue(true)
-            }
+        val connectivityManager =
+            application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager.registerNetworkCallback(
+            networkRequest,
+            object : ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    super.onAvailable(network)
+                    postValue(true)
+                }
 
-            override fun onUnavailable() {
-                super.onUnavailable()
-                postValue(false)
-            }
+                override fun onUnavailable() {
+                    super.onUnavailable()
+                    postValue(false)
+                }
 
-            override fun onLost(network: Network) {
-                super.onLost(network)
-                postValue(false)
-            }
-        })
+                override fun onLost(network: Network) {
+                    super.onLost(network)
+                    postValue(false)
+                }
+            })
     }
 
     fun isNetworkAvailable(): Boolean {
-        val connectivityManager = application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val capabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            if(capabilities != null) {
-                if(capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
+        val connectivityManager =
+            application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
                     return true
-                else if(capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI))
+                else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI))
                     return true
             }
         } else {
             try {
                 val activeInfo = connectivityManager.activeNetworkInfo
-                if(activeInfo != null && activeInfo.isConnected)
+                if (activeInfo != null && activeInfo.isConnected)
                     return true
             } catch (e: Exception) {
                 Log.e("NETWORK_AVAILABILITY", "NETWORK AVAILABILITY ERROR")

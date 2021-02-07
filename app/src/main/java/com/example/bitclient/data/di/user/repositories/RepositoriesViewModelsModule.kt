@@ -1,24 +1,20 @@
 package com.example.bitclient.data.di.user.repositories
 
 import androidx.lifecycle.ViewModel
-import com.example.bitclient.ui.viewmodels.BranchesViewModel
-import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
+import androidx.paging.ExperimentalPagingApi
 import com.example.bitclient.data.di.ViewModelKey
+import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
 abstract class RepositoriesViewModelsModule {
+
+    @ExperimentalPagingApi
     @RepositoriesScope
     @Binds
     @IntoMap
     @ViewModelKey(RepositoriesViewModel::class)
     abstract fun bindRepositoriesViewModel(viewModel: RepositoriesViewModel): ViewModel
-
-//    @RepositoriesScope
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(BranchesViewModel::class)
-//    abstract fun bindBranchesViewModel(viewModel: BranchesViewModel): ViewModel
 }

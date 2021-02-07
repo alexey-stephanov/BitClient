@@ -4,14 +4,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.bitclient.R
-import com.example.bitclient.data.network.datamodels.branchesmodel.BranchModel
-import com.example.bitclient.data.network.datamodels.commitsmodel.CommitModel
-import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryModel
+import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
+import com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels.CommitDbModel
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
 import com.example.bitclient.databinding.BranchItemBinding
 import com.example.bitclient.databinding.CommitItemBinding
 import com.example.bitclient.databinding.RepositoryItemBinding
-import java.text.SimpleDateFormat
-import java.util.*
 
 object ViewHolderFactory {
     fun create(binding: ViewBinding, viewType: Int): RecyclerView.ViewHolder {
@@ -24,10 +22,13 @@ object ViewHolderFactory {
     }
 
     class RepositoryViewHolder(private val binding: RepositoryItemBinding) :
-        RecyclerView.ViewHolder(binding.root), PaginatedListAdapter.Binder<RepositoryModel> {
-        override fun bind(data: RepositoryModel, listener: OnItemClickListener<RepositoryModel>?) {
+        RecyclerView.ViewHolder(binding.root), PaginatedListAdapter.Binder<RepositoryDbModel> {
+        override fun bind(
+            data: RepositoryDbModel,
+            listener: OnItemClickListener<RepositoryDbModel>?
+        ) {
             with(binding) {
-                imageViewRepositoryItemIcon.setImageURI(data.links.avatar.href)
+                imageViewRepositoryItemIcon.setImageURI(data.avatarLink)
                 textViewRepositoryItemRepoName.text = data.name
                 textViewRepositoryItemFullName.text = data.fullName
                 if (data.isPrivate) {
@@ -39,8 +40,8 @@ object ViewHolderFactory {
     }
 
     class BranchViewHolder(private val binding: BranchItemBinding) :
-        RecyclerView.ViewHolder(binding.root), PaginatedListAdapter.Binder<BranchModel> {
-        override fun bind(data: BranchModel, listener: OnItemClickListener<BranchModel>?) {
+        RecyclerView.ViewHolder(binding.root), PaginatedListAdapter.Binder<BranchDbModel> {
+        override fun bind(data: BranchDbModel, listener: OnItemClickListener<BranchDbModel>?) {
             with(binding) {
                 textViewBranchItemBranchName.text = data.branchName
                 frameLayoutBranchItemLayout.setOnClickListener { listener?.onItemClick(data) }
@@ -49,15 +50,14 @@ object ViewHolderFactory {
     }
 
     class CommitViewHolder(private val binding: CommitItemBinding) :
-        RecyclerView.ViewHolder(binding.root), PaginatedListAdapter.Binder<CommitModel> {
-        override fun bind(data: CommitModel, listener: OnItemClickListener<CommitModel>?) {
-            val str = data.massage.split("\n").filter { s -> s.isNotEmpty() }
+        RecyclerView.ViewHolder(binding.root), PaginatedListAdapter.Binder<CommitDbModel> {
+        override fun bind(data: CommitDbModel, listener: OnItemClickListener<CommitDbModel>?) {
+            val str = data.message.split("\n").filter { s -> s.isNotEmpty() }
             with(binding) {
                 textViewCommitItemCommitName.text = str[0]
                 if (str.size == 2) textViewCommitItemCommitMessage.text = str[1]
-                textViewCommitItemCommitDate.text =
-                    SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(data.date)
-                textViewCommitItemCommitAuthor.text = data.authorModel.author
+                textViewCommitItemCommitDate.text = data.date
+                textViewCommitItemCommitAuthor.text = data.authorName
             }
         }
     }

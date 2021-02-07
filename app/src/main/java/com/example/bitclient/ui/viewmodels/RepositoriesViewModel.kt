@@ -1,28 +1,48 @@
 package com.example.bitclient.ui.viewmodels
 
-import com.example.bitclient.data.network.datamodels.PaginatedResponse
-import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryModel
-import com.example.bitclient.data.network.requests.NetworkRepository
-import com.example.bitclient.data.repositories.userrepositories.UserRepositoriesRepository
-import com.example.bitclient.data.user.UserWorkspacesLiveDataDelegate
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import androidx.lifecycle.viewModelScope
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.PagingSource
+import com.example.bitclient.data.database.RepositoriesDao
+import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedResponse
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.RepositoryModel
+import com.example.bitclient.data.pagination.DataRetrieving
+import com.example.bitclient.data.pagination.PagingRemoteMediator
+import com.example.bitclient.data.pagination.RepositoriesRemoteMediator
+import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepository
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@ExperimentalPagingApi
 class RepositoriesViewModel @Inject constructor(
-    private val userRepositoriesRepository: UserRepositoriesRepository,
-) : PaginatedViewModel<RepositoryModel>(), UserWorkspacesLiveDataDelegate {
+    private val repositoriesRepository: RepositoriesRepository,
+    private val repositoriesDao: RepositoriesDao
+) : PaginatedViewModel<RepositoryModel, RepositoryDbModel>(),
+    DataRetrieving<RepositoryModel> {
 
-    override val workspaceIdFlow: Flow<String> = flow {
-        val userWorkspaces = userRepositoriesRepository.retrieveUserWorkspaces()
-        emit(userWorkspaces.workspaces[0].workspaceId)
+    init {
+        viewModelScope.launch {
+            val userWorkspaces = repositoriesRepository.retrieveUserWorkspaces()
+            state.emit(userWorkspaces.workspaces[0].workspaceId)
+        }
     }
 
+    val state = MutableStateFlow<String?>(null)
+
+    @FlowPreview
     override suspend fun retrieveData(page: Int): PaginatedResponse<RepositoryModel> {
-        return workspaceIdFlow.map { workspaceId ->
-            userRepositoriesRepository.retrieveUserRepositories(workspaceId, page)
+        return state.filter { it != null }.map {
+                repositoriesRepository.retrieveUserRepositories(it!!, page)
         }.first()
     }
+
+    @FlowPreview
+    override val remoteMediator: PagingRemoteMediator<RepositoryModel, RepositoryDbModel> =
+        RepositoriesRemoteMediator(repositoriesDao) { page -> retrieveData(page) }
+
+    override fun getPagingSource(): PagingSource<Int, RepositoryDbModel> =
+        repositoriesDao.getAll()
 }

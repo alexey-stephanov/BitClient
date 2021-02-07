@@ -2,7 +2,9 @@ package com.example.bitclient.data.di.user
 
 import com.example.bitclient.BuildConfig
 import com.example.bitclient.data.di.RequestQualifier
-import com.example.bitclient.data.network.requests.*
+import com.example.bitclient.data.network.requests.AccessTokenAuthenticator
+import com.example.bitclient.data.network.requests.RequestsApi
+import com.example.bitclient.data.network.requests.RequestsInterceptor
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

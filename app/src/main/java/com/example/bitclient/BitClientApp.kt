@@ -1,9 +1,9 @@
 package com.example.bitclient
 
 import android.app.Application
-import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.data.di.AppComponent
 import com.example.bitclient.data.di.DaggerAppComponent
+import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.facebook.drawee.backends.pipeline.Fresco
 
 

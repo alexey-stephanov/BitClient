@@ -29,11 +29,11 @@
         style="@style/TextAppearance.MaterialComponents.Body1.RepositoryName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_8"
         android:layout_marginStart="@dimen/spacing_8"
+        android:layout_marginTop="@dimen/spacing_8"
         android:layout_marginEnd="@dimen/spacing_8"
         app:layout_constraintBottom_toTopOf="@id/text_view_repository_item_full_name"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/image_view_repository_item_lock_image"
         app:layout_constraintStart_toEndOf="@id/barrier_repository"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Repository name" />
@@ -44,10 +44,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_8"
-        android:layout_marginEnd="@dimen/spacing_8"
         android:layout_marginBottom="@dimen/spacing_8"
+        android:layout_marginEnd="@dimen/spacing_8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/image_view_repository_item_lock_image"
         app:layout_constraintStart_toEndOf="@id/barrier_repository"
         app:layout_constraintTop_toBottomOf="@id/text_view_repository_item_repo_name"
         tools:text="Repository full name" />
@@ -62,6 +62,6 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_repository_item_full_name" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

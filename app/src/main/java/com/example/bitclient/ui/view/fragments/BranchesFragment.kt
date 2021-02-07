@@ -3,17 +3,18 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.datamodels.branchesmodel.BranchModel
+import com.example.bitclient.data.database.BranchesDao
+import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
+import com.example.bitclient.data.network.datamodels.branchesmodel.networkmodels.BranchModel
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
-import com.example.bitclient.data.network.requests.NetworkRepository
-import com.example.bitclient.data.repositories.userrepositories.UserRepositoriesRepository
+import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepository
 import com.example.bitclient.databinding.BranchItemBinding
 import com.example.bitclient.databinding.FragmentBranchesBinding
 import com.example.bitclient.ui.recyclerview.OnItemClickListener
@@ -23,7 +24,7 @@ import com.example.bitclient.ui.viewmodels.BranchesViewModel
 import com.example.bitclient.ui.viewmodels.BranchesViewModelFactory
 import javax.inject.Inject
 
-class BranchesFragment : PaginatedFragment<BranchModel>() {
+class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
 
     private val binding by viewBinding(FragmentBranchesBinding::bind)
 
@@ -33,17 +34,21 @@ class BranchesFragment : PaginatedFragment<BranchModel>() {
     lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     @Inject
-    lateinit var userRepositoriesRepository: UserRepositoriesRepository
+    lateinit var repositoriesRepository: RepositoriesRepository
+
+    @Inject
+    lateinit var branchesDao: BranchesDao
 
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
 
+    @ExperimentalPagingApi
     override val viewModel: BranchesViewModel by viewModels {
-        BranchesViewModelFactory(userRepositoriesRepository, args.workspaceId!!, args.repositoryId!!)
+        BranchesViewModelFactory(repositoriesRepository, branchesDao, args.workspaceId!!, args.repositoryId!!)
     }
 
-    override val paginatedListAdapter: PaginatedListAdapter<BranchModel> =
-        object : PaginatedListAdapter<BranchModel>(OnItemClickListener { data ->
+    override val paginatedListAdapter: PaginatedListAdapter<BranchDbModel> =
+        object : PaginatedListAdapter<BranchDbModel>(OnItemClickListener { data ->
             val action =
                 BranchesFragmentDirections.actionBranchesFragmentToCommitsFragment(
                     args.workspaceId,
@@ -56,7 +61,7 @@ class BranchesFragment : PaginatedFragment<BranchModel>() {
                 BranchItemBinding.inflate(inflater, parent, false)
             }
         ) {
-            override fun getLayoutId(position: Int, obj: BranchModel): Int =
+            override fun getLayoutId(position: Int, obj: BranchDbModel): Int =
                 R.layout.branch_item
         }
 
@@ -67,6 +72,7 @@ class BranchesFragment : PaginatedFragment<BranchModel>() {
             ?.create()?.inject(this)
     }
 
+    @ExperimentalPagingApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 

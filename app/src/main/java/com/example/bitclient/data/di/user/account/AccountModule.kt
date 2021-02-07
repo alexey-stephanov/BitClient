@@ -1,7 +1,10 @@
 package com.example.bitclient.data.di.user.account
 
-import com.example.bitclient.data.database.UserDatabase
-import com.example.bitclient.data.database.UserAccountDao
+import android.content.Context
+import androidx.room.Room
+import com.example.bitclient.data.database.AccountDao
+import com.example.bitclient.data.database.AccountDatabase
+import com.example.bitclient.data.di.user.AccountDbQualifier
 import com.example.bitclient.data.repositories.account.AccountRepository
 import com.example.bitclient.data.repositories.account.AccountRepositoryImpl
 import dagger.Binds
@@ -19,7 +22,7 @@ abstract class AccountModule {
 
         @AccountScope
         @Provides
-        fun provideUserInfoDao(userDatabase: UserDatabase): UserAccountDao =
-            userDatabase.userAccountDao()
+        fun provideAccountDao(@AccountDbQualifier accountDatabase: AccountDatabase): AccountDao =
+            accountDatabase.accountDao()
     }
 }

@@ -8,7 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.datamodels.usermodel.UserModel
+import com.example.bitclient.data.network.datamodels.usermodel.dbmodels.AccountDbModel
+import com.example.bitclient.data.network.datamodels.usermodel.networkmodels.AccountModel
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentAccountBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
@@ -48,16 +49,16 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     }
 
     private fun getUserInfo() {
-        accountViewModel.liveUserModel.observe(viewLifecycleOwner, { userModel ->
+        accountViewModel.liveAccountModel.observe(viewLifecycleOwner, { userModel ->
             setupView(userModel)
         })
     }
 
-    private fun setupView(userModel: UserModel) {
+    private fun setupView(accountDbModel: AccountDbModel) {
         binding.progressBarAccountLoading.isGone = true
-        binding.imageViewAccountAvatar.setImageURI(userModel.links.avatar.href)
-        binding.textViewAccountDisplayName.text = userModel.displayName
-        binding.textViewAccountUsername.text = userModel.username
+        binding.imageViewAccountAvatar.setImageURI(accountDbModel.avatarLink)
+        binding.textViewAccountDisplayName.text = accountDbModel.displayName
+        binding.textViewAccountUsername.text = accountDbModel.username
     }
 
     private fun setupRefreshLayout() {

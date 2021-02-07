@@ -1,9 +1,14 @@
 package com.example.bitclient.data.di.user.repositories
 
-import com.example.bitclient.data.database.UserDatabase
-import com.example.bitclient.data.database.UserRepositoriesDao
-import com.example.bitclient.data.repositories.userrepositories.UserRepositoriesRepository
-import com.example.bitclient.data.repositories.userrepositories.UserRepositoriesRepositoryImpl
+import android.content.Context
+import androidx.room.Room
+import com.example.bitclient.data.database.BranchesDao
+import com.example.bitclient.data.database.CommitsDao
+import com.example.bitclient.data.database.RepositoriesDao
+import com.example.bitclient.data.database.RepositoriesDatabase
+import com.example.bitclient.data.di.user.RepositoriesDbQualifier
+import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepository
+import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -13,12 +18,23 @@ abstract class RepositoriesModule {
 
     @RepositoriesScope
     @Binds
-    abstract fun bindUserRepositoriesRepository(userRepositoriesRepositoryImpl: UserRepositoriesRepositoryImpl): UserRepositoriesRepository
+    abstract fun bindUserRepositoriesRepository(userRepositoriesRepositoryImpl: RepositoriesRepositoryImpl): RepositoriesRepository
 
     companion object {
+
         @RepositoriesScope
         @Provides
-        fun provideRepositoriesDao(userDatabase: UserDatabase): UserRepositoriesDao =
-            userDatabase.userRepositoriesDao()
+        fun provideRepositoriesDao(@RepositoriesDbQualifier repositoriesDatabase: RepositoriesDatabase): RepositoriesDao =
+            repositoriesDatabase.repositoriesDao()
+
+        @RepositoriesScope
+        @Provides
+        fun provideBranchesDao(@RepositoriesDbQualifier repositoriesDatabase: RepositoriesDatabase): BranchesDao =
+            repositoriesDatabase.branchesDao()
+
+        @RepositoriesScope
+        @Provides
+        fun provideCommitsDao(@RepositoriesDbQualifier repositoriesDatabase: RepositoriesDatabase): CommitsDao =
+            repositoriesDatabase.commitsDao()
     }
 }

@@ -1,8 +1,8 @@
 package com.example.bitclient.data.user
 
 import androidx.lifecycle.MutableLiveData
-import com.example.bitclient.data.network.datamodels.usermodel.UserModel
+import com.example.bitclient.data.network.datamodels.usermodel.dbmodels.AccountDbModel
 
 interface UserInfoLiveDataDelegate {
-    val liveUserModel: MutableLiveData<UserModel>
+    val liveAccountModel: MutableLiveData<AccountDbModel>
 }

@@ -2,7 +2,9 @@ package com.example.bitclient.data.di.authorization
 
 import com.example.bitclient.BuildConfig
 import com.example.bitclient.data.di.AuthorizationQualifier
-import com.example.bitclient.data.network.authorization.*
+import com.example.bitclient.data.network.authorization.AuthorizationApi
+import com.example.bitclient.data.network.authorization.AuthorizationDataRepository
+import com.example.bitclient.data.network.authorization.AuthorizationDataRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -27,7 +29,8 @@ abstract class AuthorizationRequestsModule {
 
         @AuthorizationScope
         @Provides
-        fun provideAuthorizationRetrofit(okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
+        fun provideAuthorizationRetrofit(
+            okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory
         ): Retrofit = Retrofit.Builder()
             .baseUrl(BuildConfig.AUTH_URL)
             .client(okHttpClient)

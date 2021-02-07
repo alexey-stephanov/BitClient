@@ -3,13 +3,14 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryModel
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.RepositoryModel
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentRepositoriesBinding
 import com.example.bitclient.databinding.RepositoryItemBinding
@@ -20,7 +21,7 @@ import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
 import javax.inject.Inject
 
-class RepositoriesFragment : PaginatedFragment<RepositoryModel>() {
+class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbModel>() {
 
     private val binding by viewBinding(FragmentRepositoriesBinding::bind)
 
@@ -33,21 +34,23 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel>() {
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
 
-    override val paginatedListAdapter: PaginatedListAdapter<RepositoryModel> =
-        object : PaginatedListAdapter<RepositoryModel>(OnItemClickListener { data ->
+    @ExperimentalPagingApi
+    override val paginatedListAdapter: PaginatedListAdapter<RepositoryDbModel> =
+        object : PaginatedListAdapter<RepositoryDbModel>(OnItemClickListener { data ->
             val action =
                 RepositoriesFragmentDirections.actionRepositoriesFragmentToBranchesFragment(
-                    data.workspace.workspaceId,
+                    data.workspaceId,
                     data.repositoryId
                 )
             findNavController().navigate(action)
         }, { inflater, viewGroup ->
             RepositoryItemBinding.inflate(inflater, viewGroup, false)
         }) {
-            override fun getLayoutId(position: Int, obj: RepositoryModel): Int =
+            override fun getLayoutId(position: Int, obj: RepositoryDbModel): Int =
                 R.layout.repository_item
         }
 
+    @ExperimentalPagingApi
     override val viewModel: RepositoriesViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
@@ -57,6 +60,7 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel>() {
             ?.create()?.inject(this)
     }
 
+    @ExperimentalPagingApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
