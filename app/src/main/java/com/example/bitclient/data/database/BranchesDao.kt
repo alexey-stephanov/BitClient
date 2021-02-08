@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
-import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
 
 @Dao
 abstract class BranchesDao : PagingDao<BranchDbModel> {

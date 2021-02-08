@@ -1,7 +1,6 @@
 package com.example.bitclient.ui.view.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,6 @@ import com.example.bitclient.data.pagination.LoaderStateAdapter
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.viewmodels.PaginatedViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -61,7 +59,8 @@ abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel
     private fun setupRecyclerView() {
         getRecyclerView().apply {
             setHasFixedSize(true)
-            adapter = paginatedListAdapter.withLoadStateFooter(LoaderStateAdapter { paginatedListAdapter.retry() })
+            adapter =
+                paginatedListAdapter.withLoadStateFooter(LoaderStateAdapter { paginatedListAdapter.retry() })
         }
     }
 }

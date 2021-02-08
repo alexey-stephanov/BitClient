@@ -1,14 +1,12 @@
 package com.example.bitclient.data.di.user.repositories
 
-import android.content.Context
-import androidx.room.Room
 import com.example.bitclient.data.database.BranchesDao
 import com.example.bitclient.data.database.CommitsDao
 import com.example.bitclient.data.database.RepositoriesDao
 import com.example.bitclient.data.database.RepositoriesDatabase
 import com.example.bitclient.data.di.user.RepositoriesDbQualifier
-import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepository
-import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepositoryImpl
+import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
+import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

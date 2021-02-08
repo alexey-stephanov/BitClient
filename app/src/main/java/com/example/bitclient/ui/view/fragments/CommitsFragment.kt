@@ -9,11 +9,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.database.CommitsDao
 import com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels.CommitDbModel
 import com.example.bitclient.data.network.datamodels.commitsmodel.networkmodels.CommitModel
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
-import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepository
 import com.example.bitclient.databinding.CommitItemBinding
 import com.example.bitclient.databinding.FragmentCommitsBinding
 import com.example.bitclient.ui.recyclerview.OnItemClickListener
@@ -33,23 +31,14 @@ class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {
     lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     @Inject
-    lateinit var repositoriesRepository: RepositoriesRepository
-
-    @Inject
-    lateinit var commitsDao: CommitsDao
+    lateinit var commitsViewModelFactory: CommitsViewModelFactory
 
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
 
     @ExperimentalPagingApi
-    override val viewModel: CommitsViewModel by viewModels {
-        CommitsViewModelFactory(
-            repositoriesRepository,
-            commitsDao,
-            args.workspaceId!!,
-            args.repositoryId!!,
-            args.branchName!!
-        )
+    override val viewModel: CommitsViewModel by lazy {
+        commitsViewModelFactory.create(args.workspaceId!!, args.repositoryId!!, args.branchName!!)
     }
 
     override val paginatedListAdapter: PaginatedListAdapter<CommitDbModel> =

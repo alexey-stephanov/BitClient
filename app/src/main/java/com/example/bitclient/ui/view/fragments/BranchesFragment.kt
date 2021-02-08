@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.database.BranchesDao
 import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
 import com.example.bitclient.data.network.datamodels.branchesmodel.networkmodels.BranchModel
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
-import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepository
 import com.example.bitclient.databinding.BranchItemBinding
 import com.example.bitclient.databinding.FragmentBranchesBinding
 import com.example.bitclient.ui.recyclerview.OnItemClickListener
@@ -34,17 +32,14 @@ class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
     lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     @Inject
-    lateinit var repositoriesRepository: RepositoriesRepository
-
-    @Inject
-    lateinit var branchesDao: BranchesDao
+    lateinit var brancesViewModelFactory: BranchesViewModelFactory
 
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
 
     @ExperimentalPagingApi
-    override val viewModel: BranchesViewModel by viewModels {
-        BranchesViewModelFactory(repositoriesRepository, branchesDao, args.workspaceId!!, args.repositoryId!!)
+    override val viewModel: BranchesViewModel by lazy {
+        brancesViewModelFactory.create(args.workspaceId!!, args.repositoryId!!)
     }
 
     override val paginatedListAdapter: PaginatedListAdapter<BranchDbModel> =

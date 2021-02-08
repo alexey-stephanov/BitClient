@@ -18,7 +18,7 @@ import com.example.bitclient.ui.recyclerview.OnItemClickListener
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
-import com.example.bitclient.ui.viewmodels.ViewModelFactory
+import com.example.bitclient.ui.viewmodels.RepositoriesViewModelFactory
 import javax.inject.Inject
 
 class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbModel>() {
@@ -26,13 +26,18 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
     private val binding by viewBinding(FragmentRepositoriesBinding::bind)
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-
-    @Inject
     lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
+
+    @Inject
+    lateinit var repositoriesViewModelFactory: RepositoriesViewModelFactory
+
+    @ExperimentalPagingApi
+    override val viewModel: RepositoriesViewModel by lazy {
+        repositoriesViewModelFactory.create()
+    }
 
     @ExperimentalPagingApi
     override val paginatedListAdapter: PaginatedListAdapter<RepositoryDbModel> =
@@ -49,9 +54,6 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
             override fun getLayoutId(position: Int, obj: RepositoryDbModel): Int =
                 R.layout.repository_item
         }
-
-    @ExperimentalPagingApi
-    override val viewModel: RepositoriesViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

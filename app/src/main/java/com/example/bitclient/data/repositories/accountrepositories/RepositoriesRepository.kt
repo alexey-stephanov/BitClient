@@ -1,4 +1,4 @@
-package com.example.bitclient.data.repositories.userrepositories
+package com.example.bitclient.data.repositories.accountrepositories
 
 import com.example.bitclient.data.network.datamodels.branchesmodel.networkmodels.BranchesResponse
 import com.example.bitclient.data.network.datamodels.commitsmodel.networkmodels.CommitsResponse

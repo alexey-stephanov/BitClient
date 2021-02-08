@@ -1,27 +1,16 @@
 package com.example.bitclient.ui.viewmodels
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.paging.ExperimentalPagingApi
-import com.example.bitclient.data.database.BranchesDao
-import com.example.bitclient.data.repositories.userrepositories.RepositoriesRepository
+import com.example.bitclient.data.database.RepositoriesDatabase
+import com.example.bitclient.data.di.user.RepositoriesDbQualifier
+import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
+import javax.inject.Inject
 
-class BranchesViewModelFactory(
-    private val repositoriesRepository: RepositoriesRepository,
-    private val branchesDao: BranchesDao,
-    private val workspaceId: String,
-    private val repositoryId: String
-) : ViewModelProvider.Factory {
-
+class BranchesViewModelFactory @Inject constructor(
+    private val repository: RepositoriesRepository,
+    @RepositoriesDbQualifier private val database: RepositoriesDatabase
+) {
     @ExperimentalPagingApi
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(BranchesViewModel::class.java)) {
-            return BranchesViewModel(repositoriesRepository, branchesDao, workspaceId, repositoryId) as T
-        } else {
-            throw IllegalArgumentException("Required BranchesViewModel class.")
-        }
-    }
-
-
+    fun create(workspaceId: String, repositoryId: String): BranchesViewModel =
+        BranchesViewModel(repository, database, workspaceId, repositoryId)
 }

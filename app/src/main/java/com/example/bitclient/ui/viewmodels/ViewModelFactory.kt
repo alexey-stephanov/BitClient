@@ -2,7 +2,6 @@ package com.example.bitclient.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavArgs
 import javax.inject.Inject
 import javax.inject.Provider
 
