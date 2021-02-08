@@ -1,8 +1,8 @@
 package com.example.bitclient.data.repositories.account
 
-import com.example.bitclient.data.network.datamodels.usermodel.dbmodels.AccountDbModel
+import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
 
 interface AccountRepository {
     suspend fun retrieveUserInfoFromNetwork(): AccountDbModel
-    fun retrieveUserInfoFromDatabase(): AccountDbModel
+    suspend fun retrieveUserInfoFromDatabase(): AccountDbModel
 }

@@ -2,8 +2,8 @@ package com.example.bitclient.data.repositories.account
 
 import com.example.bitclient.data.database.AccountDao
 import com.example.bitclient.data.di.RequestQualifier
-import com.example.bitclient.data.network.datamodels.usermodel.dbmodels.AccountDbModel
-import com.example.bitclient.data.network.datamodels.usermodel.networkmodels.toAccountDbModel
+import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
+import com.example.bitclient.data.network.datamodels.accountmodel.networkmodels.toAccountDbModel
 import com.example.bitclient.data.network.requests.RequestsApi
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ class AccountRepositoryImpl @Inject constructor(
         return databaseModel
     }
 
-    override fun retrieveUserInfoFromDatabase(): AccountDbModel = accountDao.getAll()[0]
+    override suspend fun retrieveUserInfoFromDatabase(): AccountDbModel = accountDao.getAll()[0]
 
     private suspend fun saveUserInfoInDatabase(accountDbModel: AccountDbModel) {
         accountDao.insert(accountDbModel)

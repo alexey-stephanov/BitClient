@@ -1,6 +1,6 @@
-package com.example.bitclient.data.network.datamodels.usermodel.networkmodels
+package com.example.bitclient.data.network.datamodels.accountmodel.networkmodels
 
-import com.example.bitclient.data.network.datamodels.usermodel.dbmodels.AccountDbModel
+import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
 import com.google.gson.annotations.SerializedName
 
 data class AccountModel(

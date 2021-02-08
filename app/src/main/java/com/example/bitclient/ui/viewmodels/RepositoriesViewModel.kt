@@ -3,7 +3,7 @@ package com.example.bitclient.ui.viewmodels
 import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
-import com.example.bitclient.data.database.RepositoriesDatabase
+import com.example.bitclient.data.database.AccountDatabase
 import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedResponse
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.RepositoryModel
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 @ExperimentalPagingApi
 class RepositoriesViewModel(
     private val repository: RepositoriesRepository,
-    database: RepositoriesDatabase
+    database: AccountDatabase
 ) : PaginatedViewModel<RepositoryModel, RepositoryDbModel>(),
     DataRetrieving<RepositoryModel> {
 

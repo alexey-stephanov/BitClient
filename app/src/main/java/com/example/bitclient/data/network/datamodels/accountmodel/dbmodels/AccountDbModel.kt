@@ -1,4 +1,4 @@
-package com.example.bitclient.data.network.datamodels.usermodel.dbmodels
+package com.example.bitclient.data.network.datamodels.accountmodel.dbmodels
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

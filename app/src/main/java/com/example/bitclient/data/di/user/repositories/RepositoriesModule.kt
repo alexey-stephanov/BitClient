@@ -1,10 +1,9 @@
 package com.example.bitclient.data.di.user.repositories
 
+import com.example.bitclient.data.database.AccountDatabase
 import com.example.bitclient.data.database.BranchesDao
 import com.example.bitclient.data.database.CommitsDao
 import com.example.bitclient.data.database.RepositoriesDao
-import com.example.bitclient.data.database.RepositoriesDatabase
-import com.example.bitclient.data.di.user.RepositoriesDbQualifier
 import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
 import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepositoryImpl
 import dagger.Binds
@@ -22,17 +21,17 @@ abstract class RepositoriesModule {
 
         @RepositoriesScope
         @Provides
-        fun provideRepositoriesDao(@RepositoriesDbQualifier repositoriesDatabase: RepositoriesDatabase): RepositoriesDao =
-            repositoriesDatabase.repositoriesDao()
+        fun provideRepositoriesDao(database: AccountDatabase): RepositoriesDao =
+            database.repositoriesDao()
 
         @RepositoriesScope
         @Provides
-        fun provideBranchesDao(@RepositoriesDbQualifier repositoriesDatabase: RepositoriesDatabase): BranchesDao =
-            repositoriesDatabase.branchesDao()
+        fun provideBranchesDao(database: AccountDatabase): BranchesDao =
+            database.branchesDao()
 
         @RepositoriesScope
         @Provides
-        fun provideCommitsDao(@RepositoriesDbQualifier repositoriesDatabase: RepositoriesDatabase): CommitsDao =
-            repositoriesDatabase.commitsDao()
+        fun provideCommitsDao(database: AccountDatabase): CommitsDao =
+            database.commitsDao()
     }
 }

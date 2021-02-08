@@ -2,7 +2,7 @@ package com.example.bitclient.ui.viewmodels
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
-import com.example.bitclient.data.database.RepositoriesDatabase
+import com.example.bitclient.data.database.AccountDatabase
 import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
 import com.example.bitclient.data.network.datamodels.branchesmodel.networkmodels.BranchModel
 import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedResponse
@@ -14,7 +14,7 @@ import com.example.bitclient.data.repositories.accountrepositories.RepositoriesR
 @ExperimentalPagingApi
 class BranchesViewModel(
     private val repository: RepositoriesRepository,
-    database: RepositoriesDatabase,
+    database: AccountDatabase,
     private val workspaceId: String,
     private val repositoryId: String
 ) : PaginatedViewModel<BranchModel, BranchDbModel>(), DataRetrieving<BranchModel> {

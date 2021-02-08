@@ -3,7 +3,7 @@ package com.example.bitclient.data.network.requests
 import com.example.bitclient.data.network.datamodels.branchesmodel.networkmodels.BranchesResponse
 import com.example.bitclient.data.network.datamodels.commitsmodel.networkmodels.CommitsResponse
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.RepositoriesResponse
-import com.example.bitclient.data.network.datamodels.usermodel.networkmodels.AccountModel
+import com.example.bitclient.data.network.datamodels.accountmodel.networkmodels.AccountModel
 import com.example.bitclient.data.network.datamodels.workspacesmodel.WorkspacesResponse
 import retrofit2.http.GET
 import retrofit2.http.Path

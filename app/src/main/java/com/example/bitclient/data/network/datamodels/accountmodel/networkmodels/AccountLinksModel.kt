@@ -1,4 +1,4 @@
-package com.example.bitclient.data.network.datamodels.usermodel.networkmodels
+package com.example.bitclient.data.network.datamodels.accountmodel.networkmodels
 
 import com.google.gson.annotations.SerializedName
 

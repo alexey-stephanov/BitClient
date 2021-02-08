@@ -8,17 +8,17 @@ import androidx.room.Query
 import com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels.CommitDbModel
 
 @Dao
-abstract class CommitsDao : PagingDao<CommitDbModel> {
+interface CommitsDao : PagingDao<CommitDbModel> {
 
     @Query("SELECT * FROM commits")
-    abstract override fun getAll(): PagingSource<Int, CommitDbModel>
+    override fun getAll(): PagingSource<Int, CommitDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract override suspend fun insertAll(vararg listOfData: CommitDbModel)
+    override suspend fun insertAll(vararg listOfData: CommitDbModel)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract override suspend fun insert(data: CommitDbModel)
+    override suspend fun insert(data: CommitDbModel)
 
     @Query("DELETE FROM commits")
-    abstract override suspend fun clearAll()
+    override suspend fun clearAll()
 }
