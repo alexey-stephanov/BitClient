@@ -12,4 +12,4 @@ data class BranchDbModel(
     var branchName: String = "",
     @ColumnInfo(name = "page")
     override var page: Int = 0
-) : PaginatedDbModel
+) : PaginatedDbModel()

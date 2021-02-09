@@ -8,17 +8,11 @@ import androidx.room.Query
 import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
 
 @Dao
-interface BranchesDao : PagingDao<BranchDbModel> {
+abstract class BranchesDao : PagingDao<BranchDbModel> {
 
     @Query("SELECT * FROM branches")
-    override fun getAll(): PagingSource<Int, BranchDbModel>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    override suspend fun insertAll(vararg listOfData: BranchDbModel)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    override suspend fun insert(data: BranchDbModel)
+    abstract override fun getAll(): PagingSource<Int, BranchDbModel>
 
     @Query("DELETE FROM branches")
-    override suspend fun clearAll()
+    abstract override suspend fun clearAll()
 }

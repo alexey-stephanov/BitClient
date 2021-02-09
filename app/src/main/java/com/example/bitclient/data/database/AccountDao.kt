@@ -10,10 +10,7 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 interface AccountDao {
 
     @Query("SELECT * FROM users")
-    fun getAll(): List<AccountDbModel>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg accounts: AccountDbModel)
+    suspend fun getAll(): List<AccountDbModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(account: AccountDbModel)

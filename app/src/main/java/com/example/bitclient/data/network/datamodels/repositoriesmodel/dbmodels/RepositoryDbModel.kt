@@ -22,4 +22,4 @@ data class RepositoryDbModel(
     var isPrivate: Boolean = false,
     @ColumnInfo(name = "page")
     override var page: Int = 0
-) : PaginatedDbModel
+) : PaginatedDbModel()

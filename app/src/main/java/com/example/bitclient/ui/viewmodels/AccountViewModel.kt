@@ -18,7 +18,9 @@ class AccountViewModel @Inject constructor(
     UserInfoLiveDataDelegate by userManager {
 
     init {
-        getUserInfo()
+        viewModelScope.launch(Dispatchers.IO) {
+            liveAccountModel.postValue(accountRepository.retrieveUserInfoFromDatabase())
+        }
     }
 
     val refreshingStatus: MutableLiveData<Boolean> = MutableLiveData()
@@ -29,17 +31,6 @@ class AccountViewModel @Inject constructor(
                 accountRepository.retrieveUserInfoFromNetwork()
             } else {
                 refreshingStatus.postValue(false)
-            }
-        }
-    }
-
-    private fun getUserInfo() {
-        viewModelScope.launch(Dispatchers.IO) {
-            var userInfo = accountRepository.retrieveUserInfoFromDatabase()
-            liveAccountModel.postValue(userInfo)
-            if(NetworkStatus.isNetworkAvailable()) {
-                userInfo = accountRepository.retrieveUserInfoFromNetwork()
-                liveAccountModel.postValue(userInfo)
             }
         }
     }

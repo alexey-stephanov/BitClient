@@ -16,4 +16,4 @@ data class CommitDbModel(
     var date: String = "",
     @ColumnInfo(name = "page")
     override var page: Int = 0
-) : PaginatedDbModel
+) : PaginatedDbModel()

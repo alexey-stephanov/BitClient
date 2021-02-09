@@ -42,11 +42,12 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
             val isEndOfList = networkModel.isEmpty()
             val dbModel = networkModel.map { dataModel ->
                 dataMapper.convert(dataModel, page)
-            }.toTypedArray()
+            }
             if (loadType == LoadType.REFRESH) {
                 dao.clearAll()
             }
-            dao.insertAll(*dbModel)
+
+            dao.insertAll(dbModel)
             MediatorResult.Success(endOfPaginationReached = isEndOfList)
         } catch (exception: IOException) {
             MediatorResult.Error(exception)
