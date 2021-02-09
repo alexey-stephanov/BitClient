@@ -2,7 +2,7 @@ package com.example.bitclient.data.network.datamodels.pagingmodels
 
 import com.google.gson.annotations.SerializedName
 
-abstract class PaginatedResponse<DataModel : Any>(
+abstract class PaginatedResponse<DataModel>(
     @SerializedName("values")
     val values: List<DataModel>,
     @SerializedName("prev")

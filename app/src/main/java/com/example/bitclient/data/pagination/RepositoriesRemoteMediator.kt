@@ -7,13 +7,13 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.RepositoryModel
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.toRepositoryDbModel
 
-@ExperimentalPagingApi
-class RepositoriesRemoteMediator(
-    dao: PagingDao<RepositoryDbModel>,
-    retrieveData: suspend (page: Int) -> PaginatedResponse<RepositoryModel>
-) : PagingRemoteMediator<RepositoryModel, RepositoryDbModel>(dao, { page -> retrieveData(page) }) {
-
-    override fun convert(dataModels: List<RepositoryModel>, page: Int): Array<RepositoryDbModel> {
-        return dataModels.map { it.toRepositoryDbModel(page) }.toTypedArray()
-    }
-}
+//@ExperimentalPagingApi
+//class RepositoriesRemoteMediator(
+//    dao: PagingDao<RepositoryDbModel>,
+//    retrieveData: suspend (page: Int) -> PaginatedResponse<RepositoryModel>
+//) : PagingRemoteMediator<RepositoryModel, RepositoryDbModel>(dao, { page -> retrieveData(page) }) {
+//
+//    override fun convert(dataModels: List<RepositoryModel>, page: Int): Array<RepositoryDbModel> {
+//        return dataModels.map { it.toRepositoryDbModel(page) }.toTypedArray()
+//    }
+//}

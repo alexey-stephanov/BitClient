@@ -5,6 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.bitclient.data.database.PagingDao
+import com.example.bitclient.data.network.datamodels.NetworkToDbDataMapper
 import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
 import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedResponse
 import com.example.bitclient.data.network.networkavailability.NetworkStatus
@@ -12,12 +13,11 @@ import retrofit2.HttpException
 import java.io.IOException
 
 @ExperimentalPagingApi
-abstract class PagingRemoteMediator<DataModel : Any, DbDataModel : PaginatedDbModel>(
+class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
     private val dao: PagingDao<DbDataModel>,
+    private val dataMapper: NetworkToDbDataMapper<DataModel, DbDataModel>,
     private val retrieveData: suspend (page: Int) -> PaginatedResponse<DataModel>
 ) : RemoteMediator<Int, DbDataModel>() {
-
-    abstract fun convert(dataModels: List<DataModel>, page: Int): Array<DbDataModel>
 
     override suspend fun load(
         loadType: LoadType, state: PagingState<Int, DbDataModel>
@@ -40,7 +40,9 @@ abstract class PagingRemoteMediator<DataModel : Any, DbDataModel : PaginatedDbMo
             }
             val networkModel = retrieveData(page).values
             val isEndOfList = networkModel.isEmpty()
-            val dbModel = convert(networkModel, page)
+            val dbModel = networkModel.map { dataModel ->
+                dataMapper.convert(dataModel, page)
+            }.toTypedArray()
             if (loadType == LoadType.REFRESH) {
                 dao.clearAll()
             }

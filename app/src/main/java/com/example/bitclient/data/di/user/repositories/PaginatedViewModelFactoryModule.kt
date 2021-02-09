@@ -1,6 +1,9 @@
 package com.example.bitclient.data.di.user.repositories
 
 import com.example.bitclient.data.database.AccountDatabase
+import com.example.bitclient.data.network.datamodels.branchesmodel.BranchDataMapper
+import com.example.bitclient.data.network.datamodels.commitsmodel.CommitDataMapper
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryDataMapper
 import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
 import com.example.bitclient.ui.viewmodels.BranchesViewModelFactory
 import com.example.bitclient.ui.viewmodels.CommitsViewModelFactory
@@ -15,20 +18,23 @@ class PaginatedViewModelFactoryModule {
     @Provides
     fun provideRepositoriesViewModelFactoryModule(
         repository: RepositoriesRepository,
-        database: AccountDatabase
-    ): RepositoriesViewModelFactory = RepositoriesViewModelFactory(repository, database)
+        database: AccountDatabase,
+        dataMapper: RepositoryDataMapper
+    ): RepositoriesViewModelFactory = RepositoriesViewModelFactory(repository, database, dataMapper)
 
     @RepositoriesScope
     @Provides
     fun provideBranchesViewModelFactoryModule(
         repository: RepositoriesRepository,
-        database: AccountDatabase
-    ): BranchesViewModelFactory = BranchesViewModelFactory(repository, database)
+        database: AccountDatabase,
+        dataMapper: BranchDataMapper
+    ): BranchesViewModelFactory = BranchesViewModelFactory(repository, database, dataMapper)
 
     @RepositoriesScope
     @Provides
     fun provideCommitsViewModelFactoryModule(
         repository: RepositoriesRepository,
-        database: AccountDatabase
-    ): CommitsViewModelFactory = CommitsViewModelFactory(repository, database)
+        database: AccountDatabase,
+        dataMapper: CommitDataMapper
+    ): CommitsViewModelFactory = CommitsViewModelFactory(repository, database, dataMapper)
 }
