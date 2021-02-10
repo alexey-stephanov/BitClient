@@ -42,7 +42,7 @@ abstract class PaginatedListAdapter<DataDbModel : PaginatedDbModel>(
 
     class PagingComparator<DataDbModel : PaginatedDbModel> : DiffUtil.ItemCallback<DataDbModel>() {
         override fun areItemsTheSame(oldItem: DataDbModel, newItem: DataDbModel): Boolean =
-            oldItem.toString() == newItem.toString()
+            oldItem.unique == newItem.unique
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(oldItem: DataDbModel, newItem: DataDbModel): Boolean =

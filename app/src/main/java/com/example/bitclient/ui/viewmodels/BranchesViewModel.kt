@@ -27,7 +27,7 @@ class BranchesViewModel(
     }
 
     override val remoteMediator: PagingRemoteMediator<BranchModel, BranchDbModel> =
-        PagingRemoteMediator(branchesDao, dataMapper) { page -> retrieveData(page) }
+        PagingRemoteMediator(branchesDao, database, dataMapper) { page -> retrieveData(page) }
 
     override fun getPagingSource(): PagingSource<Int, BranchDbModel> =
         branchesDao.getAll()

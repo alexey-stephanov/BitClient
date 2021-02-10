@@ -6,17 +6,20 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class CommitModel(
-    @SerializedName("author")
-    val authorModel: CommitAuthorModel,
+    @SerializedName("hash")
+    val commitHash: String,
     @SerializedName("message")
     val message: String,
+    @SerializedName("author")
+    val authorModel: CommitAuthorModel,
     @SerializedName("date")
     val date: Date
 )
 
 fun CommitModel.toCommitDbModel(page: Int) = CommitDbModel(
-    authorName = authorModel.author,
+    commitHash = commitHash,
     message = message,
+    authorName = authorModel.author,
     date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date),
     page = page
 )

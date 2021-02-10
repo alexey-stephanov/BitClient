@@ -52,7 +52,7 @@ class RepositoriesViewModel(
 
     @FlowPreview
     override val remoteMediator: PagingRemoteMediator<RepositoryModel, RepositoryDbModel> =
-        PagingRemoteMediator(repositoriesDao, dataMapper) { page -> retrieveData(page) }
+        PagingRemoteMediator(repositoriesDao, database, dataMapper) { page -> retrieveData(page) }
 
     override fun getPagingSource(): PagingSource<Int, RepositoryDbModel> =
         repositoriesDao.getAll()

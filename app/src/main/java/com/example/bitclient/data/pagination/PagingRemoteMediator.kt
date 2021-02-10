@@ -4,6 +4,8 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import androidx.room.withTransaction
+import com.example.bitclient.data.database.AccountDatabase
 import com.example.bitclient.data.database.PagingDao
 import com.example.bitclient.data.network.datamodels.NetworkToDbDataMapper
 import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
@@ -15,6 +17,7 @@ import java.io.IOException
 @ExperimentalPagingApi
 class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
     private val dao: PagingDao<DbDataModel>,
+    private val database: AccountDatabase,
     private val dataMapper: NetworkToDbDataMapper<DataModel, DbDataModel>,
     private val retrieveData: suspend (page: Int) -> PaginatedResponse<DataModel>
 ) : RemoteMediator<Int, DbDataModel>() {
@@ -40,14 +43,15 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
             }
             val networkModel = retrieveData(page).values
             val isEndOfList = networkModel.isEmpty()
-            val dbModel = networkModel.map { dataModel ->
-                dataMapper.convert(dataModel, page)
+            database.withTransaction {
+                if (loadType == LoadType.REFRESH) {
+                    dao.clearAll()
+                }
+                val dbModel = networkModel.map { dataModel ->
+                    dataMapper.convert(dataModel, page)
+                }
+                dao.insertAll(dbModel)
             }
-            if (loadType == LoadType.REFRESH) {
-                dao.clearAll()
-            }
-
-            dao.insertAll(dbModel)
             MediatorResult.Success(endOfPaginationReached = isEndOfList)
         } catch (exception: IOException) {
             MediatorResult.Error(exception)

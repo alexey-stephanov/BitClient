@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey
 data class AccountDbModel(
     @PrimaryKey
     @ColumnInfo(name = "account_id")
-    var accountId: String = "",
+    val accountId: String,
     @ColumnInfo(name = "display_name")
-    var displayName: String = "",
+    val displayName: String,
     @ColumnInfo(name = "username")
-    var username: String = "",
+    val username: String,
     @ColumnInfo(name = "avatar_link")
-    var avatarLink: String = "",
+    val avatarLink: String,
     @ColumnInfo(name = "workspace_id")
-    var workspaceId: String = ""
+    val workspaceId: String
 )

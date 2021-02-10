@@ -2,6 +2,7 @@ package com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
 
@@ -9,17 +10,20 @@ import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbMod
 data class RepositoryDbModel(
     @PrimaryKey
     @ColumnInfo(name = "repository_id")
-    var repositoryId: String = "",
+    val repositoryId: String,
     @ColumnInfo(name = "name")
-    var name: String = "",
+    val name: String,
     @ColumnInfo(name = "full_name")
-    var fullName: String = "",
+    val fullName: String,
     @ColumnInfo(name = "avatar_link")
-    var avatarLink: String = "",
+    val avatarLink: String,
     @ColumnInfo(name = "workspace_id")
-    var workspaceId: String = "",
+    val workspaceId: String,
     @ColumnInfo(name = "is_private")
-    var isPrivate: Boolean = false,
+    val isPrivate: Boolean,
     @ColumnInfo(name = "page")
-    override var page: Int = 0
-) : PaginatedDbModel()
+    override val page: Int
+) : PaginatedDbModel {
+    override val unique: String
+        get() = repositoryId
+}

@@ -7,13 +7,18 @@ import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbMod
 
 @Entity(tableName = "commits")
 data class CommitDbModel(
-    @ColumnInfo(name = "author_name")
-    var authorName: String = "",
     @PrimaryKey
+    @ColumnInfo(name = "hash")
+    val commitHash: String,
+    @ColumnInfo(name = "author_name")
+    val authorName: String,
     @ColumnInfo(name = "message")
-    var message: String = "",
+    val message: String,
     @ColumnInfo(name = "date")
-    var date: String = "",
+    val date: String,
     @ColumnInfo(name = "page")
-    override var page: Int = 0
-) : PaginatedDbModel()
+    override val page: Int
+) : PaginatedDbModel {
+    override val unique: String
+        get() = commitHash
+}
