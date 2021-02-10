@@ -4,6 +4,7 @@ import com.example.bitclient.data.database.AccountDatabase
 import com.example.bitclient.data.network.datamodels.branchesmodel.BranchDataMapper
 import com.example.bitclient.data.network.datamodels.commitsmodel.CommitDataMapper
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryDataMapper
+import com.example.bitclient.data.repositories.account.AccountRepository
 import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
 import com.example.bitclient.ui.viewmodels.BranchesViewModelFactory
 import com.example.bitclient.ui.viewmodels.CommitsViewModelFactory
@@ -17,10 +18,11 @@ class PaginatedViewModelFactoryModule {
     @RepositoriesScope
     @Provides
     fun provideRepositoriesViewModelFactoryModule(
-        repository: RepositoriesRepository,
+        repositoriesRepository: RepositoriesRepository,
+        accountRepository: AccountRepository,
         database: AccountDatabase,
         dataMapper: RepositoryDataMapper
-    ): RepositoriesViewModelFactory = RepositoriesViewModelFactory(repository, database, dataMapper)
+    ): RepositoriesViewModelFactory = RepositoriesViewModelFactory(repositoriesRepository, accountRepository, database, dataMapper)
 
     @RepositoriesScope
     @Provides

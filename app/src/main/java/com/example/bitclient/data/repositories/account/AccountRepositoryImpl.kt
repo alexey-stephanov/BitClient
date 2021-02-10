@@ -21,7 +21,7 @@ class AccountRepositoryImpl @Inject constructor(
 
     override suspend fun retrieveUserInfoFromDatabase(): AccountDbModel = accountDao.getAll()[0]
 
-    private suspend fun saveUserInfoInDatabase(accountDbModel: AccountDbModel) {
+    override suspend fun saveUserInfoInDatabase(accountDbModel: AccountDbModel) {
         accountDao.insert(accountDbModel)
     }
 }

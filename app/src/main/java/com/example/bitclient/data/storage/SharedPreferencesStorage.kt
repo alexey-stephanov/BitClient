@@ -8,7 +8,7 @@ import javax.inject.Singleton
 private const val STORAGE_FILE_NAME = "tokens"
 private const val ACCESS_TOKEN_KEY = "access_token"
 private const val REFRESH_TOKEN_KEY = "refresh_token"
-private const val DEFAULT_VALUE = "default"
+private const val DEFAULT_VALUE = ""
 
 @Singleton
 class SharedPreferencesStorage @Inject constructor(context: Context) : Storage {

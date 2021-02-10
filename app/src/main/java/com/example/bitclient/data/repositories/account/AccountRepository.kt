@@ -5,4 +5,5 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 interface AccountRepository {
     suspend fun retrieveUserInfoFromNetwork(): AccountDbModel
     suspend fun retrieveUserInfoFromDatabase(): AccountDbModel
+    suspend fun saveUserInfoInDatabase(accountDbModel: AccountDbModel)
 }
