@@ -20,10 +20,10 @@ data class RepositoryModel(
 
 fun RepositoryModel.toRepositoryDbModel(page: Int) = RepositoryDbModel(
     repositoryId = repositoryId,
+    repositoryOwnerId = workspace.workspaceId,
     name = name,
     fullName = fullName,
     avatarLink = links.avatar.href,
-    workspaceId = workspace.workspaceId,
     isPrivate = isPrivate,
     page = page
 )

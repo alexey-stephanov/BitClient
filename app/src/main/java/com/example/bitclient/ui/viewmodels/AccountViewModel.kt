@@ -17,20 +17,26 @@ class AccountViewModel @Inject constructor(
 ) : ViewModel(),
     UserInfoLiveDataDelegate by userManager {
 
+    val networkStatus: MutableLiveData<Boolean> = MutableLiveData()
+
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            liveAccountModel.postValue(accountRepository.retrieveUserInfoFromDatabase())
+        try {
+            viewModelScope.launch(Dispatchers.IO) {
+                val userInfo = accountRepository.retrieveUserInfoFromDatabase()
+                liveAccountModel.postValue(userInfo)
+            }
+        } catch (e: NoSuchElementException) {
+            loadData()
         }
     }
 
-    val refreshingStatus: MutableLiveData<Boolean> = MutableLiveData()
-
-    fun refreshData() {
+    fun loadData() {
         viewModelScope.launch(Dispatchers.IO) {
             if (NetworkStatus.isNetworkAvailable()) {
-                accountRepository.retrieveUserInfoFromNetwork()
+                val userInfo = accountRepository.retrieveUserInfoFromNetwork()
+                accountRepository.saveUserInfoInDatabase(userInfo)
             } else {
-                refreshingStatus.postValue(false)
+                networkStatus.postValue(false)
             }
         }
     }

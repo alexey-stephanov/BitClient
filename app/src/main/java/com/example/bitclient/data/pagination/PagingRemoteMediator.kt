@@ -1,5 +1,6 @@
 package com.example.bitclient.data.pagination
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -41,16 +42,19 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
             if (!NetworkStatus.isNetworkAvailable()) {
                 dao.getAll()
             }
-            val networkModel = retrieveData(page).values
-            val isEndOfList = networkModel.isEmpty()
-            database.withTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    dao.clearAll()
+            val data = retrieveData(page).values
+            val isEndOfList = data.isEmpty()
+            if(!isEndOfList) {
+                database.withTransaction {
+                    if (loadType == LoadType.REFRESH) {
+                        dao.clearAll()
+                    }
+                    val dbModel = data.map { data ->
+                        dataMapper.convert(data, page)
+                    }
+                    Log.e("qqq", dbModel.toString())
+                    dao.insertAll(dbModel)
                 }
-                val dbModel = networkModel.map { dataModel ->
-                    dataMapper.convert(dataModel, page)
-                }
-                dao.insertAll(dbModel)
             }
             MediatorResult.Success(endOfPaginationReached = isEndOfList)
         } catch (exception: IOException) {

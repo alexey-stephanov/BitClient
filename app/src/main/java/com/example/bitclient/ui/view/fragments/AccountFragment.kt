@@ -30,7 +30,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.accountComponent()
+        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.accountSubcomponent()
             ?.create()?.inject(this)
     }
 
@@ -44,7 +44,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         )
         getUserInfo()
         setupRefreshLayout()
-        startRefreshingErrorChecking()
+        startNetworkChecking()
     }
 
     private fun getUserInfo() {
@@ -62,13 +62,13 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
 
     private fun setupRefreshLayout() {
         binding.swipeLayoutAccountRefresh.setOnRefreshListener {
-            accountViewModel.refreshData()
+            accountViewModel.loadData()
             binding.swipeLayoutAccountRefresh.isRefreshing = false
         }
     }
 
-    private fun startRefreshingErrorChecking() {
-        accountViewModel.refreshingStatus.observe(viewLifecycleOwner, {
+    private fun startNetworkChecking() {
+        accountViewModel.networkStatus.observe(viewLifecycleOwner, {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.load_error_message),

@@ -14,7 +14,7 @@ interface UserSubcomponent {
         fun create(): UserSubcomponent
     }
 
-    fun accountComponent(): AccountSubcomponent.Factory
-    fun repositoriesComponent(): RepositoriesSubcomponent.Factory
-    fun settingsComponent(): SettingsSubcomponent.Factory
+    fun accountSubcomponent(): AccountSubcomponent.Factory
+    fun repositoriesSubcomponentManager(): RepositoriesSubcomponentManager
+    fun settingsSubcomponent(): SettingsSubcomponent.Factory
 }

@@ -1,5 +1,6 @@
-package com.example.bitclient.data.di.user
+package com.example.bitclient.data.di
 
+import com.example.bitclient.data.di.user.UserSubcomponent
 import javax.inject.Inject
 import javax.inject.Singleton
 

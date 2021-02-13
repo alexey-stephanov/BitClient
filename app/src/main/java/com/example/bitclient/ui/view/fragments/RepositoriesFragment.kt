@@ -2,7 +2,6 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -44,7 +43,7 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
         object : PaginatedListAdapter<RepositoryDbModel>(OnItemClickListener { data ->
             val action =
                 RepositoriesFragmentDirections.actionRepositoriesFragmentToBranchesFragment(
-                    data.workspaceId,
+                    data.repositoryOwnerId,
                     data.repositoryId
                 )
             findNavController().navigate(action)
@@ -58,8 +57,8 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.repositoriesComponent()
-            ?.create()?.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.repositoriesSubcomponentManager()?.repositoriesSubcomponent
+            ?.inject(this)
     }
 
     @ExperimentalPagingApi

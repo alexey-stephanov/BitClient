@@ -1,12 +1,10 @@
 package com.example.bitclient.data.di.user.repositories
 
-import com.example.bitclient.ui.view.fragments.BranchesFragment
-import com.example.bitclient.ui.view.fragments.CommitsFragment
 import com.example.bitclient.ui.view.fragments.RepositoriesFragment
 import dagger.Subcomponent
 
 @RepositoriesScope
-@Subcomponent(modules = [RepositoriesModule::class, PaginatedViewModelFactoryModule::class, RecyclerViewModule::class])
+@Subcomponent(modules = [RepositoriesModule::class, RecyclerViewModule::class, RepositoriesSubcomponents::class])
 interface RepositoriesSubcomponent {
 
     @Subcomponent.Factory
@@ -15,6 +13,6 @@ interface RepositoriesSubcomponent {
     }
 
     fun inject(repositoriesFragment: RepositoriesFragment)
-    fun inject(branchesFragment: BranchesFragment)
-    fun inject(commitsFragment: CommitsFragment)
+
+    fun branchesSubcomponentManager(): BranchesSubcomponentManager
 }

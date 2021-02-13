@@ -9,11 +9,12 @@ import com.example.bitclient.data.network.datamodels.branchesmodel.networkmodels
 import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedResponse
 import com.example.bitclient.data.pagination.DataRetrieving
 import com.example.bitclient.data.pagination.PagingRemoteMediator
-import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
+import com.example.bitclient.data.repositories.branches.BranchesRepository
+import com.example.bitclient.data.repositories.repositories.RepositoriesRepository
 
 @ExperimentalPagingApi
 class BranchesViewModel(
-    private val repository: RepositoriesRepository,
+    private val branchesRepository: BranchesRepository,
     database: AccountDatabase,
     dataMapper: BranchDataMapper,
     private val workspaceId: String,
@@ -23,7 +24,7 @@ class BranchesViewModel(
     private val branchesDao = database.branchesDao()
 
     override suspend fun retrieveData(page: Int): PaginatedResponse<BranchModel> {
-        return repository.retrieveRepositoryBranches(workspaceId, repositoryId, page)
+        return branchesRepository.retrieveBranches(workspaceId, repositoryId, page)
     }
 
     override val remoteMediator: PagingRemoteMediator<BranchModel, BranchDbModel> =

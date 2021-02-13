@@ -1,4 +1,4 @@
-package com.example.bitclient.ui.view.activities
+package com.example.bitclient.ui.view
 
 import android.content.Intent
 import android.os.Bundle

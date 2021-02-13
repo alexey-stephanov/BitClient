@@ -2,7 +2,6 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -55,8 +54,8 @@ class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.repositoriesComponent()
-            ?.create()?.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.repositoriesSubcomponentManager()
+            ?.repositoriesSubcomponent?.branchesSubcomponentManager()?.branchesSubcomponent?.commitsSubcomponent()?.create()?.inject(this)
     }
 
     @ExperimentalPagingApi

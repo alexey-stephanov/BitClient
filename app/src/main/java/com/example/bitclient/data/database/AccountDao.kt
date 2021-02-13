@@ -9,12 +9,15 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 @Dao
 interface AccountDao {
 
-    @Query("SELECT * FROM users")
+    @Query("SELECT * FROM accounts")
     suspend fun getAll(): List<AccountDbModel>
+
+    @Query("SELECT * FROM accounts WHERE account_id = :accountId")
+    suspend fun getUserById(accountId: String): AccountDbModel
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(account: AccountDbModel)
 
-    @Query("DELETE FROM users")
+    @Query("DELETE FROM accounts")
     suspend fun clearAll()
 }

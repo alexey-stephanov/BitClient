@@ -12,7 +12,7 @@ import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.data.pagination.DataRetrieving
 import com.example.bitclient.data.pagination.PagingRemoteMediator
 import com.example.bitclient.data.repositories.account.AccountRepository
-import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
+import com.example.bitclient.data.repositories.repositories.RepositoriesRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filter
@@ -31,6 +31,12 @@ class RepositoriesViewModel(
 
     private val repositoriesDao = database.repositoriesDao()
 
+    private val workspaceIdState = MutableStateFlow<String?>(null)
+
+    @FlowPreview
+    override val remoteMediator: PagingRemoteMediator<RepositoryModel, RepositoryDbModel> =
+        PagingRemoteMediator(repositoriesDao, database, dataMapper) { page -> retrieveData(page) }
+
     init {
         if (NetworkStatus.isNetworkAvailable()) {
             viewModelScope.launch {
@@ -41,18 +47,12 @@ class RepositoriesViewModel(
         }
     }
 
-    private val workspaceIdState = MutableStateFlow<String?>(null)
-
     @FlowPreview
     override suspend fun retrieveData(page: Int): PaginatedResponse<RepositoryModel> {
         return workspaceIdState.filter { it != null }.map { workspaceId ->
             repositoriesRepository.retrieveUserRepositories(workspaceId!!, page)
         }.first()
     }
-
-    @FlowPreview
-    override val remoteMediator: PagingRemoteMediator<RepositoryModel, RepositoryDbModel> =
-        PagingRemoteMediator(repositoriesDao, database, dataMapper) { page -> retrieveData(page) }
 
     override fun getPagingSource(): PagingSource<Int, RepositoryDbModel> =
         repositoriesDao.getAll()

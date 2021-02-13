@@ -3,18 +3,18 @@ package com.example.bitclient.ui.viewmodels
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
 import com.example.bitclient.data.database.AccountDatabase
-import com.example.bitclient.data.network.datamodels.NetworkToDbDataMapper
 import com.example.bitclient.data.network.datamodels.commitsmodel.CommitDataMapper
 import com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels.CommitDbModel
 import com.example.bitclient.data.network.datamodels.commitsmodel.networkmodels.CommitModel
 import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedResponse
 import com.example.bitclient.data.pagination.DataRetrieving
 import com.example.bitclient.data.pagination.PagingRemoteMediator
-import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
+import com.example.bitclient.data.repositories.commits.CommitsRepository
+import com.example.bitclient.data.repositories.repositories.RepositoriesRepository
 
 @ExperimentalPagingApi
 class CommitsViewModel(
-    private val repository: RepositoriesRepository,
+    private val commitsRepository: CommitsRepository,
     database: AccountDatabase,
     dataMapper: CommitDataMapper,
     private val workspaceId: String,
@@ -25,7 +25,7 @@ class CommitsViewModel(
     private val commitsDao = database.commitsDao()
 
     override suspend fun retrieveData(page: Int): PaginatedResponse<CommitModel> {
-        return repository.retrieveBranchCommits(
+        return commitsRepository.retrieveCommits(
             workspaceId,
             repositoryId,
             branchName,

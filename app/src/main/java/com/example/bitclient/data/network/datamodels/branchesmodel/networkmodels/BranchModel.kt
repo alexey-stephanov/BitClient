@@ -11,7 +11,8 @@ data class BranchModel(
 )
 
 fun BranchModel.toBranchDbModel(page: Int) = BranchDbModel(
-    branchHash = target.branchHash,
+    branchId = branchName + target.branchOwner.branchOwnerId,
+    branchOwnerId = target.branchOwner.branchOwnerId,
     branchName = branchName,
     page = page
 )

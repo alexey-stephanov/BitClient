@@ -18,6 +18,7 @@ data class CommitModel(
 
 fun CommitModel.toCommitDbModel(page: Int) = CommitDbModel(
     commitHash = commitHash,
+    commitOwnerId = "master{c2f4ff5f-01f4-478c-bcd5-25050ace3ce2}",
     message = message,
     authorName = authorModel.author,
     date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date),

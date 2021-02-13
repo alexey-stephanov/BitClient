@@ -2,8 +2,7 @@ package com.example.bitclient.data.di
 
 import android.content.Context
 import com.example.bitclient.data.di.authorization.AuthorizationSubcomponent
-import com.example.bitclient.data.di.user.UserSubcomponentManager
-import com.example.bitclient.ui.view.activities.MainActivity
+import com.example.bitclient.ui.view.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

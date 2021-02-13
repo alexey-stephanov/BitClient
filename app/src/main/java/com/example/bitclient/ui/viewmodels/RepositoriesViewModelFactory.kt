@@ -4,7 +4,7 @@ import androidx.paging.ExperimentalPagingApi
 import com.example.bitclient.data.database.AccountDatabase
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryDataMapper
 import com.example.bitclient.data.repositories.account.AccountRepository
-import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
+import com.example.bitclient.data.repositories.repositories.RepositoriesRepository
 import javax.inject.Inject
 
 class RepositoriesViewModelFactory @Inject constructor(

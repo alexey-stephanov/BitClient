@@ -3,6 +3,6 @@ package com.example.bitclient.data.network.datamodels.repositoriesmodel.networkm
 import com.google.gson.annotations.SerializedName
 
 data class RepositoryWorkspaceModel(
-    @SerializedName("slug")
+    @SerializedName("uuid")
     val workspaceId: String
 )

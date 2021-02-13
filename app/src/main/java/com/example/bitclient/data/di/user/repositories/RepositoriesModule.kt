@@ -1,11 +1,12 @@
 package com.example.bitclient.data.di.user.repositories
 
 import com.example.bitclient.data.database.AccountDatabase
-import com.example.bitclient.data.database.BranchesDao
-import com.example.bitclient.data.database.CommitsDao
 import com.example.bitclient.data.database.RepositoriesDao
-import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepository
-import com.example.bitclient.data.repositories.accountrepositories.RepositoriesRepositoryImpl
+import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryDataMapper
+import com.example.bitclient.data.repositories.account.AccountRepository
+import com.example.bitclient.data.repositories.repositories.RepositoriesRepository
+import com.example.bitclient.data.repositories.repositories.RepositoriesRepositoryImpl
+import com.example.bitclient.ui.viewmodels.RepositoriesViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -15,7 +16,7 @@ abstract class RepositoriesModule {
 
     @RepositoriesScope
     @Binds
-    abstract fun bindUserRepositoriesRepository(userRepositoriesRepositoryImpl: RepositoriesRepositoryImpl): RepositoriesRepository
+    abstract fun bindRepositoriesRepository(repositoriesRepositoryImpl: RepositoriesRepositoryImpl): RepositoriesRepository
 
     companion object {
 
@@ -26,12 +27,16 @@ abstract class RepositoriesModule {
 
         @RepositoriesScope
         @Provides
-        fun provideBranchesDao(database: AccountDatabase): BranchesDao =
-            database.branchesDao()
+        fun provideRepositoryDataMapper(): RepositoryDataMapper =
+            RepositoryDataMapper()
 
         @RepositoriesScope
         @Provides
-        fun provideCommitsDao(database: AccountDatabase): CommitsDao =
-            database.commitsDao()
+        fun provideRepositoriesViewModelFactoryModule(
+            repositoriesRepository: RepositoriesRepository,
+            accountRepository: AccountRepository,
+            database: AccountDatabase,
+            dataMapper: RepositoryDataMapper
+        ): RepositoriesViewModelFactory = RepositoriesViewModelFactory(repositoriesRepository, accountRepository, database, dataMapper)
     }
 }

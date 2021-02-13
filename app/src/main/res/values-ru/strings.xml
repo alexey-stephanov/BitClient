@@ -5,6 +5,8 @@
     <string name="authorization_enter">Войдите в свой аккаунт</string>
     <string name="no_internet_connection">Нет подключения к интернету</string>
     <string name="settings_title">Настройки</string>
+    <string name="workspaces_title">Рабочее пространство</string>
+    <string name="change_workspace_label">Изменить рабочее пространство</string>
     <string name="repositories_title">Репозитории</string>
     <string name="account_title">Аккаунт</string>
     <string name="branches_title">Ветки</string>

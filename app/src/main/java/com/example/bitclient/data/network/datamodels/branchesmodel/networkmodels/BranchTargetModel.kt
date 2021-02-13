@@ -3,6 +3,6 @@ package com.example.bitclient.data.network.datamodels.branchesmodel.networkmodel
 import com.google.gson.annotations.SerializedName
 
 data class BranchTargetModel(
-    @SerializedName("hash")
-    val branchHash: String
+    @SerializedName("repository")
+    val branchOwner: BranchOwnerModel
 )

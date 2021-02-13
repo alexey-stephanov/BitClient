@@ -49,6 +49,7 @@ object NetworkStatus : LiveData<Boolean>() {
             })
     }
 
+    @Suppress("DEPRECATION")
     fun isNetworkAvailable(): Boolean {
         val connectivityManager =
             application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
