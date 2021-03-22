@@ -10,8 +10,8 @@ import com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels.Commi
 @Dao
 abstract class CommitsDao : PagingDao<CommitDbModel> {
 
-    @Query("SELECT * FROM commits")
-    abstract override fun getAll(): PagingSource<Int, CommitDbModel>
+    @Query("SELECT * FROM commits WHERE commit_owner_id = :ownerId")
+    abstract override fun getAll(ownerId: String): PagingSource<Int, CommitDbModel>
 
     @Query("DELETE FROM commits")
     abstract override suspend fun clearAll()

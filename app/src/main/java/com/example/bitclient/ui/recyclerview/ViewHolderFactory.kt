@@ -1,5 +1,6 @@
 package com.example.bitclient.ui.recyclerview
 
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -55,7 +56,7 @@ object ViewHolderFactory {
             val str = data.message.split("\n").filter { s -> s.isNotEmpty() }
             with(binding) {
                 textViewCommitItemCommitName.text = str[0]
-                if (str.size == 2) textViewCommitItemCommitMessage.text = str[1]
+                if (str.size == 2) textViewCommitItemCommitMessage.text = str[1] else textViewCommitItemCommitMessage.visibility = View.GONE
                 textViewCommitItemCommitDate.text = data.date
                 textViewCommitItemCommitAuthor.text = data.authorName
             }

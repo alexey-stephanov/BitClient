@@ -5,6 +5,8 @@ import com.example.bitclient.data.di.RequestQualifier
 import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
 import com.example.bitclient.data.network.datamodels.accountmodel.networkmodels.toAccountDbModel
 import com.example.bitclient.data.network.requests.RequestsApi
+import kotlinx.coroutines.flow.flow
+import java.util.concurrent.Flow
 import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(
@@ -12,16 +14,15 @@ class AccountRepositoryImpl @Inject constructor(
     private val accountDao: AccountDao
 ) : AccountRepository {
 
-    override suspend fun retrieveUserInfoFromNetwork(): AccountDbModel {
-        val networkModel = service.getUserInfo()
-        val databaseModel = networkModel.toAccountDbModel()
-        saveUserInfoInDatabase(databaseModel)
-        return databaseModel
+    override suspend fun retrieveAccountInfo() = flow {
+        try {
+            emit(accountDao.getActiveUser(true))
+        } catch (e: NoSuchElementException) {
+            emit(service.getUserInfo().toAccountDbModel())
+        }
     }
 
-    override suspend fun retrieveUserInfoFromDatabase(): AccountDbModel = accountDao.getAll()[0]
-
-    override suspend fun saveUserInfoInDatabase(accountDbModel: AccountDbModel) {
+    private suspend fun saveUserInfoIntoDatabase(accountDbModel: AccountDbModel) {
         accountDao.insert(accountDbModel)
     }
 }

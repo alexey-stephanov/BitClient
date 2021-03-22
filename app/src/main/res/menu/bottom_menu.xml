@@ -6,9 +6,9 @@
         android:icon="@drawable/ic_settings"/>
 
     <item
-        android:id="@+id/repositoriesFragment"
-        android:title="@string/repositories_title"
-        android:icon="@drawable/ic_repositories"/>
+        android:id="@+id/homeFragment"
+        android:title="@string/home_title"
+        android:icon="@drawable/ic_home"/>
 
     <item
         android:id="@+id/accountFragment"

@@ -11,9 +11,7 @@ data class AccountModel(
     @SerializedName("username")
     val username: String,
     @SerializedName("links")
-    val links: AccountLinksModel,
-    @SerializedName("uuid")
-    val workspaceId: String
+    val links: AccountLinksModel
 )
 
 fun AccountModel.toAccountDbModel() = AccountDbModel(
@@ -21,5 +19,5 @@ fun AccountModel.toAccountDbModel() = AccountDbModel(
     displayName = displayName,
     username = username,
     avatarLink = links.avatar.href,
-    workspaceId = workspaceId
+    isActive = true
 )

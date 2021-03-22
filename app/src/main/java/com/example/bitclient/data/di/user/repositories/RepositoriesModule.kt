@@ -34,9 +34,8 @@ abstract class RepositoriesModule {
         @Provides
         fun provideRepositoriesViewModelFactoryModule(
             repositoriesRepository: RepositoriesRepository,
-            accountRepository: AccountRepository,
             database: AccountDatabase,
             dataMapper: RepositoryDataMapper
-        ): RepositoriesViewModelFactory = RepositoriesViewModelFactory(repositoriesRepository, accountRepository, database, dataMapper)
+        ): RepositoriesViewModelFactory = RepositoriesViewModelFactory(repositoriesRepository, database, dataMapper)
     }
 }

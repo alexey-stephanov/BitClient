@@ -9,10 +9,9 @@ import javax.inject.Inject
 
 class RepositoriesViewModelFactory @Inject constructor(
     private val repositoriesRepository: RepositoriesRepository,
-    private val accountRepository: AccountRepository,
     private val database: AccountDatabase,
     private val dataMapper: RepositoryDataMapper
 ) {
     @ExperimentalPagingApi
-    fun create(): RepositoriesViewModel = RepositoriesViewModel(repositoriesRepository, accountRepository, database, dataMapper)
+    fun create(): RepositoriesViewModel = RepositoriesViewModel(repositoriesRepository, database, dataMapper)
 }

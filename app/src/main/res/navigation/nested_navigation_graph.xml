@@ -3,8 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nested_navigation_graph"
-    app:startDestination="@id/repositoriesFragment">
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.bitclient.ui.view.fragments.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_repositoriesFragment"
+            app:destination="@id/repositoriesFragment"
+            app:popUpTo="@id/homeFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/repositoriesFragment"
         android:name="com.example.bitclient.ui.view.fragments.RepositoriesFragment"
@@ -14,12 +30,6 @@
             android:id="@+id/action_repositoriesFragment_to_branchesFragment"
             app:destination="@id/branchesFragment"
             app:popUpTo="@id/repositoriesFragment" />
-        <action
-            android:id="@+id/action_repositoriesFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_repositoriesFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
     </fragment>
     <fragment
         android:id="@+id/branchesFragment"
@@ -37,7 +47,7 @@
         <action
             android:id="@+id/action_branchesFragment_to_commitsFragment"
             app:destination="@id/commitsFragment"
-            app:popUpTo="@id/commitsFragment"/>
+            app:popUpTo="@id/branchesFragment"/>
     </fragment>
     <fragment
         android:id="@+id/commitsFragment"

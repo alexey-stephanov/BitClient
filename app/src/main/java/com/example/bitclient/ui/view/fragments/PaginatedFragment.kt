@@ -32,10 +32,9 @@ abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(getLayoutResId(), container, false)
 
-
     @ExperimentalPagingApi
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
         subscribeOnPaginatedData()
@@ -59,8 +58,7 @@ abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel
     private fun setupRecyclerView() {
         getRecyclerView().apply {
             setHasFixedSize(true)
-            adapter =
-                paginatedListAdapter.withLoadStateFooter(LoaderStateAdapter { paginatedListAdapter.retry() })
+            adapter = paginatedListAdapter.withLoadStateFooter(LoaderStateAdapter { paginatedListAdapter.retry() })
         }
     }
 }

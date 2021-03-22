@@ -13,7 +13,6 @@ import com.example.bitclient.BitClientApp
 import com.example.bitclient.BuildConfig
 import com.example.bitclient.R
 import com.example.bitclient.data.network.ResponseStatus
-import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentAuthorizationBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.ui.viewmodels.AuthorizationViewModel
@@ -28,9 +27,6 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     lateinit var viewModelFactory: ViewModelFactory
     private val authorizationViewModel: AuthorizationViewModel by viewModels { viewModelFactory }
 
-    @Inject
-    lateinit var networkConnectivityManager: NetworkConnectivityManager
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -41,11 +37,6 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        networkConnectivityManager.startConnectionChecking(
-            viewLifecycleOwner,
-            binding.root,
-            binding.textViewAuthorizationNoInternet
-        )
         observeResponseStatus(view)
 
         binding.buttonAuthorizationEnter.setOnClickListener {

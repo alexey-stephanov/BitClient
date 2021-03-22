@@ -2,6 +2,7 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -59,8 +60,8 @@ class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {
     }
 
     @ExperimentalPagingApi
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(binding.toolbarCommitsActionbar) {
             title = args.branchName

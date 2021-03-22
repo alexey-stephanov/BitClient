@@ -39,9 +39,6 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
         }
 
         return try {
-            if (!NetworkStatus.isNetworkAvailable()) {
-                dao.getAll()
-            }
             val data = retrieveData(page).values
             val isEndOfList = data.isEmpty()
             if(!isEndOfList) {

@@ -10,8 +10,8 @@ import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.Bran
 @Dao
 abstract class BranchesDao : PagingDao<BranchDbModel> {
 
-    @Query("SELECT * FROM branches")
-    abstract override fun getAll(): PagingSource<Int, BranchDbModel>
+    @Query("SELECT * FROM branches WHERE branch_owner_id = :ownerId")
+    abstract override fun getAll(ownerId: String): PagingSource<Int, BranchDbModel>
 
     @Query("DELETE FROM branches")
     abstract override suspend fun clearAll()

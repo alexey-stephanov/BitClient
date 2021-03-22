@@ -10,45 +10,38 @@
         android:id="@+id/image_view_repository_item_icon"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_margin="@dimen/spacing_16"
+        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/barrier_repository"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:placeholderImage="@drawable/logo_light" />
+        app:placeholderImage="@drawable/ic_app_logo"
+        app:placeholderImageScaleType="fitCenter" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier_repository"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="end"
-        app:constraint_referenced_ids="image_view_repository_item_icon" />
-
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_view_repository_item_repo_name"
-        style="@style/TextAppearance.MaterialComponents.Body1.RepositoryName"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_8"
-        android:layout_marginTop="@dimen/spacing_8"
-        android:layout_marginEnd="@dimen/spacing_8"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toTopOf="@id/text_view_repository_item_full_name"
         app:layout_constraintEnd_toStartOf="@+id/image_view_repository_item_lock_image"
-        app:layout_constraintStart_toEndOf="@id/barrier_repository"
+        app:layout_constraintStart_toEndOf="@+id/image_view_repository_item_icon"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Repository name" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_view_repository_item_full_name"
-        style="@style/TextAppearance.MaterialComponents.Body2.RepositoryFullName"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_8"
-        android:layout_marginBottom="@dimen/spacing_8"
-        android:layout_marginEnd="@dimen/spacing_8"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/image_view_repository_item_lock_image"
-        app:layout_constraintStart_toEndOf="@id/barrier_repository"
+        app:layout_constraintStart_toEndOf="@+id/image_view_repository_item_icon"
         app:layout_constraintTop_toBottomOf="@id/text_view_repository_item_repo_name"
         tools:text="Repository full name" />
 
@@ -56,12 +49,12 @@
         android:id="@+id/image_view_repository_item_lock_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:contentDescription="@string/repository_icon_private_repo_content_description"
-        android:layout_margin="@dimen/spacing_4"
         android:src="@drawable/ic_lock"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,8 +7,8 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.
 @Dao
 abstract class RepositoriesDao : PagingDao<RepositoryDbModel> {
 
-    @Query("SELECT * FROM repositories")
-    abstract override fun getAll(): PagingSource<Int, RepositoryDbModel>
+    @Query("SELECT * FROM repositories WHERE repository_owner_id = :ownerId")
+    abstract override fun getAll(ownerId: String): PagingSource<Int, RepositoryDbModel>
 
     @Query("DELETE FROM repositories")
     abstract override suspend fun clearAll()

@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">BitClient</string>
-    <string name="authorization_greeting">Welcome to BitClient</string>
     <string name="authorization_logo_content_description">Logo</string>
     <string name="authorization_enter">Enter to your account</string>
+    <string name="authorization_rights_reserved">© All rights reserved 2021</string>
     <string name="no_internet_connection">No internet connection</string>
+    <string name="home_title">Home</string>
+    <string name="home_greetings">Welcome, %1$s!</string>
     <string name="settings_title">Settings</string>
     <string name="workspaces_title">Workspaces</string>
     <string name="change_workspace_label">Change workspace</string>

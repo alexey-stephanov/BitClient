@@ -1,5 +1,6 @@
 package com.example.bitclient.ui.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
@@ -8,6 +9,8 @@ import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedRespo
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.RepositoryDataMapper
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.RepositoryModel
+import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.WorkspaceDbModel
+import com.example.bitclient.data.network.datamodels.workspacesmodel.networkmodels.toWorkspaceDbModel
 import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.data.pagination.DataRetrieving
 import com.example.bitclient.data.pagination.PagingRemoteMediator
@@ -23,7 +26,6 @@ import kotlinx.coroutines.launch
 @ExperimentalPagingApi
 class RepositoriesViewModel(
     private val repositoriesRepository: RepositoriesRepository,
-    private val accountRepository: AccountRepository,
     database: AccountDatabase,
     dataMapper: RepositoryDataMapper
 ) : PaginatedViewModel<RepositoryModel, RepositoryDbModel>(),
@@ -33,6 +35,8 @@ class RepositoriesViewModel(
 
     private val workspaceIdState = MutableStateFlow<String?>(null)
 
+    val workspacesLiveData = MutableLiveData<List<WorkspaceDbModel>>()
+
     @FlowPreview
     override val remoteMediator: PagingRemoteMediator<RepositoryModel, RepositoryDbModel> =
         PagingRemoteMediator(repositoriesDao, database, dataMapper) { page -> retrieveData(page) }
@@ -40,11 +44,17 @@ class RepositoriesViewModel(
     init {
         if (NetworkStatus.isNetworkAvailable()) {
             viewModelScope.launch {
-                val userInfo = accountRepository.retrieveUserInfoFromNetwork()
-                accountRepository.saveUserInfoInDatabase(userInfo)
-                workspaceIdState.emit(userInfo.workspaceId)
+                loadAndSaveWorkspaces()
             }
         }
+    }
+
+    private suspend fun loadAndSaveWorkspaces() {
+        val workspaces = repositoriesRepository.retrieveUserWorkspaces().values.map { workspace ->
+            workspace.toWorkspaceDbModel(1)
+        }
+        workspacesLiveData.postValue(workspaces)
+        workspaceIdState.emit(workspaces[0].workspaceId)
     }
 
     @FlowPreview
@@ -55,5 +65,5 @@ class RepositoriesViewModel(
     }
 
     override fun getPagingSource(): PagingSource<Int, RepositoryDbModel> =
-        repositoriesDao.getAll()
+        repositoriesDao.getAll("")
 }

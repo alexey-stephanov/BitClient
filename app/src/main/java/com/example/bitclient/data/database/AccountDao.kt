@@ -9,11 +9,14 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 @Dao
 interface AccountDao {
 
-    @Query("SELECT * FROM accounts")
-    suspend fun getAll(): List<AccountDbModel>
+    @Query("SELECT * FROM accounts WHERE is_active LIKE :isActive")
+    suspend fun getActiveUser(isActive: Boolean = true): AccountDbModel
 
-    @Query("SELECT * FROM accounts WHERE account_id = :accountId")
-    suspend fun getUserById(accountId: String): AccountDbModel
+    @Query("DELETE FROM accounts WHERE account_id LIKE :accountId")
+    suspend fun deleteUser(accountId: String)
+
+    @Query("UPDATE accounts SET is_active = :isActive WHERE account_id LIKE :accountId")
+    suspend fun updateAccountFlag(accountId: String, isActive: Boolean)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(account: AccountDbModel)

@@ -1,9 +1,8 @@
 package com.example.bitclient.data.repositories.account
 
 import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
+import kotlinx.coroutines.flow.Flow
 
 interface AccountRepository {
-    suspend fun retrieveUserInfoFromNetwork(): AccountDbModel
-    suspend fun retrieveUserInfoFromDatabase(): AccountDbModel
-    suspend fun saveUserInfoInDatabase(accountDbModel: AccountDbModel)
+    suspend fun retrieveAccountInfo(): Flow<AccountDbModel>
 }

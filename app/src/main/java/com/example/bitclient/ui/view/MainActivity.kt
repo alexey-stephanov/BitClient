@@ -3,6 +3,7 @@ package com.example.bitclient.ui.view
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -10,6 +11,7 @@ import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.storage.Storage
 import com.example.bitclient.databinding.ActivityMainBinding
+import com.example.bitclient.ui.view.fragments.AuthorizationFragmentDirections
 import com.example.bitclient.ui.viewmodels.MainViewModel
 import com.example.bitclient.ui.viewmodels.ViewModelFactory
 import javax.inject.Inject
@@ -56,6 +58,8 @@ class MainActivity : AppCompatActivity() {
         val code = intent?.data?.getQueryParameter("code")
         if (code != null) {
             mainViewModel.handleAuthorizationCode(code)
+        } else {
+            Toast.makeText(this, getString(R.string.load_error_message), Toast.LENGTH_SHORT).show()
         }
     }
 }

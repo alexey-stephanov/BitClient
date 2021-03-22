@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">BitClient</string>
-    <string name="authorization_greeting">Добро пожаловать в BitClient</string>
     <string name="authorization_logo_content_description">Лого</string>
     <string name="authorization_enter">Войдите в свой аккаунт</string>
+    <string name="authorization_rights_reserved">© Все права защищены 2021</string>
     <string name="no_internet_connection">Нет подключения к интернету</string>
+    <string name="home_title">Главная</string>
+    <string name="home_greetings">Добро пожаловать, %1$s!</string>
     <string name="settings_title">Настройки</string>
     <string name="workspaces_title">Рабочее пространство</string>
     <string name="change_workspace_label">Изменить рабочее пространство</string>

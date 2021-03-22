@@ -2,6 +2,7 @@ package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
@@ -31,14 +32,14 @@ class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
     lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     @Inject
-    lateinit var brancesViewModelFactory: BranchesViewModelFactory
+    lateinit var branchesViewModelFactory: BranchesViewModelFactory
 
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
 
     @ExperimentalPagingApi
     override val viewModel: BranchesViewModel by lazy {
-        brancesViewModelFactory.create(args.workspaceId!!, args.repositoryId!!)
+        branchesViewModelFactory.create(args.workspaceId!!, args.repositoryId!!)
     }
 
     override val paginatedListAdapter: PaginatedListAdapter<BranchDbModel> =
@@ -67,8 +68,8 @@ class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
     }
 
     @ExperimentalPagingApi
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         with(binding.toolbarBranchesActionbar) {
             setNavigationIcon(R.drawable.ic_left_arrow)

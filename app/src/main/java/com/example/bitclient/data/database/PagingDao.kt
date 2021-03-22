@@ -9,7 +9,7 @@ import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbMod
 interface PagingDao<DbDataModel : PaginatedDbModel> {
 
     @Query("")
-    fun getAll(): PagingSource<Int, DbDataModel>
+    fun getAll(ownerId: String): PagingSource<Int, DbDataModel>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(listOfData: List<DbDataModel>)

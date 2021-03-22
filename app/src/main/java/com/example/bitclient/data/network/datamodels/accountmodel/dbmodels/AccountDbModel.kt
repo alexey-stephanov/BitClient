@@ -15,6 +15,6 @@ data class AccountDbModel(
     val username: String,
     @ColumnInfo(name = "avatar_link")
     val avatarLink: String,
-    @ColumnInfo(name = "workspace_id")
-    val workspaceId: String
+    @ColumnInfo(name = "is_active")
+    val isActive: Boolean
 )

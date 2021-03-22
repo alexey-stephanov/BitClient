@@ -21,14 +21,6 @@ class UserManagerImpl @Inject constructor(
     override suspend fun logout() {
         storage.clearStorage()
         liveAccountModel.value = null
-        database.withTransaction {
-            with(database) {
-                accountDao().clearAll()
-                repositoriesDao().clearAll()
-                branchesDao().clearAll()
-                commitsDao().clearAll()
-            }
-        }
     }
 }
 

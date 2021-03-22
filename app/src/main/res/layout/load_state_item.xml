@@ -8,22 +8,22 @@
         android:id="@+id/progress_bar_load_state_item_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:visibility="gone"
-        android:layout_margin="@dimen/spacing_8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_view_load_state_item_error_message"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
         android:text="@string/load_error_message"
         android:visibility="gone"
-        android:gravity="center"
-        android:padding="@dimen/spacing_8"
-        style="@style/TextAppearance.MaterialComponents.Headline6.LoadErrorMessage"
         app:layout_constraintBottom_toTopOf="@id/button_load_state_item_retry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,12 +33,12 @@
         android:id="@+id/button_load_state_item_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_margin="@dimen/spacing_8"
+        android:layout_margin="8dp"
         android:text="@string/load_error_retry"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_load_state_item_error_message"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/text_view_load_state_item_error_message" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
