@@ -13,12 +13,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/text_view_commits_no_internet"
-        style="@style/NoInternetMessageTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/no_internet_connection"
+        android:background="?colorError"
+        android:textColor="?colorOnError"
+        android:gravity="center"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

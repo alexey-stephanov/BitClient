@@ -17,7 +17,7 @@
         app:placeholderImage="@drawable/ic_app_logo"
         app:placeholderImageScaleType="fitCenter" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/text_view_repository_item_repo_name"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="0dp"
@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Repository name" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/text_view_repository_item_full_name"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:layout_width="0dp"

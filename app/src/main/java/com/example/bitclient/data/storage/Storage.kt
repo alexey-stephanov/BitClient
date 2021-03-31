@@ -1,6 +1,6 @@
 package com.example.bitclient.data.storage
 
-import com.example.bitclient.data.network.datamodels.TokensModel
+import com.example.bitclient.data.network.datamodels.tokensmodel.TokensModel
 
 interface Storage {
     fun getString(key: String): String

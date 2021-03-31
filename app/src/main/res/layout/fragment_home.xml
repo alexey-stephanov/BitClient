@@ -15,6 +15,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/home_title" />
 
+    <TextView
+        android:id="@+id/text_view_home_no_internet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/no_internet_connection"
+        android:background="?colorError"
+        android:textColor="?colorOnError"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar" />
+
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_home_user_section"
         android:layout_width="0dp"
@@ -22,7 +35,7 @@
         android:visibility="gone"
         app:constraint_referenced_ids="text_view_home_greetings, button_home_repositories" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <TextView
         android:id="@+id/text_view_home_greetings"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar"
         tools:text="Welcome User000!" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/button_home_repositories"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
@@ -50,17 +63,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_view_home_no_internet"
-        style="@style/NoInternetMessageTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_internet_connection"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar" />

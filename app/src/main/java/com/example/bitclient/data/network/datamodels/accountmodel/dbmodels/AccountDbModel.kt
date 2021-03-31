@@ -4,7 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "accounts")
+@Entity(
+    tableName = "accounts"
+)
 data class AccountDbModel(
     @PrimaryKey
     @ColumnInfo(name = "account_id")
@@ -16,5 +18,5 @@ data class AccountDbModel(
     @ColumnInfo(name = "avatar_link")
     val avatarLink: String,
     @ColumnInfo(name = "is_active")
-    val isActive: Boolean
+    var isActive: Boolean = true
 )

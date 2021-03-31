@@ -18,6 +18,5 @@ fun AccountModel.toAccountDbModel() = AccountDbModel(
     accountId = accountId,
     displayName = displayName,
     username = username,
-    avatarLink = links.avatar.href,
-    isActive = true
+    avatarLink = links.avatar.href
 )

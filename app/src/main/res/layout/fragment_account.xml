@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/account_title" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
             android:id="@+id/text_view_account_no_internet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,23 +28,36 @@
             android:background="?colorError"
             android:textColor="?colorOnError"
             android:gravity="center"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_account_actionbar" />
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/image_view_account_avatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            app:roundAsCircle="true"
+            app:roundWithOverlayColor="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_account_no_internet"
             app:placeholderImage="@drawable/ic_app_logo"
             app:placeholderImageScaleType="fitCenter" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
+            android:id="@+id/text_view_account_switch_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/switch_account"
+            android:textColor="?colorPrimary"
+            app:layout_constraintEnd_toEndOf="@+id/image_view_account_avatar"
+            app:layout_constraintStart_toStartOf="@+id/image_view_account_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_account_avatar" />
+
+        <TextView
             android:id="@+id/text_view_account_display_name"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="0dp"
@@ -57,7 +70,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_view_account_no_internet"
             tools:text="Account display name" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
             android:id="@+id/text_view_account_username"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="0dp"

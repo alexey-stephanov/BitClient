@@ -7,7 +7,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
+import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 
 abstract class PaginatedListAdapter<DataDbModel : PaginatedDbModel>(
     private var listener: OnItemClickListener<DataDbModel>? = null,

@@ -20,8 +20,8 @@ import com.example.bitclient.databinding.RepositoryItemBinding
 import com.example.bitclient.ui.recyclerview.OnItemClickListener
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
-import com.example.bitclient.ui.viewmodels.RepositoriesViewModel
-import com.example.bitclient.ui.viewmodels.RepositoriesViewModelFactory
+import com.example.bitclient.viewmodels.RepositoriesViewModel
+import com.example.bitclient.viewmodels.RepositoriesViewModelFactory
 import timber.log.Timber
 import javax.inject.Inject
 

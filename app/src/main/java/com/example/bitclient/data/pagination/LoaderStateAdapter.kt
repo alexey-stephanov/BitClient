@@ -3,6 +3,7 @@ package com.example.bitclient.data.pagination
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -27,19 +28,10 @@ class LoaderStateAdapter(private val retry: () -> Unit) :
 
         fun bind(loadState: LoadState) {
             with(binding) {
-                progressBarLoadStateItemLoading.visibility =
-                    toVisibility(loadState is LoadState.Loading)
-                buttonLoadStateItemRetry.visibility = toVisibility(loadState !is LoadState.Loading)
+                progressBarLoadStateItemLoading.isVisible = loadState is LoadState.Loading
+                groupLoadStateError.isVisible = loadState !is LoadState.Loading
                 buttonLoadStateItemRetry.setOnClickListener { retry() }
-                textViewLoadStateItemErrorMessage.visibility =
-                    toVisibility(loadState !is LoadState.Loading)
             }
         }
-
-        private fun toVisibility(loadState: Boolean): Int =
-            if (loadState)
-                View.VISIBLE
-            else
-                View.GONE
     }
 }

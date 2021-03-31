@@ -1,8 +1,8 @@
 package com.example.bitclient.data.repositories.commits
 
-import com.example.bitclient.data.di.RequestQualifier
+import com.example.bitclient.di.RequestQualifier
 import com.example.bitclient.data.network.datamodels.commitsmodel.networkmodels.CommitsResponse
-import com.example.bitclient.data.network.requests.RequestsApi
+import com.example.bitclient.data.network.api.RequestsApi
 import javax.inject.Inject
 
 class CommitsRepositoryImpl @Inject constructor(@RequestQualifier private val service: RequestsApi) :

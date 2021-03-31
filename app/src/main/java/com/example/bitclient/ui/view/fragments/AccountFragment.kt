@@ -13,8 +13,8 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentAccountBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
-import com.example.bitclient.ui.viewmodels.AccountViewModel
-import com.example.bitclient.ui.viewmodels.ViewModelFactory
+import com.example.bitclient.viewmodels.AccountViewModel
+import com.example.bitclient.viewmodels.ViewModelFactory
 import javax.inject.Inject
 
 class AccountFragment : Fragment(R.layout.fragment_account) {

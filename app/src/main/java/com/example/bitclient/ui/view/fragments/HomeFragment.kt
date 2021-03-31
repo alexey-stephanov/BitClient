@@ -12,8 +12,8 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentHomeBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
-import com.example.bitclient.ui.viewmodels.HomeViewModel
-import com.example.bitclient.ui.viewmodels.ViewModelFactory
+import com.example.bitclient.viewmodels.HomeViewModel
+import com.example.bitclient.viewmodels.ViewModelFactory
 import javax.inject.Inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {

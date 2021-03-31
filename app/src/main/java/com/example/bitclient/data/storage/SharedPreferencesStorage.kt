@@ -1,14 +1,14 @@
 package com.example.bitclient.data.storage
 
 import android.content.Context
-import com.example.bitclient.data.network.datamodels.TokensModel
+import com.example.bitclient.data.network.datamodels.tokensmodel.TokensModel
 import javax.inject.Inject
 import javax.inject.Singleton
 
 private const val STORAGE_FILE_NAME = "tokens"
 private const val ACCESS_TOKEN_KEY = "access_token"
 private const val REFRESH_TOKEN_KEY = "refresh_token"
-private const val DEFAULT_VALUE = ""
+private const val DEFAULT_VALUE = "default"
 
 @Singleton
 class SharedPreferencesStorage @Inject constructor(context: Context) : Storage {

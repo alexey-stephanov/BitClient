@@ -17,8 +17,8 @@ import com.example.bitclient.databinding.FragmentCommitsBinding
 import com.example.bitclient.ui.recyclerview.OnItemClickListener
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
-import com.example.bitclient.ui.viewmodels.CommitsViewModel
-import com.example.bitclient.ui.viewmodels.CommitsViewModelFactory
+import com.example.bitclient.viewmodels.CommitsViewModel
+import com.example.bitclient.viewmodels.CommitsViewModelFactory
 import javax.inject.Inject
 
 class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {

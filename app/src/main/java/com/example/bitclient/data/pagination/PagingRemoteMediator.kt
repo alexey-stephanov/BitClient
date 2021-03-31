@@ -1,6 +1,5 @@
 package com.example.bitclient.data.pagination
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -8,11 +7,11 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.bitclient.data.database.AccountDatabase
 import com.example.bitclient.data.database.PagingDao
-import com.example.bitclient.data.network.datamodels.NetworkToDbDataMapper
-import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
-import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedResponse
-import com.example.bitclient.data.network.networkavailability.NetworkStatus
+import com.example.bitclient.data.network.datamappers.NetworkToDbDataMapper
+import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
+import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedResponse
 import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
 
 @ExperimentalPagingApi
@@ -41,7 +40,7 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
         return try {
             val data = retrieveData(page).values
             val isEndOfList = data.isEmpty()
-            if(!isEndOfList) {
+            if (!isEndOfList) {
                 database.withTransaction {
                     if (loadType == LoadType.REFRESH) {
                         dao.clearAll()
@@ -49,7 +48,7 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
                     val dbModel = data.map { data ->
                         dataMapper.convert(data, page)
                     }
-                    Log.e("qqq", dbModel.toString())
+                    Timber.e(dbModel.toString())
                     dao.insertAll(dbModel)
                 }
             }

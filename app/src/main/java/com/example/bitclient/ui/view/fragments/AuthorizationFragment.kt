@@ -12,11 +12,10 @@ import androidx.navigation.findNavController
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.BuildConfig
 import com.example.bitclient.R
-import com.example.bitclient.data.network.ResponseStatus
 import com.example.bitclient.databinding.FragmentAuthorizationBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
-import com.example.bitclient.ui.viewmodels.AuthorizationViewModel
-import com.example.bitclient.ui.viewmodels.ViewModelFactory
+import com.example.bitclient.viewmodels.AuthorizationViewModel
+import com.example.bitclient.viewmodels.ViewModelFactory
 import javax.inject.Inject
 
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
@@ -48,19 +47,14 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     }
 
     private fun observeResponseStatus(view: View) {
-        authorizationViewModel.responseStatusLiveData.observe(
+        authorizationViewModel.resultLiveData.observe(
             viewLifecycleOwner,
-            { responseStatus ->
-                when (responseStatus) {
-                    is ResponseStatus.Success -> {
-                        val action =
-                            AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment()
-                        view.findNavController().navigate(action)
-                    }
-                    is ResponseStatus.Error -> {
-                        Toast.makeText(requireContext(), "Some problems.", Toast.LENGTH_SHORT)
-                            .show()
-                    }
+            { result ->
+                if(result) {
+                val action = AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment()
+                view.findNavController().navigate(action)
+                } else {
+                    Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
                 }
             })
     }

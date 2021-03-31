@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
+import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 import com.example.bitclient.data.pagination.LoaderStateAdapter
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
-import com.example.bitclient.ui.viewmodels.PaginatedViewModel
+import com.example.bitclient.viewmodels.PaginatedViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

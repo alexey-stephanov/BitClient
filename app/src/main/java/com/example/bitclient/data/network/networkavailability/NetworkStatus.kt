@@ -9,6 +9,7 @@ import android.os.Build
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.bitclient.BitClientApp
+import timber.log.Timber
 
 object NetworkStatus : LiveData<Boolean>() {
 
@@ -68,7 +69,7 @@ object NetworkStatus : LiveData<Boolean>() {
                 if (activeInfo != null && activeInfo.isConnected)
                     return true
             } catch (e: Exception) {
-                Log.e("NETWORK_AVAILABILITY", "NETWORK AVAILABILITY ERROR")
+                Timber.e("NETWORK AVAILABILITY ERROR")
             }
         }
         return false

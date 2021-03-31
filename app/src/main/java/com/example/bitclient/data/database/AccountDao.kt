@@ -10,10 +10,10 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 interface AccountDao {
 
     @Query("SELECT * FROM accounts WHERE is_active LIKE :isActive")
-    suspend fun getActiveUser(isActive: Boolean = true): AccountDbModel
+    suspend fun getActiveAccount(isActive: Boolean = true): AccountDbModel
 
     @Query("DELETE FROM accounts WHERE account_id LIKE :accountId")
-    suspend fun deleteUser(accountId: String)
+    suspend fun deleteAccount(accountId: String)
 
     @Query("UPDATE accounts SET is_active = :isActive WHERE account_id LIKE :accountId")
     suspend fun updateAccountFlag(accountId: String, isActive: Boolean)

@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
+import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 
 interface PagingDao<DbDataModel : PaginatedDbModel> {
 

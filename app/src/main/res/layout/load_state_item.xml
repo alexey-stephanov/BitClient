@@ -15,7 +15,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_load_state_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="text_view_load_state_item_error_message, button_load_state_item_retry"
+        android:visibility="gone"/>
+
+    <TextView
         android:id="@+id/text_view_load_state_item_error_message"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="wrap_content"
@@ -23,19 +30,17 @@
         android:gravity="center"
         android:padding="8dp"
         android:text="@string/load_error_message"
-        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/button_load_state_item_retry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/button_load_state_item_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/load_error_retry"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

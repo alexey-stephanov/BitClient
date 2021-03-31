@@ -14,13 +14,26 @@ class UserManagerImpl @Inject constructor(
 
     override val liveAccountModel: MutableLiveData<AccountDbModel> = MutableLiveData()
 
-    override fun loginUser(accountDbModel: AccountDbModel) {
+    override suspend fun loginUser(accountDbModel: AccountDbModel) {
         liveAccountModel.postValue(accountDbModel)
+        database.withTransaction {
+            with(database) {
+                accountDao().insert(accountDbModel)
+            }
+        }
     }
 
     override suspend fun logout() {
         storage.clearStorage()
         liveAccountModel.value = null
+        database.withTransaction {
+            with(database) {
+                accountDao().clearAll()
+                repositoriesDao().clearAll()
+                branchesDao().clearAll()
+                commitsDao().clearAll()
+            }
+        }
     }
 }
 

@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
-import com.example.bitclient.data.network.datamodels.pagingmodels.PaginatedDbModel
+import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 
 @Entity(tableName = "workspaces",
     foreignKeys = [ForeignKey(
