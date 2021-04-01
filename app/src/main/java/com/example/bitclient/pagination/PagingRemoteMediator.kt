@@ -1,4 +1,4 @@
-package com.example.bitclient.data.pagination
+package com.example.bitclient.pagination
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType

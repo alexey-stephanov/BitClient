@@ -28,6 +28,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/container_home_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shimmer_duration="800"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar">
+
+        <include layout="@layout/home_content_placeholder"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_home_user_section"
         android:layout_width="0dp"
@@ -57,14 +70,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_home_greetings" />
-
-    <ProgressBar
-        android:id="@+id/progress_bar_home_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

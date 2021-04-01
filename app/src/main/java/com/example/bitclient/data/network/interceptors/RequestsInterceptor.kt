@@ -7,13 +7,15 @@ import javax.inject.Inject
 
 private const val ACCESS_TOKEN_KEY = "access_token"
 private const val REQUEST_TYPE = "Authorization"
-private const val TOKEN_TYPE = "Bearer"
+private const val BEARER_AUTH = "Bearer"
 
-class RequestsInterceptor @Inject constructor(storage: Storage) : Interceptor {
+class RequestsInterceptor @Inject constructor(private val storage: Storage) : Interceptor {
 
-    private val accessToken = storage.getString(ACCESS_TOKEN_KEY)
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val accessToken = storage.getString(ACCESS_TOKEN_KEY)
 
-    override fun intercept(chain: Interceptor.Chain): Response = chain.proceed(
-        chain.request().newBuilder().header(REQUEST_TYPE, "$TOKEN_TYPE $accessToken").build()
-    )
+        return chain.proceed(
+            chain.request().newBuilder().header(REQUEST_TYPE, "$BEARER_AUTH $accessToken").build()
+        )
+    }
 }

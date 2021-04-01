@@ -7,7 +7,7 @@ import com.example.bitclient.data.network.datamappers.BranchDataMapper
 import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
 import com.example.bitclient.data.network.datamodels.branchesmodel.networkmodels.BranchModel
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedResponse
-import com.example.bitclient.data.pagination.PagingRemoteMediator
+import com.example.bitclient.pagination.PagingRemoteMediator
 import com.example.bitclient.data.repositories.branches.BranchesRepository
 
 @ExperimentalPagingApi

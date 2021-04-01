@@ -1,7 +1,6 @@
-package com.example.bitclient.data.pagination
+package com.example.bitclient.pagination
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.paging.LoadState

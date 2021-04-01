@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface AccountRepository {
     suspend fun retrieveAccountInfo(): Flow<AccountDbModel>
+    suspend fun updateAccountInfo(): AccountDbModel
 }

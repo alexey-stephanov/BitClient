@@ -7,7 +7,7 @@ import com.example.bitclient.data.network.datamappers.CommitDataMapper
 import com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels.CommitDbModel
 import com.example.bitclient.data.network.datamodels.commitsmodel.networkmodels.CommitModel
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedResponse
-import com.example.bitclient.data.pagination.PagingRemoteMediator
+import com.example.bitclient.pagination.PagingRemoteMediator
 import com.example.bitclient.data.repositories.commits.CommitsRepository
 
 @ExperimentalPagingApi

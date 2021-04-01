@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.bitclient.BitClientApp
@@ -43,36 +42,46 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             binding.root,
             binding.textViewAccountNoInternet
         )
-        getUserInfo()
+        observeAccountData()
         setupRefreshLayout()
-        startNetworkChecking()
     }
 
-    private fun getUserInfo() {
-        accountViewModel.liveAccountModel.observe(viewLifecycleOwner, { userModel ->
-            setupView(userModel)
+    override fun onPause() {
+        binding.containerAccountPlaceholder.stopShimmer()
+        super.onPause()
+    }
+
+    private fun observeAccountData() {
+        accountViewModel.accountData.observe(viewLifecycleOwner, { accountModel ->
+            setupView(accountModel)
         })
     }
 
     private fun setupView(accountDbModel: AccountDbModel) {
-        binding.progressBarAccountLoading.isGone = true
-        binding.imageViewAccountAvatar.setImageURI(accountDbModel.avatarLink)
-        binding.textViewAccountDisplayName.text = accountDbModel.displayName
-        binding.textViewAccountUsername.text = accountDbModel.username
+        with(binding) {
+            if (containerAccountPlaceholder.isShimmerVisible) {
+                containerAccountPlaceholder.stopShimmer()
+                containerAccountPlaceholder.visibility = View.GONE
+            }
+            imageViewAccountAvatar.setImageURI(accountDbModel.avatarLink)
+            textViewAccountDisplayName.text = accountDbModel.displayName
+            textViewAccountUsername.text = accountDbModel.username
+        }
     }
 
     private fun setupRefreshLayout() {
         binding.swipeLayoutAccountRefresh.setOnRefreshListener {
+            startExceptionsChecking()
             accountViewModel.loadData()
             binding.swipeLayoutAccountRefresh.isRefreshing = false
         }
     }
 
-    private fun startNetworkChecking() {
-        accountViewModel.networkStatus.observe(viewLifecycleOwner, {
+    private fun startExceptionsChecking() {
+        accountViewModel.exceptionMessage.observe(viewLifecycleOwner, { exceptionMessage ->
             Toast.makeText(
                 requireContext(),
-                getString(R.string.load_error_message),
+                exceptionMessage,
                 Toast.LENGTH_SHORT
             ).show()
         })

@@ -8,14 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.di.UserSubcomponentManager
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentSettingsBinding
+import com.example.bitclient.di.UserSubcomponentManager
 import com.example.bitclient.ui.view.activities.MainActivity
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.SettingsViewModel
 import com.example.bitclient.viewmodels.ViewModelFactory
-import timber.log.Timber
 import javax.inject.Inject
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
@@ -53,7 +52,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
 
     private fun logout() {
-        Timber.e("JHKJJJL")
         settingsViewModel.logout()
         userSubcomponentManager.removeComponent()
         requireActivity().finish()

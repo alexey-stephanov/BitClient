@@ -49,10 +49,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
-        android:drawableStart="@drawable/ic_author"
         android:drawablePadding="4dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:textColor="?colorPrimary"
+        app:drawableStartCompat="@drawable/ic_author"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/text_view_commit_item_commit_date"
         app:layout_constraintStart_toStartOf="@id/guideline_commit_item_content_start"
@@ -66,12 +66,13 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:drawableStart="@drawable/ic_date"
         android:drawablePadding="4dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+        app:drawableStartCompat="@drawable/ic_date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_commit_item_content_end"
         app:layout_constraintStart_toEndOf="@+id/text_view_commit_item_commit_author"
         app:layout_constraintTop_toBottomOf="@id/text_view_commit_item_commit_message"
         tools:text="commit date" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

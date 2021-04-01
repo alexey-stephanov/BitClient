@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
-import com.example.bitclient.data.pagination.PagingRemoteMediator
+import com.example.bitclient.pagination.PagingRemoteMediator
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalPagingApi

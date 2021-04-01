@@ -3,44 +3,40 @@ package com.example.bitclient.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
+import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.data.repositories.account.AccountRepository
-import com.example.bitclient.data.user.UserAccountLiveDataDelegate
-import com.example.bitclient.data.user.UserManager
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.text.ParseException
 import javax.inject.Inject
 
 class AccountViewModel @Inject constructor(
-    private val accountRepository: AccountRepository,
-    private val userManager: UserManager
-) : ViewModel(),
-    UserAccountLiveDataDelegate by userManager {
+    private val accountRepository: AccountRepository
+) : ViewModel() {
 
-    val networkStatus: MutableLiveData<Boolean> = MutableLiveData()
+    val accountData: MutableLiveData<AccountDbModel> = MutableLiveData()
+
+    val exceptionMessage: MutableLiveData<String> = MutableLiveData()
 
     init {
         viewModelScope.launch(Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
-            Timber.e("Error in AccountVM with $throwable")
+            Timber.e("Exception handled $throwable")
         }) {
             accountRepository.retrieveAccountInfo().collect { accountInfo ->
-                liveAccountModel.postValue(accountInfo)
-                Timber.e("Data has loaded.")
+                accountData.postValue(accountInfo)
             }
         }
     }
 
     fun loadData() {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            if (NetworkStatus.isNetworkAvailable()) {
-//                val accountInfo = accountRepository.retrieveAccountInfo()
-//                liveAccountModel.postValue(accountInfo)
-//                Timber.e("Data has loaded.")
-//            } else {
-//                networkStatus.postValue(false)
-//            }
-//        }
+        viewModelScope.launch(Dispatchers.IO + CoroutineExceptionHandler { _, throwable ->
+            exceptionMessage.postValue(throwable.localizedMessage)
+        }) {
+            accountData.postValue(accountRepository.updateAccountInfo())
+        }
     }
 }

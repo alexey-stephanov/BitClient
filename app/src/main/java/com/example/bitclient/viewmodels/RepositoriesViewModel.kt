@@ -12,7 +12,7 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmo
 import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.WorkspaceDbModel
 import com.example.bitclient.data.network.datamodels.workspacesmodel.networkmodels.toWorkspaceDbModel
 import com.example.bitclient.data.network.networkavailability.NetworkStatus
-import com.example.bitclient.data.pagination.PagingRemoteMediator
+import com.example.bitclient.pagination.PagingRemoteMediator
 import com.example.bitclient.data.repositories.repositories.RepositoriesRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -45,6 +45,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
+    override fun onPause() {
+        binding.containerHomePlaceholder.stopShimmer()
+        super.onPause()
+    }
+
     private fun observeAccountData() {
         homeViewModel.accountData.observe(viewLifecycleOwner, { accountData ->
             setupView(accountData)
@@ -53,7 +58,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupView(accountData: AccountDbModel) {
         with(binding) {
-            progressBarHomeLoading.visibility = View.GONE
+            if (containerHomePlaceholder.isShimmerVisible) {
+                containerHomePlaceholder.stopShimmer()
+                containerHomePlaceholder.visibility = View.GONE
+            }
             groupHomeUserSection.visibility = View.VISIBLE
             textViewHomeGreetings.text = getString(R.string.home_greetings, accountData.displayName)
             buttonHomeRepositories.setOnClickListener {
