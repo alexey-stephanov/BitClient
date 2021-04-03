@@ -13,7 +13,8 @@ import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.Wo
     foreignKeys = [ForeignKey(
         entity = WorkspaceDbModel::class,
         parentColumns = ["workspace_id"],
-        childColumns = ["repository_owner_id"]
+        childColumns = ["repository_owner_id"],
+        onDelete = ForeignKey.CASCADE
     )]
 )
 data class RepositoryDbModel(

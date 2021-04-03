@@ -14,6 +14,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/branches_title" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/container_branches_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_branches_actionbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/branch_item_placeholder"/>
+            <include layout="@layout/branch_item_placeholder"/>
+            <include layout="@layout/branch_item_placeholder"/>
+            <include layout="@layout/branch_item_placeholder"/>
+            <include layout="@layout/branch_item_placeholder"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <TextView
         android:id="@+id/text_view_branches_no_internet"
         android:layout_width="match_parent"

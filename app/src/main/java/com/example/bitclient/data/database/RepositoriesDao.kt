@@ -8,7 +8,10 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.
 interface RepositoriesDao : PagingDao<RepositoryDbModel> {
 
     @Query("SELECT * FROM repositories WHERE repository_owner_id = :ownerId")
-    override fun getAll(ownerId: String): PagingSource<Int, RepositoryDbModel>
+    override fun getItemsByOwnerId(ownerId: String): PagingSource<Int, RepositoryDbModel>
+
+    @Query("DELETE FROM repositories WHERE repository_owner_id = :ownerId")
+    override suspend fun clearItemsByOwnerId(ownerId: String)
 
     @Query("DELETE FROM repositories")
     override suspend fun clearAll()

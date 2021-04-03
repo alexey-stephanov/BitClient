@@ -5,8 +5,11 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmo
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.toRepositoryDbModel
 import javax.inject.Inject
 
-class RepositoryDataMapper @Inject constructor():
+class RepositoryDataMapper @Inject constructor() :
     NetworkToDbDataMapper<RepositoryModel, RepositoryDbModel> {
-    override fun convert(dataModel: RepositoryModel, page: Int): RepositoryDbModel =
-        dataModel.toRepositoryDbModel(page)
+    override fun convert(
+        dataModel: RepositoryModel,
+        page: Int,
+        ownerId: String
+    ): RepositoryDbModel = dataModel.toRepositoryDbModel(page, ownerId)
 }

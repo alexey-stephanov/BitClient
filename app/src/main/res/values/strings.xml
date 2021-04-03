@@ -12,10 +12,12 @@
     <string name="repositories_title">Repositories</string>
     <string name="account_title">Account</string>
     <string name="branches_title">Branches</string>
+    <string name="organizations_title">Organizations</string>
     <string name="repositories_menu">Menu</string>
     <string name="settings_logout">Log out</string>
     <string name="repository_icon_private_repo_content_description">Private repository</string>
     <string name="load_error_message">Something went wrong, please try again.</string>
     <string name="load_error_retry">Retry</string>
     <string name="switch_account">Switch account</string>
+    <string name="created_on">Created on %1$s</string>
 </resources>

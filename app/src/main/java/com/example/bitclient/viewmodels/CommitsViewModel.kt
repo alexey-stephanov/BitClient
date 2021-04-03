@@ -23,7 +23,7 @@ class CommitsViewModel(
     private val commitsDao = database.commitsDao()
 
     override val remoteMediator: PagingRemoteMediator<CommitModel, CommitDbModel> =
-        PagingRemoteMediator(commitsDao, database, dataMapper) { page -> retrieveData(page) }
+        PagingRemoteMediator(commitsDao, database, dataMapper, branchName + repositoryId) { page -> retrieveData(page) }
 
     private suspend fun retrieveData(page: Int): PaginatedResponse<CommitModel> {
         return commitsRepository.retrieveCommits(
@@ -35,5 +35,5 @@ class CommitsViewModel(
     }
 
     override fun getPagingSource(): PagingSource<Int, CommitDbModel> =
-        commitsDao.getAll("")
+        commitsDao.getItemsByOwnerId(branchName + repositoryId)
 }

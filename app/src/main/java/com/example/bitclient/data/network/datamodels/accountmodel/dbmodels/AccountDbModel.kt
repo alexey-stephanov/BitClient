@@ -3,6 +3,8 @@ package com.example.bitclient.data.network.datamodels.accountmodel.dbmodels
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+import java.util.*
 
 @Entity(
     tableName = "accounts"
@@ -17,6 +19,10 @@ data class AccountDbModel(
     val username: String,
     @ColumnInfo(name = "avatar_link")
     val avatarLink: String,
+    @ColumnInfo(name = "uuid")
+    val workspaceId: String,
+    @ColumnInfo(name = "created_on")
+    val createdOn: String,
     @ColumnInfo(name = "is_active")
     var isActive: Boolean = true
 )

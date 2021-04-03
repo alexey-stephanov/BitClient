@@ -47,12 +47,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             binding.textViewSettingsNoInternet
         )
         binding.buttonSettingsLogout.setOnClickListener {
+            settingsViewModel.logout(false)
+            logout()
+        }
+        binding.buttonSettingsLogoutAndDeleteAccount.setOnClickListener {
+            settingsViewModel.logout(true)
             logout()
         }
     }
 
     private fun logout() {
-        settingsViewModel.logout()
         userSubcomponentManager.removeComponent()
         requireActivity().finish()
         requireActivity().overridePendingTransition(0, 0)

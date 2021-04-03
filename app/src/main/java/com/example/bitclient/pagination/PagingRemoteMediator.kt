@@ -19,6 +19,7 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
     private val dao: PagingDao<DbDataModel>,
     private val database: AccountDatabase,
     private val dataMapper: NetworkToDbDataMapper<DataModel, DbDataModel>,
+    private val ownerId: String,
     private val retrieveData: suspend (page: Int) -> PaginatedResponse<DataModel>
 ) : RemoteMediator<Int, DbDataModel>() {
 
@@ -43,12 +44,11 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
             if (!isEndOfList) {
                 database.withTransaction {
                     if (loadType == LoadType.REFRESH) {
-                        dao.clearAll()
+                        dao.clearItemsByOwnerId(ownerId)
                     }
                     val dbModel = data.map { data ->
-                        dataMapper.convert(data, page)
+                        dataMapper.convert(data, page, ownerId)
                     }
-                    Timber.e(dbModel.toString())
                     dao.insertAll(dbModel)
                 }
             }

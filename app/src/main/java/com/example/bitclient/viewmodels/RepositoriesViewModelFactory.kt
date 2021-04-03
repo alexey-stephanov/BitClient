@@ -12,5 +12,5 @@ class RepositoriesViewModelFactory @Inject constructor(
     private val dataMapper: RepositoryDataMapper
 ) {
     @ExperimentalPagingApi
-    fun create(): RepositoriesViewModel = RepositoriesViewModel(repositoriesRepository, database, dataMapper)
+    fun create(workspaceId: String): RepositoriesViewModel = RepositoriesViewModel(repositoriesRepository, database, dataMapper, workspaceId)
 }

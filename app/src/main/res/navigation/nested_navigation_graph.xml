@@ -26,6 +26,10 @@
         android:name="com.example.bitclient.ui.view.fragments.RepositoriesFragment"
         android:label="RepositoriesFragment"
         tools:layout="@layout/fragment_repositories">
+        <argument
+            android:name="workspaceId"
+            app:argType="string"
+            app:nullable="true"/>
         <action
             android:id="@+id/action_repositoriesFragment_to_branchesFragment"
             app:destination="@id/branchesFragment"

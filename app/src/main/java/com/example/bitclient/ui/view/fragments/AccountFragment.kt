@@ -66,6 +66,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
             imageViewAccountAvatar.setImageURI(accountDbModel.avatarLink)
             textViewAccountDisplayName.text = accountDbModel.displayName
             textViewAccountUsername.text = accountDbModel.username
+            textViewCreationDay.text = getString(R.string.created_on, accountDbModel.createdOn)
         }
     }
 

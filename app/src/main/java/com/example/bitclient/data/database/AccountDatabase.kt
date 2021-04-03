@@ -9,14 +9,14 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.
 import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.WorkspaceDbModel
 
 @Database(
-    entities = [AccountDbModel::class, RepositoryDbModel::class, BranchDbModel::class, CommitDbModel::class, WorkspaceDbModel::class],
+    entities = [AccountDbModel::class, WorkspaceDbModel::class, RepositoryDbModel::class, BranchDbModel::class, CommitDbModel::class],
     version = 1,
     exportSchema = false
 )
 abstract class AccountDatabase : RoomDatabase() {
     abstract fun accountDao(): AccountDao
-    abstract fun repositoriesDao(): RepositoriesDao
     abstract fun workspacesDao(): WorkspacesDao
+    abstract fun repositoriesDao(): RepositoriesDao
     abstract fun branchesDao(): BranchesDao
     abstract fun commitsDao(): CommitsDao
 }

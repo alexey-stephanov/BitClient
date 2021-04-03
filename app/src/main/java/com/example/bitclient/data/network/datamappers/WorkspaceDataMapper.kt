@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class WorkspaceDataMapper @Inject constructor() :
     NetworkToDbDataMapper<WorkspaceModel, WorkspaceDbModel> {
-    override fun convert(dataModel: WorkspaceModel, page: Int): WorkspaceDbModel =
-        dataModel.toWorkspaceDbModel(page)
+    override fun convert(dataModel: WorkspaceModel, page: Int, ownerId: String): WorkspaceDbModel =
+        dataModel.toWorkspaceDbModel(page, ownerId)
 }

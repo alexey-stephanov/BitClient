@@ -12,7 +12,8 @@ import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.
     foreignKeys = [ForeignKey(
         entity = RepositoryDbModel::class,
         parentColumns = ["repository_id"],
-        childColumns = ["branch_owner_id"]
+        childColumns = ["branch_owner_id"],
+        onDelete = ForeignKey.CASCADE
     )]
 )
 data class BranchDbModel(

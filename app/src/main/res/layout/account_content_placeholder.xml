@@ -35,4 +35,16 @@
         app:layout_constraintStart_toEndOf="@+id/placeholder_account_icon"
         app:layout_constraintTop_toBottomOf="@+id/placeholder_account_display_name" />
 
+    <View
+        android:id="@+id/placeholder_account_creation_day"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/gray_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placeholder_account_icon" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

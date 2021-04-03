@@ -1,9 +1,6 @@
 package com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 
@@ -11,7 +8,8 @@ import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbMode
     foreignKeys = [ForeignKey(
         entity = AccountDbModel::class,
         parentColumns = ["account_id"],
-        childColumns = ["workspace_owner_id"]
+        childColumns = ["workspace_owner_id"],
+        onDelete = ForeignKey.CASCADE
     )])
 data class WorkspaceDbModel(
     @PrimaryKey

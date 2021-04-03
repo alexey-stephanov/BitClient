@@ -12,10 +12,12 @@
     <string name="repositories_title">Репозитории</string>
     <string name="account_title">Аккаунт</string>
     <string name="branches_title">Ветки</string>
+    <string name="organizations_title">Организации</string>
     <string name="repositories_menu">Меню</string>
     <string name="settings_logout">Выйти</string>
     <string name="repository_icon_private_repo_content_description">Приватный репозиторий</string>
     <string name="load_error_message">Что-то пошло не так, попробуйте ещё раз.</string>
     <string name="load_error_retry">Повторить</string>
     <string name="switch_account">Сменить аккаунт</string>
+    <string name="created_on">Создан %1$s</string>
 </resources>

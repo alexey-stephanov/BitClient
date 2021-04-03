@@ -4,5 +4,5 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 
 interface UserManager : UserAccountLiveDataDelegate {
     suspend fun loginUser(accountDbModel: AccountDbModel)
-    suspend fun logout()
+    suspend fun logout(isClearDataNeeded: Boolean)
 }

@@ -12,15 +12,13 @@ data class RepositoryModel(
     val fullName: String,
     @SerializedName("links")
     val links: RepositoryLinksModel,
-    @SerializedName("workspace")
-    val workspace: RepositoryWorkspaceModel,
     @SerializedName("is_private")
     val isPrivate: Boolean
 )
 
-fun RepositoryModel.toRepositoryDbModel(page: Int) = RepositoryDbModel(
+fun RepositoryModel.toRepositoryDbModel(page: Int, ownerId: String) = RepositoryDbModel(
     repositoryId = repositoryId,
-    repositoryOwnerId = workspace.workspaceId,
+    repositoryOwnerId = ownerId,
     name = name,
     fullName = fullName,
     avatarLink = links.avatar.href,

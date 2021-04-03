@@ -3,6 +3,7 @@ package com.example.bitclient.di.user
 import androidx.lifecycle.ViewModel
 import com.example.bitclient.data.database.AccountDao
 import com.example.bitclient.data.database.AccountDatabase
+import com.example.bitclient.data.database.WorkspacesDao
 import com.example.bitclient.di.ViewModelKey
 import com.example.bitclient.data.repositories.account.AccountRepository
 import com.example.bitclient.data.repositories.account.AccountRepositoryImpl
@@ -36,5 +37,10 @@ interface UserModule {
         @Provides
         fun provideAccountDao(database: AccountDatabase): AccountDao =
             database.accountDao()
+
+        @UserScope
+        @Provides
+        fun provideWorkspacesDao(database: AccountDatabase): WorkspacesDao =
+            database.workspacesDao()
     }
 }

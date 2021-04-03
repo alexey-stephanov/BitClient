@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/placeholder_commit_start_guideline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/placeholder_commit_end_guideline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <View
+        android:id="@+id/placeholder_commit_name"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/placeholder_commit_start_guideline"
+        app:layout_constraintEnd_toEndOf="@id/placeholder_commit_end_guideline"
+        app:layout_constraintBottom_toTopOf="@id/placeholder_commit_message"/>
+
+    <View
+        android:id="@+id/placeholder_commit_message"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toBottomOf="@id/placeholder_commit_name"
+        app:layout_constraintStart_toStartOf="@id/placeholder_commit_start_guideline"
+        app:layout_constraintEnd_toEndOf="@id/placeholder_commit_end_guideline"/>
+
+    <View
+        android:id="@+id/placeholder_commit_author"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toBottomOf="@id/placeholder_commit_message"
+        app:layout_constraintStart_toStartOf="@id/placeholder_commit_start_guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/placeholder_commit_date"/>
+
+    <View
+        android:id="@+id/placeholder_commit_date"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toBottomOf="@id/placeholder_commit_message"
+        app:layout_constraintEnd_toEndOf="@id/placeholder_commit_end_guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/placeholder_commit_author"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

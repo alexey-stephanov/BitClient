@@ -65,8 +65,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             groupHomeUserSection.visibility = View.VISIBLE
             textViewHomeGreetings.text = getString(R.string.home_greetings, accountData.displayName)
             buttonHomeRepositories.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToRepositoriesFragment()
+                val action = HomeFragmentDirections.actionHomeFragmentToRepositoriesFragment(accountData.workspaceId)
                 findNavController().navigate(action)
+            }
+            buttonHomeOrganizations.setOnClickListener {
+
             }
         }
     }

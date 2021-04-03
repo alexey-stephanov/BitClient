@@ -10,9 +10,9 @@ class SettingsViewModel @Inject constructor(
     private val userManager: UserManager,
 ) : ViewModel() {
 
-    fun logout() {
+    fun logout(isClearDataNeeded: Boolean) {
         viewModelScope.launch {
-            userManager.logout()
+            userManager.logout(isClearDataNeeded)
         }
     }
 }

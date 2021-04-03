@@ -17,6 +17,6 @@ class DatabaseModule {
             context.applicationContext,
             AccountDatabase::class.java,
             "account-db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 }

@@ -16,9 +16,9 @@ data class CommitModel(
     val date: Date
 )
 
-fun CommitModel.toCommitDbModel(page: Int) = CommitDbModel(
+fun CommitModel.toCommitDbModel(page: Int, ownerId: String) = CommitDbModel(
     commitHash = commitHash,
-    commitOwnerId = "master{c2f4ff5f-01f4-478c-bcd5-25050ace3ce2}",
+    commitOwnerId = ownerId,
     message = message,
     authorName = authorModel.author,
     date = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(date),

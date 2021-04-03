@@ -1,12 +1,11 @@
 package com.example.bitclient
 
 import android.app.Application
+import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.di.AppComponent
 import com.example.bitclient.di.DaggerAppComponent
-import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.facebook.drawee.backends.pipeline.Fresco
 import timber.log.Timber
-
 
 class BitClientApp : Application() {
 

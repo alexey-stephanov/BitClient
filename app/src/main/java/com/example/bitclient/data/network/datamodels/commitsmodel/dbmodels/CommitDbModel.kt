@@ -13,7 +13,8 @@ import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbMode
     foreignKeys = [ForeignKey(
         entity = BranchDbModel::class,
         parentColumns = ["branch_id"],
-        childColumns = ["commit_owner_id"]
+        childColumns = ["commit_owner_id"],
+        onDelete = ForeignKey.CASCADE
     )]
 )
 data class CommitDbModel(

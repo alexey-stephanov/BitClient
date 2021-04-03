@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,8 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
 
     private val binding by viewBinding(FragmentRepositoriesBinding::bind)
 
+    private val args: RepositoriesFragmentArgs by navArgs()
+
     @Inject
     lateinit var networkConnectivityManager: NetworkConnectivityManager
 
@@ -40,7 +43,7 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
 
     @ExperimentalPagingApi
     override val viewModel: RepositoriesViewModel by lazy {
-        repositoriesViewModelFactory.create()
+        repositoriesViewModelFactory.create(args.workspaceId!!)
     }
 
     @ExperimentalPagingApi
@@ -70,44 +73,16 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeRepositories()
+        with(binding.toolbarRepositoriesActionbar) {
+            setNavigationIcon(R.drawable.ic_left_arrow)
+            setNavigationOnClickListener { activity?.onBackPressed() }
+        }
 
         networkConnectivityManager.startConnectionChecking(
             viewLifecycleOwner,
             binding.root,
             binding.textViewRepositoriesNoInternet
         )
-    }
-
-    @ExperimentalPagingApi
-    private fun observeRepositories() {
-        viewModel.workspacesLiveData.observe(viewLifecycleOwner, { workspaces ->
-            setupSpinner(workspaces)
-        })
-    }
-
-    private fun setupSpinner(workspaces: List<WorkspaceDbModel>) {
-        val workspacesNames = workspaces.map { it.workspaceName }
-        val spinnerAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.support_simple_spinner_dropdown_item,
-            workspacesNames
-        )
-        with(binding.spinnerRepositoriesWorkspaces) {
-            adapter = spinnerAdapter
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    Timber.e(position.toString())
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
-        }
     }
 
     override fun getLayoutResId(): Int = R.layout.fragment_repositories

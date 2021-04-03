@@ -9,7 +9,10 @@ import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.Bran
 interface BranchesDao : PagingDao<BranchDbModel> {
 
     @Query("SELECT * FROM branches WHERE branch_owner_id = :ownerId")
-    override fun getAll(ownerId: String): PagingSource<Int, BranchDbModel>
+    override fun getItemsByOwnerId(ownerId: String): PagingSource<Int, BranchDbModel>
+
+    @Query("DELETE FROM branches WHERE branch_owner_id = :ownerId")
+    override suspend fun clearItemsByOwnerId(ownerId: String)
 
     @Query("DELETE FROM branches")
     override suspend fun clearAll()

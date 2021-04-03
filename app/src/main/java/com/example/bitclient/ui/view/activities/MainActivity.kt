@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.main_host_fragment) as NavHostFragment
         val inflater = navHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.navigation_graph)
-        if (storage.getString("access_token") != "") {
+        if (storage.getString("access_token") != "" && storage.getString("access_token") != "default") {
             graph.startDestination = R.id.bottomNavigationFragment
         } else {
             graph.startDestination = R.id.authorizationFragment

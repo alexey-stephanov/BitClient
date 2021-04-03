@@ -10,9 +10,9 @@ data class WorkspaceModel(
     val workspaceId: String
 )
 
-fun WorkspaceModel.toWorkspaceDbModel(page: Int) = WorkspaceDbModel(
+fun WorkspaceModel.toWorkspaceDbModel(page: Int, ownerId: String) = WorkspaceDbModel(
     workspaceId = workspaceId,
-    workspaceOwnerId = "",
+    workspaceOwnerId = ownerId,
     workspaceName = workspaceName,
     page = page
 )
