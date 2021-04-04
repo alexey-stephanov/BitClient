@@ -20,6 +20,7 @@ import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.RepositoriesViewModel
 import com.example.bitclient.viewmodels.factories.RepositoriesViewModelFactory
+import com.facebook.shimmer.ShimmerFrameLayout
 import javax.inject.Inject
 
 class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbModel>() {
@@ -82,6 +83,9 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
     }
 
     override fun getLayoutResId(): Int = R.layout.fragment_repositories
+
+    override fun getShimmerFrameLayout(): ShimmerFrameLayout =
+        binding.containerRepositoriesPlaceholder
 
     override fun getRecyclerView(): RecyclerView {
         binding.recyclerViewRepositoriesReposList.addItemDecoration(itemDecoration)

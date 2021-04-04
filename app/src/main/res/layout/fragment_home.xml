@@ -46,7 +46,7 @@
         android:id="@+id/group_home_user_section"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:constraint_referenced_ids="text_view_home_greetings, button_home_repositories, button_home_organizations, button_home_pull_requests" />
 
     <TextView

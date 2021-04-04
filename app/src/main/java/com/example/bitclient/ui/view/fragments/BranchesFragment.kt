@@ -20,6 +20,7 @@ import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.BranchesViewModel
 import com.example.bitclient.viewmodels.factories.BranchesViewModelFactory
+import com.facebook.shimmer.ShimmerFrameLayout
 import javax.inject.Inject
 
 class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
@@ -85,6 +86,9 @@ class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
 
     override fun getLayoutResId(): Int =
         R.layout.fragment_branches
+
+    override fun getShimmerFrameLayout(): ShimmerFrameLayout =
+        binding.containerBranchesPlaceholder
 
     override fun getRecyclerView(): RecyclerView {
         binding.recyclerViewBranchesBranchesList.addItemDecoration(itemDecoration)

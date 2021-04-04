@@ -45,11 +45,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         )
     }
 
-    override fun onPause() {
-        binding.containerHomePlaceholder.stopShimmer()
-        super.onPause()
-    }
-
     private fun observeAccountData() {
         homeViewModel.accountData.observe(viewLifecycleOwner, { accountData ->
             setupView(accountData)

@@ -19,6 +19,7 @@ import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.CommitsViewModel
 import com.example.bitclient.viewmodels.factories.CommitsViewModelFactory
+import com.facebook.shimmer.ShimmerFrameLayout
 import javax.inject.Inject
 
 class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {
@@ -78,6 +79,9 @@ class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {
 
     override fun getLayoutResId(): Int =
         R.layout.fragment_commits
+
+    override fun getShimmerFrameLayout(): ShimmerFrameLayout =
+        binding.containerCommitsPlaceholder
 
     override fun getRecyclerView(): RecyclerView {
         binding.recyclerViewCommitsCommitsList.addItemDecoration(itemDecoration)

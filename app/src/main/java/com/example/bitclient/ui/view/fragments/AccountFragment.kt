@@ -46,11 +46,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
         setupRefreshLayout()
     }
 
-    override fun onPause() {
-        binding.containerAccountPlaceholder.stopShimmer()
-        super.onPause()
-    }
-
     private fun observeAccountData() {
         accountViewModel.accountData.observe(viewLifecycleOwner, { accountModel ->
             setupView(accountModel)

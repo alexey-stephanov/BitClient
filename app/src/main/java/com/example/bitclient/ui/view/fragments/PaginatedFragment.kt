@@ -7,22 +7,29 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.CombinedLoadStates
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
+import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.WorkspaceDbModel
 import com.example.bitclient.pagination.LoaderStateAdapter
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.viewmodels.PaginatedViewModel
+import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel> : Fragment() {
 
     @ExperimentalPagingApi
-    protected abstract val viewModel: PaginatedViewModel<DataModel, DbDataModel>
+    abstract val viewModel: PaginatedViewModel<DataModel, DbDataModel>
 
-    protected abstract val paginatedListAdapter: PaginatedListAdapter<DbDataModel>
+    abstract val paginatedListAdapter: PaginatedListAdapter<DbDataModel>
 
     private var searchJob: Job? = null
 
@@ -55,7 +62,23 @@ abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel
 
     abstract fun getRecyclerView(): RecyclerView
 
+    abstract fun getShimmerFrameLayout(): ShimmerFrameLayout
+
     private fun setupRecyclerView() {
+        paginatedListAdapter.addLoadStateListener {
+            getShimmerFrameLayout().startShimmer()
+            if(it.refresh is LoadState.Loading){
+                with(getShimmerFrameLayout()) {
+                    visibility = View.VISIBLE
+                    startShimmer()
+                }
+            } else if(it.refresh is LoadState.NotLoading) {
+                with(getShimmerFrameLayout()) {
+                    stopShimmer()
+                    visibility = View.GONE
+                }
+            }
+        }
         getRecyclerView().apply {
             setHasFixedSize(true)
             adapter = paginatedListAdapter.withLoadStateFooter(LoaderStateAdapter { paginatedListAdapter.retry() })
