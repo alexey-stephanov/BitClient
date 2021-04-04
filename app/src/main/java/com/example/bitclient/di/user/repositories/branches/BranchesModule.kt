@@ -5,7 +5,7 @@ import com.example.bitclient.data.database.BranchesDao
 import com.example.bitclient.data.network.datamappers.BranchDataMapper
 import com.example.bitclient.data.repositories.branches.BranchesRepository
 import com.example.bitclient.data.repositories.branches.BranchesRepositoryImpl
-import com.example.bitclient.viewmodels.BranchesViewModelFactory
+import com.example.bitclient.viewmodels.factories.BranchesViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

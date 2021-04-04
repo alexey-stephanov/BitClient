@@ -9,8 +9,6 @@ import javax.inject.Inject
 class RepositoriesRepositoryImpl @Inject constructor(@RequestQualifier private val service: RequestsApi) :
     RepositoriesRepository {
 
-    override suspend fun retrieveUserWorkspaces(): WorkspacesResponse = service.getWorkspaces()
-
     override suspend fun retrieveUserRepositories(
         workspaceId: String,
         page: Int

@@ -8,8 +8,10 @@ import com.example.bitclient.R
 import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
 import com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels.CommitDbModel
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
+import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.WorkspaceDbModel
 import com.example.bitclient.databinding.BranchItemBinding
 import com.example.bitclient.databinding.CommitItemBinding
+import com.example.bitclient.databinding.OrganizationItemBinding
 import com.example.bitclient.databinding.RepositoryItemBinding
 
 object ViewHolderFactory {
@@ -18,6 +20,7 @@ object ViewHolderFactory {
             R.layout.repository_item -> RepositoryViewHolder(binding as RepositoryItemBinding)
             R.layout.branch_item -> BranchViewHolder(binding as BranchItemBinding)
             R.layout.commit_item -> CommitViewHolder(binding as CommitItemBinding)
+            R.layout.organization_item -> OrganizationViewHolder(binding as OrganizationItemBinding)
             else -> throw Exception("Wrong type.")
         }
     }
@@ -59,6 +62,18 @@ object ViewHolderFactory {
                 if (str.size == 2) textViewCommitItemCommitMessage.text = str[1] else textViewCommitItemCommitMessage.visibility = View.GONE
                 textViewCommitItemCommitDate.text = data.date
                 textViewCommitItemCommitAuthor.text = data.authorName
+            }
+        }
+    }
+
+    class OrganizationViewHolder(private val binding: OrganizationItemBinding) : RecyclerView.ViewHolder(binding.root), PaginatedListAdapter.Binder<WorkspaceDbModel> {
+        override fun bind(
+            data: WorkspaceDbModel,
+            listener: OnItemClickListener<WorkspaceDbModel>?
+        ) {
+            with(binding) {
+                textViewOrganizationItemWorkspaceName.text = data.workspaceName
+                frameLayoutOrganizationItemLayout.setOnClickListener { listener?.onItemClick(data) }
             }
         }
     }

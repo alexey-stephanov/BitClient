@@ -20,6 +20,13 @@
         <action
             android:id="@+id/action_homeFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_organizationsFragment"
+            app:destination="@id/organizationsFragment"
+            app:popUpTo="@id/homeFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_pullRequestsFragment"
+            app:destination="@id/pullRequestsFragment" />
     </fragment>
     <fragment
         android:id="@+id/repositoriesFragment"
@@ -34,6 +41,26 @@
             android:id="@+id/action_repositoriesFragment_to_branchesFragment"
             app:destination="@id/branchesFragment"
             app:popUpTo="@id/repositoriesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/organizationsFragment"
+        android:name="com.example.bitclient.ui.view.fragments.OrganizationsFragment"
+        android:label="OrganizationsFragment"
+        tools:layout="@layout/fragment_organizations">
+        <argument
+            android:name="accountId"
+            app:argType="string"
+            app:nullable="true"/>
+        <action
+            android:id="@+id/action_organizationsFragment_to_repositoriesFragment"
+            app:destination="@id/repositoriesFragment"
+            app:popUpTo="@id/organizationsFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/pullRequestsFragment"
+        android:name="com.example.bitclient.ui.view.fragments.PullRequestsFragment"
+        android:label="PullRequestsFragment"
+        tools:layout="@layout/fragment_pull_requests">
     </fragment>
     <fragment
         android:id="@+id/branchesFragment"

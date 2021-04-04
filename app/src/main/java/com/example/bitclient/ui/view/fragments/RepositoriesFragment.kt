@@ -3,8 +3,6 @@ package com.example.bitclient.ui.view.fragments
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
@@ -14,7 +12,6 @@ import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.RepositoryModel
-import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.WorkspaceDbModel
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentRepositoriesBinding
 import com.example.bitclient.databinding.RepositoryItemBinding
@@ -22,8 +19,7 @@ import com.example.bitclient.ui.recyclerview.OnItemClickListener
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.RepositoriesViewModel
-import com.example.bitclient.viewmodels.RepositoriesViewModelFactory
-import timber.log.Timber
+import com.example.bitclient.viewmodels.factories.RepositoriesViewModelFactory
 import javax.inject.Inject
 
 class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbModel>() {

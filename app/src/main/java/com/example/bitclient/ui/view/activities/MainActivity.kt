@@ -11,8 +11,7 @@ import com.example.bitclient.R
 import com.example.bitclient.data.storage.Storage
 import com.example.bitclient.databinding.ActivityMainBinding
 import com.example.bitclient.viewmodels.MainViewModel
-import com.example.bitclient.viewmodels.ViewModelFactory
-import timber.log.Timber
+import com.example.bitclient.viewmodels.factories.ViewModelFactory
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

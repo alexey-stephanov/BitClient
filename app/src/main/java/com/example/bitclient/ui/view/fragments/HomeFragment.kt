@@ -13,7 +13,7 @@ import com.example.bitclient.data.network.networkavailability.NetworkConnectivit
 import com.example.bitclient.databinding.FragmentHomeBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.HomeViewModel
-import com.example.bitclient.viewmodels.ViewModelFactory
+import com.example.bitclient.viewmodels.factories.ViewModelFactory
 import javax.inject.Inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -69,7 +69,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 findNavController().navigate(action)
             }
             buttonHomeOrganizations.setOnClickListener {
-
+                val action = HomeFragmentDirections.actionHomeFragmentToOrganizationsFragment(accountData.accountId)
+                findNavController().navigate(action)
             }
         }
     }

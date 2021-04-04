@@ -12,7 +12,7 @@ import retrofit2.http.Query
 interface RequestsApi {
 
     @GET("2.0/workspaces")
-    suspend fun getWorkspaces(): WorkspacesResponse
+    suspend fun getWorkspaces(@Query("page") page: Int): WorkspacesResponse
 
     @GET("2.0/repositories/{workspace}")
     suspend fun getRepositories(

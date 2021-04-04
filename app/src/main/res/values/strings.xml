@@ -13,6 +13,7 @@
     <string name="account_title">Account</string>
     <string name="branches_title">Branches</string>
     <string name="organizations_title">Organizations</string>
+    <string name="pull_requests_title">Pull requests</string>
     <string name="repositories_menu">Menu</string>
     <string name="settings_logout">Log out</string>
     <string name="repository_icon_private_repo_content_description">Private repository</string>

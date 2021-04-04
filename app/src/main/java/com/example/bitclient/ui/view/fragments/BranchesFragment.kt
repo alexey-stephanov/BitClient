@@ -19,7 +19,7 @@ import com.example.bitclient.ui.recyclerview.OnItemClickListener
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.BranchesViewModel
-import com.example.bitclient.viewmodels.BranchesViewModelFactory
+import com.example.bitclient.viewmodels.factories.BranchesViewModelFactory
 import javax.inject.Inject
 
 class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {

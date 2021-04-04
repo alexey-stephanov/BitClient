@@ -5,7 +5,7 @@ import com.example.bitclient.data.database.CommitsDao
 import com.example.bitclient.data.network.datamappers.CommitDataMapper
 import com.example.bitclient.data.repositories.commits.CommitsRepository
 import com.example.bitclient.data.repositories.commits.CommitsRepositoryImpl
-import com.example.bitclient.viewmodels.CommitsViewModelFactory
+import com.example.bitclient.viewmodels.factories.CommitsViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

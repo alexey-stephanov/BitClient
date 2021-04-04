@@ -1,4 +1,4 @@
-package com.example.bitclient.viewmodels
+package com.example.bitclient.viewmodels.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

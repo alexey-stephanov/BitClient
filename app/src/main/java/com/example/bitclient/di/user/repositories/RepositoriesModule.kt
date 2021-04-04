@@ -5,7 +5,7 @@ import com.example.bitclient.data.database.RepositoriesDao
 import com.example.bitclient.data.network.datamappers.RepositoryDataMapper
 import com.example.bitclient.data.repositories.repositories.RepositoriesRepository
 import com.example.bitclient.data.repositories.repositories.RepositoriesRepositoryImpl
-import com.example.bitclient.viewmodels.RepositoriesViewModelFactory
+import com.example.bitclient.viewmodels.factories.RepositoriesViewModelFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

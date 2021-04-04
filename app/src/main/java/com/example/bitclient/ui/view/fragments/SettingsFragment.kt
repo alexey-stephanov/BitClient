@@ -14,7 +14,7 @@ import com.example.bitclient.di.UserSubcomponentManager
 import com.example.bitclient.ui.view.activities.MainActivity
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.SettingsViewModel
-import com.example.bitclient.viewmodels.ViewModelFactory
+import com.example.bitclient.viewmodels.factories.ViewModelFactory
 import javax.inject.Inject
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
@@ -47,16 +47,15 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             binding.textViewSettingsNoInternet
         )
         binding.buttonSettingsLogout.setOnClickListener {
-            settingsViewModel.logout(false)
-            logout()
+            logout(isClearDataNeeded = false)
         }
         binding.buttonSettingsLogoutAndDeleteAccount.setOnClickListener {
-            settingsViewModel.logout(true)
-            logout()
+            logout(isClearDataNeeded = true)
         }
     }
 
-    private fun logout() {
+    private fun logout(isClearDataNeeded: Boolean) {
+        settingsViewModel.logout(isClearDataNeeded)
         userSubcomponentManager.removeComponent()
         requireActivity().finish()
         requireActivity().overridePendingTransition(0, 0)

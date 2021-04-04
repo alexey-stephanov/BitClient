@@ -15,7 +15,7 @@ import com.example.bitclient.R
 import com.example.bitclient.databinding.FragmentAuthorizationBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.AuthorizationViewModel
-import com.example.bitclient.viewmodels.ViewModelFactory
+import com.example.bitclient.viewmodels.factories.ViewModelFactory
 import javax.inject.Inject
 
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {

@@ -1,12 +1,13 @@
 package com.example.bitclient.di.user
 
 import com.example.bitclient.di.user.account.AccountSubcomponent
+import com.example.bitclient.di.user.organizations.OrganizationsSubcomponent
 import com.example.bitclient.di.user.settings.SettingsSubcomponent
 import com.example.bitclient.ui.view.fragments.HomeFragment
 import dagger.Subcomponent
 
 @UserScope
-@Subcomponent(modules = [UserModule::class, RequestsModule::class, RefreshTokenModule::class, UserSubcomponents::class])
+@Subcomponent(modules = [UserModule::class, RequestsModule::class, RecyclerViewModule::class, RefreshTokenModule::class, UserSubcomponents::class])
 interface UserSubcomponent {
 
     @Subcomponent.Factory
@@ -19,4 +20,5 @@ interface UserSubcomponent {
     fun accountSubcomponent(): AccountSubcomponent.Factory
     fun repositoriesSubcomponentManager(): RepositoriesSubcomponentManager
     fun settingsSubcomponent(): SettingsSubcomponent.Factory
+    fun organizationsSubcomponent(): OrganizationsSubcomponent.Factory
 }

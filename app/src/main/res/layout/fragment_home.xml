@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="RtlHardcoded">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_home_actionbar"
@@ -45,8 +46,8 @@
         android:id="@+id/group_home_user_section"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
-        app:constraint_referenced_ids="text_view_home_greetings, button_home_repositories, button_home_organizations" />
+        android:visibility="visible"
+        app:constraint_referenced_ids="text_view_home_greetings, button_home_repositories, button_home_organizations, button_home_pull_requests" />
 
     <TextView
         android:id="@+id/text_view_home_greetings"
@@ -61,31 +62,53 @@
 
     <Button
         android:id="@+id/button_home_repositories"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="4dp"
+        android:drawableLeft="@drawable/ic_repositories"
+        android:drawablePadding="4dp"
         android:gravity="center_vertical"
+        android:paddingVertical="15dp"
         android:text="@string/repositories_title"
+        app:layout_constraintBottom_toTopOf="@id/button_home_organizations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_home_greetings" />
 
     <Button
         android:id="@+id/button_home_organizations"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
+        android:drawableLeft="@drawable/ic_organizations"
+        android:drawablePadding="4dp"
         android:gravity="center_vertical"
+        android:paddingVertical="15dp"
         android:text="@string/organizations_title"
+        app:layout_constraintBottom_toTopOf="@id/button_home_pull_requests"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/button_home_repositories" />
+
+    <Button
+        android:id="@+id/button_home_pull_requests"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:drawableLeft="@drawable/ic_pull_requests"
+        android:drawablePadding="4dp"
+        android:gravity="center_vertical"
+        android:paddingVertical="15dp"
+        android:text="@string/pull_requests_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_home_organizations" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
