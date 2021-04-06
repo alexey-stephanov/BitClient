@@ -71,16 +71,11 @@ class OrganizationsFragment : PaginatedFragment<WorkspaceModel, WorkspaceDbModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding.toolbarOrganizationsActionbar) {
-            setNavigationIcon(R.drawable.ic_left_arrow)
-            setNavigationOnClickListener { activity?.onBackPressed() }
-        }
-
-        networkConnectivityManager.startConnectionChecking(
-            viewLifecycleOwner,
-            binding.root,
-            binding.textViewOrganizationsNoInternet
-        )
+//        networkConnectivityManager.startConnectionChecking(
+//            viewLifecycleOwner,
+//            binding.root,
+//            binding.textViewOrganizationsNoInternet
+//        )
     }
 
     override fun getLayoutResId(): Int =

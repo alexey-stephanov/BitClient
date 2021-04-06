@@ -5,7 +5,7 @@ import com.example.bitclient.ui.view.fragments.BranchesFragment
 import dagger.Subcomponent
 
 @BranchesScope
-@Subcomponent(modules = [BranchesModule::class])
+@Subcomponent(modules = [BranchesModule::class, BranchesSubcomponents::class])
 interface BranchesSubcomponent {
 
     @Subcomponent.Factory

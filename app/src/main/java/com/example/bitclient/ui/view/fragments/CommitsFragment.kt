@@ -64,17 +64,11 @@ class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding.toolbarCommitsActionbar) {
-            title = args.branchName
-            setNavigationIcon(R.drawable.ic_left_arrow)
-            setNavigationOnClickListener { activity?.onBackPressed() }
-        }
-
-        networkConnectivityManager.startConnectionChecking(
-            viewLifecycleOwner,
-            binding.root,
-            binding.textViewCommitsNoInternet
-        )
+//        networkConnectivityManager.startConnectionChecking(
+//            viewLifecycleOwner,
+//            binding.root,
+//            binding.textViewCommitsNoInternet
+//        )
     }
 
     override fun getLayoutResId(): Int =

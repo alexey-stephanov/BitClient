@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.WorkspaceDbModel
 

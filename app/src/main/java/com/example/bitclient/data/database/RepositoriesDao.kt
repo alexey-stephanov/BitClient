@@ -12,7 +12,4 @@ interface RepositoriesDao : PagingDao<RepositoryDbModel> {
 
     @Query("DELETE FROM repositories WHERE repository_owner_id = :ownerId")
     override suspend fun clearItemsByOwnerId(ownerId: String)
-
-    @Query("DELETE FROM repositories")
-    override suspend fun clearAll()
 }

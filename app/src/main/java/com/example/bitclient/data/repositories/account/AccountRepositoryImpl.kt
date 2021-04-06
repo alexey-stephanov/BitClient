@@ -35,6 +35,13 @@ class AccountRepositoryImpl @Inject constructor(
         service.getUserInfo().toAccountDbModel()
 
     private suspend fun saveMainWorkspaceIntoDb(accountDbModel: AccountDbModel) {
-        workspacesDao.insert(WorkspaceDbModel(accountDbModel.workspaceId, accountDbModel.accountId, accountDbModel.displayName, 1))
+        workspacesDao.insert(
+            WorkspaceDbModel(
+                accountDbModel.workspaceId,
+                accountDbModel.accountId,
+                accountDbModel.displayName,
+                1
+            )
+        )
     }
 }

@@ -19,7 +19,4 @@ interface PagingDao<DbDataModel : PaginatedDbModel> {
 
     @Query("")
     suspend fun clearItemsByOwnerId(ownerId: String)
-
-    @Query("")
-    suspend fun clearAll()
 }

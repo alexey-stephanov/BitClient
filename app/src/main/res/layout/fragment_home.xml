@@ -6,36 +6,13 @@
     android:layout_height="match_parent"
     tools:ignore="RtlHardcoded">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_home_actionbar"
-        style="@style/AppBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/home_title" />
-
-    <TextView
-        android:id="@+id/text_view_home_no_internet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?colorError"
-        android:gravity="center"
-        android:text="@string/no_internet_connection"
-        android:textColor="?colorOnError"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar" />
-
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/container_home_placeholder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:shimmer_duration="800">
 
         <include layout="@layout/home_content_placeholder" />
@@ -57,7 +34,7 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home_actionbar"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Welcome User000!" />
 
     <Button

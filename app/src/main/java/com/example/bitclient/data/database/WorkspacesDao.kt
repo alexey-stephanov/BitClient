@@ -13,7 +13,4 @@ interface WorkspacesDao : PagingDao<WorkspaceDbModel>{
 
     @Query("DELETE FROM workspaces WHERE workspace_owner_id = :ownerId")
     override suspend fun clearItemsByOwnerId(ownerId: String)
-
-    @Query("DELETE FROM workspaces")
-    override suspend fun clearAll()
 }

@@ -38,11 +38,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         observeAccountData()
 
-        networkConnectivityManager.startConnectionChecking(
-            viewLifecycleOwner,
-            binding.root,
-            binding.textViewHomeNoInternet
-        )
+//        networkConnectivityManager.startConnectionChecking(
+//            viewLifecycleOwner,
+//            binding.root,
+//            binding.textViewHomeNoInternet
+//        )
     }
 
     private fun observeAccountData() {

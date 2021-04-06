@@ -10,41 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar_account_actionbar"
-            style="@style/AppBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/account_title" />
-
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/container_account_placeholder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_account_actionbar"
+            app:layout_constraintTop_toTopOf="parent"
             app:shimmer_duration="800">
 
             <include layout="@layout/account_content_placeholder" />
 
         </com.facebook.shimmer.ShimmerFrameLayout>
-
-        <TextView
-            android:id="@+id/text_view_account_no_internet"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?colorError"
-            android:gravity="center"
-            android:text="@string/no_internet_connection"
-            android:textColor="?colorOnError"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_account_actionbar" />
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/image_view_account_avatar"
@@ -53,7 +30,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_account_no_internet"
+            app:layout_constraintTop_toTopOf="parent"
             app:roundAsCircle="true"
             app:roundWithOverlayColor="@android:color/transparent" />
 
@@ -78,7 +55,7 @@
             app:layout_constraintBottom_toTopOf="@id/text_view_account_username"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_view_account_avatar"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_account_no_internet"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Account display name" />
 
         <TextView

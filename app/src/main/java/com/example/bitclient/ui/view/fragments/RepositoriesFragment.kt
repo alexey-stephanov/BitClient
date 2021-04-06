@@ -70,16 +70,11 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding.toolbarRepositoriesActionbar) {
-            setNavigationIcon(R.drawable.ic_left_arrow)
-            setNavigationOnClickListener { activity?.onBackPressed() }
-        }
-
-        networkConnectivityManager.startConnectionChecking(
-            viewLifecycleOwner,
-            binding.root,
-            binding.textViewRepositoriesNoInternet
-        )
+//        networkConnectivityManager.startConnectionChecking(
+//            viewLifecycleOwner,
+//            binding.root,
+//            binding.textViewRepositoriesNoInternet
+//        )
     }
 
     override fun getLayoutResId(): Int = R.layout.fragment_repositories

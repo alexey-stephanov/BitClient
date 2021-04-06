@@ -6,7 +6,6 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.bitclient.BitClientApp
 import timber.log.Timber

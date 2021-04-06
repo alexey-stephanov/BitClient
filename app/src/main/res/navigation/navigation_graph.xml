@@ -11,16 +11,16 @@
         tools:layout="@layout/fragment_authorization">
         <action
             android:id="@+id/action_authorizationFragment_to_bottomNavigationFragment"
-            app:destination="@id/bottomNavigationFragment"
+            app:destination="@id/hostFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_graph"
             app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-        android:id="@+id/bottomNavigationFragment"
-        android:name="com.example.bitclient.ui.view.fragments.BottomNavigationFragment"
-        android:label="BottomNavigationFragment"
-        tools:layout="@layout/fragment_bottom_navigation" />
+        android:id="@+id/hostFragment"
+        android:name="com.example.bitclient.ui.view.fragments.HostFragment"
+        android:label="HostFragment"
+        tools:layout="@layout/fragment_host" />
 
 </navigation>

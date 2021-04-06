@@ -13,7 +13,4 @@ interface CommitsDao : PagingDao<CommitDbModel> {
 
     @Query("DELETE FROM commits WHERE commit_owner_id = :ownerId")
     override suspend fun clearItemsByOwnerId(ownerId: String)
-
-    @Query("DELETE FROM commits")
-    override suspend fun clearAll()
 }

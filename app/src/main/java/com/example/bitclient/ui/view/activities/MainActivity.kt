@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         val inflater = navHostFragment.navController.navInflater
         val graph = inflater.inflate(R.navigation.navigation_graph)
         if (storage.getString("access_token") != "" && storage.getString("access_token") != "default") {
-            graph.startDestination = R.id.bottomNavigationFragment
+            graph.startDestination = R.id.hostFragment
         } else {
             graph.startDestination = R.id.authorizationFragment
         }

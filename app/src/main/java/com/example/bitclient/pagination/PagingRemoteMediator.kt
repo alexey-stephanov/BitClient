@@ -11,7 +11,6 @@ import com.example.bitclient.data.network.datamappers.NetworkToDbDataMapper
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedResponse
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 
 @ExperimentalPagingApi

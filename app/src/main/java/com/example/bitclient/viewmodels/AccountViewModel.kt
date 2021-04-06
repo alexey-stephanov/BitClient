@@ -4,14 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
-import com.example.bitclient.data.network.networkavailability.NetworkStatus
 import com.example.bitclient.data.repositories.account.AccountRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.text.ParseException
 import javax.inject.Inject
 
 class AccountViewModel @Inject constructor(

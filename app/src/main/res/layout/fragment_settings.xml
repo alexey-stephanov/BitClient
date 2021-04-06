@@ -4,29 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_settings_actionbar"
-        style="@style/AppBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/settings_title" />
-
-    <TextView
-        android:id="@+id/text_view_settings_no_internet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/no_internet_connection"
-        android:background="?colorError"
-        android:textColor="?colorOnError"
-        android:gravity="center"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_settings_actionbar" />
-
     <Button
         android:id="@+id/button_settings_logout_and_delete_account"
         android:layout_width="wrap_content"

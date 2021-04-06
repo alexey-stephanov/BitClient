@@ -12,8 +12,8 @@ interface AccountDao {
     @Query("DELETE FROM accounts WHERE account_id = :accountId")
     suspend fun deleteAccount(accountId: String)
 
-    @Query("UPDATE accounts SET is_active = 0 WHERE account_id = :accountId")
-    suspend fun inactiveAccount(accountId: String)
+    @Query("UPDATE accounts SET is_active = 0 WHERE is_active = 1")
+    suspend fun inactiveAccount()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(account: AccountDbModel)

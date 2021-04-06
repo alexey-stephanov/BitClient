@@ -72,16 +72,11 @@ class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding.toolbarBranchesActionbar) {
-            setNavigationIcon(R.drawable.ic_left_arrow)
-            setNavigationOnClickListener { activity?.onBackPressed() }
-        }
-
-        networkConnectivityManager.startConnectionChecking(
-            viewLifecycleOwner,
-            binding.root,
-            binding.textViewBranchesNoInternet
-        )
+//        networkConnectivityManager.startConnectionChecking(
+//            viewLifecycleOwner,
+//            binding.root,
+//            binding.textViewBranchesNoInternet
+//        )
     }
 
     override fun getLayoutResId(): Int =

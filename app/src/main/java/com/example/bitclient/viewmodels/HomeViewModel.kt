@@ -7,17 +7,14 @@ import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.Accou
 import com.example.bitclient.data.repositories.account.AccountRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
     private val accountRepository: AccountRepository
-): ViewModel() {
+) : ViewModel() {
 
     val accountData: MutableLiveData<AccountDbModel> = MutableLiveData()
 

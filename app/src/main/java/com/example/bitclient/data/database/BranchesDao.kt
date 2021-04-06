@@ -13,7 +13,4 @@ interface BranchesDao : PagingDao<BranchDbModel> {
 
     @Query("DELETE FROM branches WHERE branch_owner_id = :ownerId")
     override suspend fun clearItemsByOwnerId(ownerId: String)
-
-    @Query("DELETE FROM branches")
-    override suspend fun clearAll()
 }

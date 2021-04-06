@@ -8,22 +8,14 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.bitclient.ui.view.fragments.HomeFragment"
-        android:label="HomeFragment"
+        android:label="@string/home_title"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_repositoriesFragment"
-            app:destination="@id/repositoriesFragment"
-            app:popUpTo="@id/homeFragment"/>
-        <action
-            android:id="@+id/action_homeFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/repositoriesFragment" />
         <action
             android:id="@+id/action_homeFragment_to_organizationsFragment"
-            app:destination="@id/organizationsFragment"
-            app:popUpTo="@id/homeFragment"/>
+            app:destination="@id/organizationsFragment" />
         <action
             android:id="@+id/action_homeFragment_to_pullRequestsFragment"
             app:destination="@id/pullRequestsFragment" />
@@ -31,7 +23,7 @@
     <fragment
         android:id="@+id/repositoriesFragment"
         android:name="com.example.bitclient.ui.view.fragments.RepositoriesFragment"
-        android:label="RepositoriesFragment"
+        android:label="@string/repositories_title"
         tools:layout="@layout/fragment_repositories">
         <argument
             android:name="workspaceId"
@@ -39,13 +31,12 @@
             app:nullable="true"/>
         <action
             android:id="@+id/action_repositoriesFragment_to_branchesFragment"
-            app:destination="@id/branchesFragment"
-            app:popUpTo="@id/repositoriesFragment" />
+            app:destination="@id/branchesFragment" />
     </fragment>
     <fragment
         android:id="@+id/organizationsFragment"
         android:name="com.example.bitclient.ui.view.fragments.OrganizationsFragment"
-        android:label="OrganizationsFragment"
+        android:label="@string/organizations_title"
         tools:layout="@layout/fragment_organizations">
         <argument
             android:name="accountId"
@@ -53,19 +44,18 @@
             app:nullable="true"/>
         <action
             android:id="@+id/action_organizationsFragment_to_repositoriesFragment"
-            app:destination="@id/repositoriesFragment"
-            app:popUpTo="@id/organizationsFragment"/>
+            app:destination="@id/repositoriesFragment"/>
     </fragment>
     <fragment
         android:id="@+id/pullRequestsFragment"
         android:name="com.example.bitclient.ui.view.fragments.PullRequestsFragment"
-        android:label="PullRequestsFragment"
+        android:label="@string/pull_requests_title"
         tools:layout="@layout/fragment_pull_requests">
     </fragment>
     <fragment
         android:id="@+id/branchesFragment"
         android:name="com.example.bitclient.ui.view.fragments.BranchesFragment"
-        android:label="BranchesFragment"
+        android:label="@string/branches_title"
         tools:layout="@layout/fragment_branches" >
         <argument
             android:name="workspaceId"
@@ -101,11 +91,11 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.bitclient.ui.view.fragments.SettingsFragment"
-        android:label="SettingsFragment"
+        android:label="@string/settings_title"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.bitclient.ui.view.fragments.AccountFragment"
-        android:label="AccountFragment"
+        android:label="@string/account_title"
         tools:layout="@layout/fragment_account" />
 </navigation>
