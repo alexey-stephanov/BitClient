@@ -1,8 +1,6 @@
 package com.example.bitclient.ui.view.fragments
 
 import android.content.Context
-import android.os.Bundle
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.paging.ExperimentalPagingApi
@@ -65,17 +63,6 @@ class OrganizationsFragment : PaginatedFragment<WorkspaceModel, WorkspaceDbModel
 
         (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.organizationsSubcomponent()
             ?.create()?.inject(this)
-    }
-
-    @ExperimentalPagingApi
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-//        networkConnectivityManager.startConnectionChecking(
-//            viewLifecycleOwner,
-//            binding.root,
-//            binding.textViewOrganizationsNoInternet
-//        )
     }
 
     override fun getLayoutResId(): Int =

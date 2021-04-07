@@ -11,6 +11,7 @@ import com.example.bitclient.R
 import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
 import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentHomeBinding
+import com.example.bitclient.ui.appbars.getAppBarsStateHandler
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.HomeViewModel
 import com.example.bitclient.viewmodels.factories.ViewModelFactory
@@ -30,7 +31,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.inject(this)
+        (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.inject(
+            this
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,11 +41,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         observeAccountData()
 
-//        networkConnectivityManager.startConnectionChecking(
-//            viewLifecycleOwner,
-//            binding.root,
-//            binding.textViewHomeNoInternet
-//        )
     }
 
     private fun observeAccountData() {
@@ -60,11 +58,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             groupHomeUserSection.visibility = View.VISIBLE
             textViewHomeGreetings.text = getString(R.string.home_greetings, accountData.displayName)
             buttonHomeRepositories.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToRepositoriesFragment(accountData.workspaceId)
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToRepositoriesFragment(accountData.workspaceId)
                 findNavController().navigate(action)
             }
             buttonHomeOrganizations.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToOrganizationsFragment(accountData.accountId)
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToOrganizationsFragment(accountData.accountId)
                 findNavController().navigate(action)
             }
         }

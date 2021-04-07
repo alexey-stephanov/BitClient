@@ -38,14 +38,14 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
         }
 
         return try {
-            val data = retrieveData(page).values
-            val isEndOfList = data.isEmpty()
+            val data = retrieveData(page)
+            val isEndOfList = data.nextPage == null
             if (!isEndOfList) {
                 database.withTransaction {
                     if (loadType == LoadType.REFRESH) {
                         dao.clearItemsByOwnerId(ownerId)
                     }
-                    val dbModel = data.map { data ->
+                    val dbModel = data.values.map { data ->
                         dataMapper.convert(data, page, ownerId)
                     }
                     dao.insertAll(dbModel)

@@ -8,11 +8,12 @@
         android:id="@+id/button_settings_logout_and_delete_account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout and delete account"
         android:layout_marginBottom="16dp"
+        android:text="Logout and delete account"
         app:layout_constraintBottom_toTopOf="@+id/button_settings_logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_settings_logout"
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:text="@string/settings_logout"
+        app:layout_constraintTop_toBottomOf="@id/button_settings_logout_and_delete_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -12,6 +12,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 import com.example.bitclient.pagination.LoaderStateAdapter
+import com.example.bitclient.ui.appbars.getAppBarsStateHandler
 import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
 import com.example.bitclient.viewmodels.PaginatedViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -40,6 +41,11 @@ abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel
 
         setupRecyclerView()
         subscribeOnPaginatedData()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        getAppBarsStateHandler()?.show()
     }
 
     @LayoutRes

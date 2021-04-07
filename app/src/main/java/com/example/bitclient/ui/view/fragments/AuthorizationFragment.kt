@@ -35,12 +35,10 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         observeResponseStatus(view)
 
         binding.buttonAuthorizationEnter.setOnClickListener {
-            val url =
-                "${BuildConfig.AUTH_URL}site/oauth2/authorize?client_id=${BuildConfig.CLIENT_ID}&response_type=code"
+            val url = "${BuildConfig.AUTH_URL}site/oauth2/authorize?client_id=${BuildConfig.CLIENT_ID}&response_type=code"
             val customTabsIntent = CustomTabsIntent.Builder().build()
             customTabsIntent.launchUrl(requireContext(), Uri.parse(url))
         }
@@ -50,9 +48,9 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         authorizationViewModel.resultLiveData.observe(
             viewLifecycleOwner,
             { result ->
-                if(result) {
-                val action = AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment()
-                view.findNavController().navigate(action)
+                if (result) {
+                    val action = AuthorizationFragmentDirections.actionAuthorizationFragmentToBottomNavigationFragment()
+                    view.findNavController().navigate(action)
                 } else {
                     Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
                 }
