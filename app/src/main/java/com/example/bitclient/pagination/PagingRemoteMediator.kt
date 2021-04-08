@@ -11,7 +11,9 @@ import com.example.bitclient.data.network.datamappers.NetworkToDbDataMapper
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedResponse
 import retrofit2.HttpException
+import timber.log.Timber
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 @ExperimentalPagingApi
 class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
@@ -27,31 +29,38 @@ class PagingRemoteMediator<DataModel, DbDataModel : PaginatedDbModel>(
     ): MediatorResult {
 
         val page = when (loadType) {
-            LoadType.REFRESH -> state.lastItemOrNull()?.page?.minus(1) ?: 1
-            LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
+            LoadType.REFRESH -> {
+                Timber.e("REFRESH")
+                state.lastItemOrNull()?.page ?: 1
+            }
+            LoadType.PREPEND -> {
+                Timber.e("PREPEND")
+                return MediatorResult.Success(endOfPaginationReached = true)
+            }
             LoadType.APPEND -> {
+                Timber.e("${state.lastItemOrNull()}")
                 val lastItem = state.lastItemOrNull() ?: return MediatorResult.Success(
                     endOfPaginationReached = true
                 )
+                Timber.e("APPEND")
                 lastItem.page + 1
             }
         }
 
         return try {
+            Timber.e(page.toString())
             val data = retrieveData(page)
-            val isEndOfList = data.nextPage == null
-            if (!isEndOfList) {
-                database.withTransaction {
-                    if (loadType == LoadType.REFRESH) {
-                        dao.clearItemsByOwnerId(ownerId)
-                    }
-                    val dbModel = data.values.map { data ->
-                        dataMapper.convert(data, page, ownerId)
-                    }
-                    dao.insertAll(dbModel)
+            database.withTransaction {
+                if (loadType == LoadType.REFRESH) {
+                    dao.clearItemsByOwnerId(ownerId)
                 }
+                val dbModel = data.values.map { data ->
+                    dataMapper.convert(data, page, ownerId)
+                }
+                dao.insertAll(dbModel)
             }
-            MediatorResult.Success(endOfPaginationReached = isEndOfList)
+            Timber.e((data.nextPage == null).toString())
+            MediatorResult.Success(endOfPaginationReached = data.nextPage == null)
         } catch (exception: IOException) {
             MediatorResult.Error(exception)
         } catch (exception: HttpException) {

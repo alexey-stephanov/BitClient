@@ -55,7 +55,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 containerHomePlaceholder.stopShimmer()
                 containerHomePlaceholder.visibility = View.GONE
             }
-            groupHomeUserSection.visibility = View.VISIBLE
             textViewHomeGreetings.text = getString(R.string.home_greetings, accountData.displayName)
             buttonHomeRepositories.setOnClickListener {
                 val action =
@@ -67,6 +66,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     HomeFragmentDirections.actionHomeFragmentToOrganizationsFragment(accountData.accountId)
                 findNavController().navigate(action)
             }
+            groupHomeUserSection.visibility = View.VISIBLE
         }
     }
 }

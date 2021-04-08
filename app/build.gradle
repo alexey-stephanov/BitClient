@@ -90,7 +90,7 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-    implementation 'androidx.paging:paging-runtime-ktx:3.0.0-beta03'
+    implementation 'androidx.paging:paging-runtime-ktx:3.0.0-alpha02'
 
     def navigation_version = "2.3.4"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"

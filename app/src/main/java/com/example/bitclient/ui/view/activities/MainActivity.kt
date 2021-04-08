@@ -56,8 +56,6 @@ class MainActivity : AppCompatActivity() {
         val code = intent?.data?.getQueryParameter("code")
         if (code != null) {
             mainViewModel.handleAuthorizationCode(code)
-        } else {
-            Toast.makeText(this, getString(R.string.load_error_message), Toast.LENGTH_SHORT).show()
         }
     }
 }

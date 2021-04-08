@@ -8,7 +8,7 @@ import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.Bran
 @Dao
 interface BranchesDao : PagingDao<BranchDbModel> {
 
-    @Query("SELECT * FROM branches WHERE branch_owner_id = :ownerId")
+    @Query("SELECT * FROM branches WHERE branch_owner_id = :ownerId ORDER BY page ASC")
     override fun getItemsByOwnerId(ownerId: String): PagingSource<Int, BranchDbModel>
 
     @Query("DELETE FROM branches WHERE branch_owner_id = :ownerId")

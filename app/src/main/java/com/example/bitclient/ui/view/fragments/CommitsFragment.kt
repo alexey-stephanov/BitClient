@@ -74,10 +74,10 @@ class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {
     override fun getLayoutResId(): Int =
         R.layout.fragment_commits
 
-    override fun getShimmerFrameLayout(): ShimmerFrameLayout =
+    override fun bindShimmerFrameLayout(): ShimmerFrameLayout =
         binding.containerCommitsPlaceholder
 
-    override fun getRecyclerView(): RecyclerView {
+    override fun bindRecyclerView(): RecyclerView {
         binding.recyclerViewCommitsCommitsList.addItemDecoration(itemDecoration)
         return binding.recyclerViewCommitsCommitsList
     }

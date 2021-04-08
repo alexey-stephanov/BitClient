@@ -69,10 +69,10 @@ class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
     override fun getLayoutResId(): Int =
         R.layout.fragment_branches
 
-    override fun getShimmerFrameLayout(): ShimmerFrameLayout =
+    override fun bindShimmerFrameLayout(): ShimmerFrameLayout =
         binding.containerBranchesPlaceholder
 
-    override fun getRecyclerView(): RecyclerView {
+    override fun bindRecyclerView(): RecyclerView {
         binding.recyclerViewBranchesBranchesList.addItemDecoration(itemDecoration)
         return binding.recyclerViewBranchesBranchesList
     }

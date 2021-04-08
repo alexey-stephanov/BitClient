@@ -56,4 +56,14 @@ class HostFragment : Fragment(R.layout.fragment_host), AppBarsStateHandler {
             }
         }
     }
+
+    override fun onStop() {
+        offsetAnimator?.cancel()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        offsetAnimator?.removeAllListeners()
+        super.onDestroy()
+    }
 }

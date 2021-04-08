@@ -37,11 +37,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        networkConnectivityManager.startConnectionChecking(
-//            viewLifecycleOwner,
-//            binding.root,
-//            binding.textViewAccountNoInternet
-//        )
         observeAccountData()
         setupRefreshLayout()
     }

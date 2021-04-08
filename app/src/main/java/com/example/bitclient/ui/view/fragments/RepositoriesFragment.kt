@@ -66,10 +66,10 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
 
     override fun getLayoutResId(): Int = R.layout.fragment_repositories
 
-    override fun getShimmerFrameLayout(): ShimmerFrameLayout =
+    override fun bindShimmerFrameLayout(): ShimmerFrameLayout =
         binding.containerRepositoriesPlaceholder
 
-    override fun getRecyclerView(): RecyclerView {
+    override fun bindRecyclerView(): RecyclerView {
         binding.recyclerViewRepositoriesReposList.addItemDecoration(itemDecoration)
         return binding.recyclerViewRepositoriesReposList
     }

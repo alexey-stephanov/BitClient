@@ -8,7 +8,7 @@ import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.Wo
 @Dao
 interface WorkspacesDao : PagingDao<WorkspaceDbModel>{
 
-    @Query("SELECT * FROM workspaces WHERE workspace_owner_id = :ownerId")
+    @Query("SELECT * FROM workspaces WHERE workspace_owner_id = :ownerId ORDER BY page ASC")
     override fun getItemsByOwnerId(ownerId: String): PagingSource<Int, WorkspaceDbModel>
 
     @Query("DELETE FROM workspaces WHERE workspace_owner_id = :ownerId")

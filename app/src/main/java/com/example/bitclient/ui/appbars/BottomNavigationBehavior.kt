@@ -73,7 +73,6 @@ class BottomNavigationBehavior<V : View>(context: Context, attrs: AttributeSet) 
         }
 
         val targetTranslation = if (isVisible) 0f else child.height.toFloat()
-        Timber.e("${child.translationY} || $targetTranslation")
         offsetAnimator?.setFloatValues(child.translationY, targetTranslation)
         offsetAnimator?.start()
     }

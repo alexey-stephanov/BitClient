@@ -68,10 +68,10 @@ class OrganizationsFragment : PaginatedFragment<WorkspaceModel, WorkspaceDbModel
     override fun getLayoutResId(): Int =
         R.layout.fragment_organizations
 
-    override fun getShimmerFrameLayout(): ShimmerFrameLayout =
+    override fun bindShimmerFrameLayout(): ShimmerFrameLayout =
         binding.containerOrganizationsPlaceholder
 
-    override fun getRecyclerView(): RecyclerView {
+    override fun bindRecyclerView(): RecyclerView {
         binding.recyclerViewOrganizationsWorkspacesList.addItemDecoration(itemDecoration)
         return binding.recyclerViewOrganizationsWorkspacesList
     }
