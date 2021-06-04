@@ -10,7 +10,8 @@ import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbMode
         parentColumns = ["account_id"],
         childColumns = ["workspace_owner_id"],
         onDelete = ForeignKey.CASCADE
-    )])
+    )], indices = [Index(value = ["workspace_owner_id", "workspace_id"])]
+)
 data class WorkspaceDbModel(
     @PrimaryKey
     @ColumnInfo(name = "workspace_id")

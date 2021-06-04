@@ -7,31 +7,44 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            style="@style/AppBarStyle"
+            style="@style/ToolbarStyle"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_scrollFlags="scroll|enterAlways|snap" />
+
+        <TextView
+            android:id="@+id/text_view_host_no_internet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?colorError"
+            android:gravity="center"
+            android:text="@string/no_internet_connection"
+            android:textColor="?colorOnError"
+            android:visibility="gone" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:navGraph="@navigation/nested_navigation_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
+        style="@style/BottomNavigationViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        app:labelVisibilityMode="unlabeled"
         app:layout_behavior="com.example.bitclient.ui.appbars.BottomNavigationBehavior"
         app:menu="@menu/bottom_menu" />
 

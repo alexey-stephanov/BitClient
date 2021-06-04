@@ -13,12 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 import com.example.bitclient.pagination.LoaderStateAdapter
 import com.example.bitclient.ui.appbars.getAppBarsStateHandler
-import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
+import com.example.bitclient.ui.recyclerview.adapters.PaginatedListAdapter
 import com.example.bitclient.viewmodels.PaginatedViewModel
 import com.facebook.shimmer.ShimmerFrameLayout
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel> : Fragment() {
 
@@ -33,6 +32,9 @@ abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(getLayoutResId(), container, false)
 
+    @LayoutRes
+    abstract fun getLayoutResId(): Int
+
     @ExperimentalPagingApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,28 +42,6 @@ abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel
         setupRecyclerView()
         subscribeOnPaginatedData()
     }
-
-    override fun onStop() {
-        super.onStop()
-        getAppBarsStateHandler()?.show()
-    }
-
-    @LayoutRes
-    abstract fun getLayoutResId(): Int
-
-    @ExperimentalPagingApi
-    private fun subscribeOnPaginatedData() {
-        Timber.e(viewModel.dataFlow.toString())
-        lifecycleScope.launch {
-            viewModel.dataFlow.collectLatest { pagingData ->
-                paginatedListAdapter.submitData(pagingData)
-            }
-        }
-    }
-
-    abstract fun bindRecyclerView(): RecyclerView
-
-    abstract fun bindShimmerFrameLayout(): ShimmerFrameLayout
 
     private fun setupRecyclerView() {
         paginatedListAdapter.addLoadStateListener {
@@ -79,5 +59,23 @@ abstract class PaginatedFragment<DataModel : Any, DbDataModel : PaginatedDbModel
         }
         bindRecyclerView().adapter =
             paginatedListAdapter.withLoadStateFooter(LoaderStateAdapter { paginatedListAdapter.retry() })
+    }
+
+    abstract fun bindShimmerFrameLayout(): ShimmerFrameLayout
+
+    abstract fun bindRecyclerView(): RecyclerView
+
+    override fun onStop() {
+        super.onStop()
+        getAppBarsStateHandler()?.show()
+    }
+
+    @ExperimentalPagingApi
+    private fun subscribeOnPaginatedData() {
+        lifecycleScope.launch {
+            viewModel.dataFlow.collectLatest { pagingData ->
+                paginatedListAdapter.submitData(pagingData)
+            }
+        }
     }
 }

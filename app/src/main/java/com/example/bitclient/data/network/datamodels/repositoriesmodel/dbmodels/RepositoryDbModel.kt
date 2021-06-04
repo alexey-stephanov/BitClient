@@ -1,9 +1,6 @@
 package com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.WorkspaceDbModel
 
@@ -14,7 +11,7 @@ import com.example.bitclient.data.network.datamodels.workspacesmodel.dbmodels.Wo
         parentColumns = ["workspace_id"],
         childColumns = ["repository_owner_id"],
         onDelete = ForeignKey.CASCADE
-    )]
+    )], indices = [Index(value = ["repository_id"])]
 )
 data class RepositoryDbModel(
     @PrimaryKey

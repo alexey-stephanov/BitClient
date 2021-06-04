@@ -10,11 +10,10 @@ import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
 import com.example.bitclient.data.network.datamodels.branchesmodel.networkmodels.BranchModel
-import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.BranchItemBinding
 import com.example.bitclient.databinding.FragmentBranchesBinding
-import com.example.bitclient.ui.recyclerview.OnItemClickListener
-import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
+import com.example.bitclient.ui.recyclerview.listeners.OnItemClickListener
+import com.example.bitclient.ui.recyclerview.adapters.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.BranchesViewModel
 import com.example.bitclient.viewmodels.factories.BranchesViewModelFactory
@@ -28,9 +27,6 @@ class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
     private val args: BranchesFragmentArgs by navArgs()
 
     @Inject
-    lateinit var networkConnectivityManager: NetworkConnectivityManager
-
-    @Inject
     lateinit var branchesViewModelFactory: BranchesViewModelFactory
 
     @Inject
@@ -42,7 +38,8 @@ class BranchesFragment : PaginatedFragment<BranchModel, BranchDbModel>() {
     }
 
     override val paginatedListAdapter: PaginatedListAdapter<BranchDbModel> =
-        object : PaginatedListAdapter<BranchDbModel>(OnItemClickListener { data ->
+        object : PaginatedListAdapter<BranchDbModel>(
+            OnItemClickListener { data ->
             val action =
                 BranchesFragmentDirections.actionBranchesFragmentToCommitsFragment(
                     args.workspaceId,

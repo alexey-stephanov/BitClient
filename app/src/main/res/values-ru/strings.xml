@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">BitClient</string>
     <string name="authorization_logo_content_description">Лого</string>
-    <string name="authorization_enter">Войдите в свой аккаунт</string>
-    <string name="authorization_rights_reserved">© Все права защищены 2021</string>
+    <string name="authorization_enter">Войдите в аккаунт</string>
     <string name="no_internet_connection">Нет подключения к интернету</string>
     <string name="home_title">Главная</string>
-    <string name="home_greetings">Добро пожаловать, %1$s!</string>
+    <string name="home_work_title">Моя работа</string>
+    <string name="home_recent_repos_title">Последние репозитории</string>
     <string name="settings_title">Настройки</string>
     <string name="workspaces_title">Рабочее пространство</string>
     <string name="change_workspace_label">Изменить рабочее пространство</string>
@@ -16,6 +16,7 @@
     <string name="pull_requests_title">Пулл реквесты</string>
     <string name="repositories_menu">Меню</string>
     <string name="settings_logout">Выйти</string>
+    <string name="settings_clear_cache">Очистить кэш</string>
     <string name="repository_icon_private_repo_content_description">Приватный репозиторий</string>
     <string name="load_error_message">Что-то пошло не так, попробуйте ещё раз.</string>
     <string name="load_error_retry">Повторить</string>

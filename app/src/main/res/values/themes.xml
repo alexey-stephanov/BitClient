@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/orange_900</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?android:colorBackground</item>
         <!-- Customize your theme here. -->
         <item name="colorError">@color/red_700</item>
         <item name="colorOnError">@color/white</item>
@@ -20,13 +20,31 @@
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
-    <style name="AppBarStyle">
-        <item name="android:elevation">@dimen/action_bar_light_elevation</item>
+    <style name="ToolbarStyle">
+        <item name="android:elevation">@dimen/toolbar_light_elevation</item>
         <item name="android:background">?android:colorBackground</item>
     </style>
 
-    <style name="BottomNavigationBarStyle">
-        <item name="android:elevation">@dimen/bottom_navigation_bar_light_elevation</item>
+    <style name="BottomNavigationViewStyle">
+        <item name="android:elevation">@dimen/bottom_navigation_view_light_elevation</item>
         <item name="android:background">?android:colorBackground</item>
+    </style>
+
+    <style name="AppNameTextStyle" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="HomeTextStyle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">?colorOnBackground</item>
+    </style>
+
+    <style name="ButtonItemTextStyle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">?colorOnBackground</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.ImageCornersSize" parent="">
+        <item name="cornerSize">25%</item>
     </style>
 </resources>

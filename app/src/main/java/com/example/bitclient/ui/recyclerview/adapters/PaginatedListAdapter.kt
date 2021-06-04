@@ -1,4 +1,4 @@
-package com.example.bitclient.ui.recyclerview
+package com.example.bitclient.ui.recyclerview.adapters
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
+import com.example.bitclient.ui.recyclerview.factories.ViewHolderFactory
+import com.example.bitclient.ui.recyclerview.listeners.OnItemClickListener
 
 abstract class PaginatedListAdapter<DataDbModel : PaginatedDbModel>(
     private var listener: OnItemClickListener<DataDbModel>? = null,
@@ -24,7 +26,7 @@ abstract class PaginatedListAdapter<DataDbModel : PaginatedDbModel>(
 
     @Suppress("UNCHECKED_CAST")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as Binder<DataDbModel>).bind(getItem(position)!!, listener)
+        (holder as PaginatedListBinder<DataDbModel>).bind(getItem(position)!!, listener)
     }
 
     override fun getItemViewType(position: Int): Int =
@@ -36,7 +38,7 @@ abstract class PaginatedListAdapter<DataDbModel : PaginatedDbModel>(
         return ViewHolderFactory.create(binding, viewType)
     }
 
-    interface Binder<DataDbModel : PaginatedDbModel> {
+    interface PaginatedListBinder<DataDbModel : PaginatedDbModel> {
         fun bind(data: DataDbModel, listener: OnItemClickListener<DataDbModel>?)
     }
 

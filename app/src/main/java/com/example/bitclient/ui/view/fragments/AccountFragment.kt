@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.network.datamodels.accountmodel.dbmodels.AccountDbModel
-import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentAccountBinding
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.AccountViewModel
@@ -23,9 +22,6 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
     private val accountViewModel: AccountViewModel by viewModels { viewModelFactory }
-
-    @Inject
-    lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

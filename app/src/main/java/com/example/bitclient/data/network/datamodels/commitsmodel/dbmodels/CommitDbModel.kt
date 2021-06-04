@@ -1,9 +1,6 @@
 package com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 import com.example.bitclient.data.network.datamodels.branchesmodel.dbmodels.BranchDbModel
 import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbModel
 
@@ -14,7 +11,7 @@ import com.example.bitclient.data.network.datamodels.pagingmodel.PaginatedDbMode
         parentColumns = ["branch_id"],
         childColumns = ["commit_owner_id"],
         onDelete = ForeignKey.CASCADE
-    )]
+    )], indices = [Index(value = ["hash"])]
 )
 data class CommitDbModel(
     @PrimaryKey

@@ -11,11 +11,10 @@ import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.network.datamodels.commitsmodel.dbmodels.CommitDbModel
 import com.example.bitclient.data.network.datamodels.commitsmodel.networkmodels.CommitModel
-import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.CommitItemBinding
 import com.example.bitclient.databinding.FragmentCommitsBinding
-import com.example.bitclient.ui.recyclerview.OnItemClickListener
-import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
+import com.example.bitclient.ui.recyclerview.listeners.OnItemClickListener
+import com.example.bitclient.ui.recyclerview.adapters.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.CommitsViewModel
 import com.example.bitclient.viewmodels.factories.CommitsViewModelFactory
@@ -27,9 +26,6 @@ class CommitsFragment : PaginatedFragment<CommitModel, CommitDbModel>() {
     private val binding by viewBinding(FragmentCommitsBinding::bind)
 
     private val args: CommitsFragmentArgs by navArgs()
-
-    @Inject
-    lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     @Inject
     lateinit var commitsViewModelFactory: CommitsViewModelFactory

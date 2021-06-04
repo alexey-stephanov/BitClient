@@ -1,91 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="RtlHardcoded">
+    android:layout_height="match_parent">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/container_home_placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shimmer_duration="800">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_home_buttons_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/recycler_view_recent_repositories_list"/>
 
-        <include layout="@layout/home_content_placeholder" />
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group_home_user_section"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:constraint_referenced_ids="text_view_home_greetings, button_home_repositories, button_home_organizations, button_home_pull_requests" />
-
-    <TextView
-        android:id="@+id/text_view_home_greetings"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Welcome User000!" />
-
-    <Button
-        android:id="@+id/button_home_repositories"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="4dp"
-        android:drawableLeft="@drawable/ic_repositories"
-        android:drawablePadding="4dp"
-        android:gravity="center_vertical"
-        android:paddingVertical="15dp"
-        android:text="@string/repositories_title"
-        app:layout_constraintBottom_toTopOf="@id/button_home_organizations"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_view_home_greetings" />
-
-    <Button
-        android:id="@+id/button_home_organizations"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:drawableLeft="@drawable/ic_organizations"
-        android:drawablePadding="4dp"
-        android:gravity="center_vertical"
-        android:paddingVertical="15dp"
-        android:text="@string/organizations_title"
-        app:layout_constraintBottom_toTopOf="@id/button_home_pull_requests"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_home_repositories" />
-
-    <Button
-        android:id="@+id/button_home_pull_requests"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
-        android:drawableLeft="@drawable/ic_pull_requests"
-        android:drawablePadding="4dp"
-        android:gravity="center_vertical"
-        android:paddingVertical="15dp"
-        android:text="@string/pull_requests_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_home_organizations" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_recent_repositories_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_home_buttons_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

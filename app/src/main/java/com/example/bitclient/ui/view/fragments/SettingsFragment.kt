@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
-import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentSettingsBinding
 import com.example.bitclient.di.UserSubcomponentManager
 import com.example.bitclient.ui.view.activities.MainActivity
@@ -25,9 +24,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     lateinit var viewModelFactory: ViewModelFactory
     private val settingsViewModel: SettingsViewModel by viewModels { viewModelFactory }
 
-    @Inject
-    lateinit var networkConnectivityManager: NetworkConnectivityManager
-
     private lateinit var userSubcomponentManager: UserSubcomponentManager
 
     override fun onAttach(context: Context) {
@@ -41,21 +37,16 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        networkConnectivityManager.startConnectionChecking(
-//            viewLifecycleOwner,
-//            binding.root,
-//            binding.textViewSettingsNoInternet
-//        )
-        binding.buttonSettingsLogout.setOnClickListener {
-            logout(isClearDataNeeded = false)
-        }
-        binding.buttonSettingsLogoutAndDeleteAccount.setOnClickListener {
-            logout(isClearDataNeeded = true)
-        }
+//        binding.buttonSettingsLogout.setOnClickListener {
+//            logoutAndMoveToAuthorization()
+//        }
+//        binding.buttonSettingsClearCache.setOnClickListener {
+//            settingsViewModel.clearCache()
+//        }
     }
 
-    private fun logout(isClearDataNeeded: Boolean) {
-        settingsViewModel.logout(isClearDataNeeded)
+    private fun logoutAndMoveToAuthorization() {
+        settingsViewModel.logout()
         userSubcomponentManager.removeComponent()
         requireActivity().finish()
         requireActivity().overridePendingTransition(0, 0)

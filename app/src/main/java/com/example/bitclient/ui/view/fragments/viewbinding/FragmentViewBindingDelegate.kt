@@ -1,7 +1,6 @@
 package com.example.bitclient.ui.view.fragments.viewbinding
 
 import android.view.View
-import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
@@ -13,7 +12,7 @@ import kotlin.reflect.KProperty
 
 class FragmentViewBindingDelegate<Binding : ViewBinding>(
     val fragment: Fragment,
-        val viewBindingFactory: (View) -> Binding
+    val viewBindingFactory: (View) -> Binding
 ) : ReadOnlyProperty<Fragment, Binding> {
 
     private var binding: Binding? = null
@@ -31,11 +30,15 @@ class FragmentViewBindingDelegate<Binding : ViewBinding>(
             }
 
             override fun onCreate(owner: LifecycleOwner) {
-                fragment.viewLifecycleOwnerLiveData.observeForever(viewLifecycleOwnerLiveDataObserver)
+                fragment.viewLifecycleOwnerLiveData.observeForever(
+                    viewLifecycleOwnerLiveDataObserver
+                )
             }
 
             override fun onDestroy(owner: LifecycleOwner) {
-                fragment.viewLifecycleOwnerLiveData.removeObserver(viewLifecycleOwnerLiveDataObserver)
+                fragment.viewLifecycleOwnerLiveData.removeObserver(
+                    viewLifecycleOwnerLiveDataObserver
+                )
             }
         })
     }
@@ -47,7 +50,7 @@ class FragmentViewBindingDelegate<Binding : ViewBinding>(
         }
 
         val lifecycle = fragment.viewLifecycleOwner.lifecycle
-        if(!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
+        if (!lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
         }
         return viewBindingFactory(thisRef.requireView()).also { this.binding = it }
@@ -55,4 +58,4 @@ class FragmentViewBindingDelegate<Binding : ViewBinding>(
 }
 
 fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
-        FragmentViewBindingDelegate(this, viewBindingFactory)
+    FragmentViewBindingDelegate(this, viewBindingFactory)

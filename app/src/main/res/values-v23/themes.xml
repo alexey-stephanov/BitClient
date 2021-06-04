@@ -11,24 +11,10 @@
         <item name="colorSecondaryVariant">@color/orange_900</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?android:colorBackground</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
         <item name="colorError">@color/red_700</item>
         <item name="colorOnError">@color/white</item>
-    </style>
-
-    <style name="Theme.BitClient.Launcher" parent="Theme.BitClient">
-        <item name="android:windowBackground">@drawable/launch_screen</item>
-    </style>
-
-    <style name="AppBarStyle">
-        <item name="android:elevation">@dimen/action_bar_light_elevation</item>
-        <item name="android:background">?android:colorBackground</item>
-    </style>
-
-    <style name="BottomNavigationBarStyle">
-        <item name="android:elevation">@dimen/bottom_navigation_bar_light_elevation</item>
-        <item name="android:background">?android:colorBackground</item>
     </style>
 </resources>

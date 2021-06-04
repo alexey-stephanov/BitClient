@@ -4,42 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/image_view_authorization_app_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/authorization_logo_content_description"
         android:src="@drawable/ic_app_logo"
         app:layout_constraintBottom_toTopOf="@+id/text_view_authorization_app_name"
-        app:layout_constraintEnd_toEndOf="@+id/text_view_authorization_app_name"
-        app:layout_constraintStart_toStartOf="@+id/text_view_authorization_app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/text_view_authorization_app_name"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Overline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:letterSpacing="0.1"
+        android:layout_marginBottom="34dp"
         android:padding="8dp"
+        style="@style/AppNameTextStyle"
         android:text="@string/app_name"
-        android:textColor="?colorPrimary"
-        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/button_authorization_enter"
-        app:layout_constraintEnd_toEndOf="@+id/button_authorization_enter"
-        app:layout_constraintStart_toStartOf="@+id/button_authorization_enter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_view_authorization_app_logo" />
 
     <Button
         android:id="@+id/button_authorization_enter"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
+        app:layout_constraintWidth_max="250dp"
+        android:paddingVertical="14dp"
         android:text="@string/authorization_enter"
+        android:textAllCaps="false"
+        android:letterSpacing="0"
+        android:textSize="16sp"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_authorization_app_name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

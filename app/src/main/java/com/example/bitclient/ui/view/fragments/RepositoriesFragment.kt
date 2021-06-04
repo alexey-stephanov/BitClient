@@ -10,11 +10,10 @@ import com.example.bitclient.BitClientApp
 import com.example.bitclient.R
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.dbmodels.RepositoryDbModel
 import com.example.bitclient.data.network.datamodels.repositoriesmodel.networkmodels.RepositoryModel
-import com.example.bitclient.data.network.networkavailability.NetworkConnectivityManager
 import com.example.bitclient.databinding.FragmentRepositoriesBinding
 import com.example.bitclient.databinding.RepositoryItemBinding
-import com.example.bitclient.ui.recyclerview.OnItemClickListener
-import com.example.bitclient.ui.recyclerview.PaginatedListAdapter
+import com.example.bitclient.ui.recyclerview.listeners.OnItemClickListener
+import com.example.bitclient.ui.recyclerview.adapters.PaginatedListAdapter
 import com.example.bitclient.ui.view.fragments.viewbinding.viewBinding
 import com.example.bitclient.viewmodels.RepositoriesViewModel
 import com.example.bitclient.viewmodels.factories.RepositoriesViewModelFactory
@@ -26,9 +25,6 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
     private val binding by viewBinding(FragmentRepositoriesBinding::bind)
 
     private val args: RepositoriesFragmentArgs by navArgs()
-
-    @Inject
-    lateinit var networkConnectivityManager: NetworkConnectivityManager
 
     @Inject
     lateinit var itemDecoration: DividerItemDecoration
@@ -59,7 +55,6 @@ class RepositoriesFragment : PaginatedFragment<RepositoryModel, RepositoryDbMode
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         (requireActivity().application as BitClientApp).appComponent.userSubcomponentManager().userSubcomponent?.repositoriesSubcomponentManager()?.repositoriesSubcomponent
             ?.inject(this)
     }
